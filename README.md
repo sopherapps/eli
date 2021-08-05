@@ -2,6 +2,8 @@
 
 This is a Web-based Client application for the [PubSubQ pub/sub app](https://sopherapps.com/store/pubsub/pubsubq/). It allows a user to generate realtime tables, charts, lists etc. basing on the data coming from any number of PubSubQ instances.
 
+Do note that it can technically connect to any websocket URL as long as the data returned is Client-style like PubSubQ's Restie and any other data sources will ensure
+
 ## Quick Start
 
 - Open the [Eli app](https://eli.sopherapps.com) in your web browser of choice
@@ -136,42 +138,41 @@ This is a Web-based Client application for the [PubSubQ pub/sub app](https://sop
 
 ### Screens
 
-Here are the screens drawn in my little sketch book
+Here are the screens drawn in [Figma](https://www.figma.com/file/TR8Qaag0r9Dx6tqqekmr0Y/eli?node-id=8%3A358).
+
+The design is based on [Google Keep](https://keep.google.com/)
 
 #### Home Screen
 
-![Home screen](./designs/home_screen.jpg)
+![Home screen](./designs/home_screen.png)
 
-#### Control Panel (Tabs list)
+#### Control Panel (Multi Tab Edit Screen)
 
-![Control Panel Tab list](./designs/control_panel_tab_list.jpg)
+![Control Panel Multi-tab edit screen](./designs/multitab_edit_screen.png)
 
-#### Control Panel (Single Tab)
+#### Control Panel (Single Tab Edit Screen)
 
-![Control Panel single tab](./designs/control_panel_single_tab.jpg)
+![Control Panel single -tab edit screen](./designs/singletab_edit_screen.png)
 
 #### Tab
 
-![Tab](./designs/tab.jpg)
-
-#### Navigation
-
-![Navigation](./designs/navigation.jpg)
+![Tab](./designs/tab_screen.png)
 
 ### Features
 
-- [ ] A user can select any tab from the `Tabs` bar just below the top bar
-- [ ] A user can go to the control panel by clicking the `Control` menu item
+- [ ] A user can select any tab from the `Tabs` bar at the bottom of the tabs screen
+- [ ] If no tabs have been created yet, the user should be shown the home screen
+- [ ] A user can go to the control panel by clicking the `Gear` icon in the top bar
 - [ ] A user can create any number of tabs, each tab having any number of analytics of any kind.
       This is done in the `Control Panel` by clicking the `+` button at the top right.
-- [ ] A user can view all available tabs on the initial page of the control panel
-- [ ] A user can edit any tab by clicking the `pen` icon button in that tab's panel
+- [ ] A user can view all available tabs on the initial page of the control panel (no pagination as the data is local)
+- [ ] A user can edit any tab by clicking the `pen` icon button in that tab's edit card
 - [ ] A user can navigate backwards in the Control Panel when viewing the settings of one tab.
       Backwards would take them to the list of all tabs
 - [ ] A user can delete any tab from the initial screen of the control panel.
       This is done by clicking the `x` button in the card of that tab.
-- [ ] A user can add any analytic of any given message type, from any given PubSubQ URL.
-      The PubSubQ URL can have the auth data in its query paramters.
+- [ ] A user can add any analytic of given Data Source URL which must be a websocket URL.
+      If it is a PubSubQ URL, the auth data if any should be put in the query paramters.
 - [ ] A user can choose any analytic type for that given analytic, including chart, table, text etc.
       The appropriate configuration for each given canlytic type will be availed to the user to tweak.
 - [ ] A user can rearrange the order of the analytics in a given tab.
@@ -186,9 +187,11 @@ Here are the screens drawn in my little sketch book
 - [ ] Configurations saved by the user are saved in a JSON file every 3 seconds when the control panel is open.
       In case there are no changes, the JSON file is not touched.
 - [ ] At startup, these configurations are loaded from the file.
-- [ ] A user can toggle the theme between dark and light by clicking the moon/sun icon in the top bar.
+- [ ] \*A user can toggle the theme between dark and light by clicking the moon/sun icon in the top bar.
 - [ ] Any number of tabs can be open at the same time. The tabs appear just below the top bar.
-      If the tabs are too many, they will have an arrow button to enable scrolling left and right.
+      If the tabs are too many, they will have arrow buttons to enable scrolling left and right.
+
+Note: \* Is a nice-to-have feature. We will start with the Dark theme
 
 ### Technical Architecture
 
