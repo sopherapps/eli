@@ -1,25 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { UserAppConfig } from "./data/models";
+import AppRouter from "./AppRouter";
+
+enum Theme {
+  Dark = 1,
+  Light,
+}
+const defaultUserAppConfig: UserAppConfig = { tabs: [] };
+
+const ThemeContext = React.createContext(Theme.Dark); // other possibility is light
+const UserAppConfigContext = React.createContext(defaultUserAppConfig);
 
 function App() {
+  const localStorageAppConfigKey = "eli:AppConfig";
+  const [appConfig, changeAppConfig] = useState(defaultUserAppConfig);
+
+  useEffect(() => {
+    const appConfigAsJson =
+      localStorage.getItem(localStorageAppConfigKey) || '{"tabs":[]}';
+    changeAppConfig(JSON.parse(appConfigAsJson));
+  }, []);
+
+  useEffect(() => {
+    const appConfigAsJson = JSON.stringify(appConfig);
+    localStorage.setItem(localStorageAppConfigKey, appConfigAsJson);
+  }, [appConfig]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeContext.Provider value={Theme.Dark}>
+      <UserAppConfigContext.Provider value={appConfig}>
+        <AppRouter />
+      </UserAppConfigContext.Provider>
+    </ThemeContext.Provider>
   );
 }
 
