@@ -195,6 +195,4 @@ Note: \* Is a nice-to-have feature. We will start with the Dark theme
 
 ### Technical Architecture
 
-![Eli Architecture Diagram](./designs/architecture.png)
-
-- This is a simple React App with client-side routing, theme changing, saving of configurations in localstorage and using bootstrap to style the web app
+- This is a simple React App with client-side routing, theme changing, saving of configurations in localstorage and the style being inspired by Google-Keep
