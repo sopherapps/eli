@@ -1,8 +1,14 @@
 // Page that shows the default empty page
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, Redirect } from "react-router-dom";
+import { UserAppConfigContext } from "../context";
 
 export default function Home() {
+  const appConfig = useContext(UserAppConfigContext);
+  if (appConfig.tabs.length > 0) {
+    return <Redirect to={{ pathname: `/tabs/${appConfig.tabs[0].title}` }} />;
+  }
+
   return (
     <div className="d-flex justify-center align-center h-100">
       <div className="cta mt-neg-4">
