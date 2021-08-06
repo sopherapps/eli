@@ -196,3 +196,22 @@ Note: \* Is a nice-to-have feature. We will start with the Dark theme
 ### Technical Architecture
 
 - This is a simple React App with client-side routing, theme changing, saving of configurations in localstorage and the style being inspired by Google-Keep
+
+### ToDo
+
+- [ ] Clip the tabs in the tabbar
+- [ ] Add ability to scroll the tabs in the tabbar if they are many
+- [ ] Add ability to create tabs in the control panel
+- [ ] Add ability to add visualization configurations in the control panel
+- [ ] Add ability to save configurations every 3 seconds or so if anything changes when the control panel is open
+- [ ] Add ability to connect to websocket
+- [ ] Add ability to merge any new message to the preexisting client-style JSON for that visualization
+- [ ] Add ability to set the maximum range of the x-axis for charts
+- [ ] Add ability to set the maximum range of the column field for tables
+- [ ] Add ability to set the maximum number of items in list visualization
+- [ ] Add ability to display plain text visualization from data from websocket
+- [ ] Add ability to display table visualizations from data from websocket
+- [ ] Add ability to display charts (piecharts, doughnut, bar, stacked bar, line, scatter, mixed, multiline)
+- [ ] Deploy to firebase, netlify or vercel
+- [ ] List the app on SopherApps
+- [ ] Write aboute the app on SopherApps blog
