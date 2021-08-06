@@ -4,6 +4,7 @@
 
 * {
   font-family: "Open Sans", sans-serif;
+  font-size: 16px;
   margin: 0;
   box-sizing: border-box;
 }
@@ -48,6 +49,11 @@
   right: 0;
 }
 
+.absolute-bottom {
+  position: absolute;
+  bottom: 0;
+}
+
 .h-100 {
   min-height: 100%;
 }
@@ -89,15 +95,17 @@
   display: inline-block;
   text-align: center;
   width: 160px;
-  /* There is need to clip long texts */
-  /* white-space: nowrap;
+  padding: 0.25rem 2rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   overflow: hidden;
-  text-overflow: ellipsis; */
+  height: 100%;
+  margin: 0 1px;
 }
 
 .dark .tab-navitem {
   color: #dbd8d3;
-  border-right: 0.5px solid #dbd8d3;
+  background-color: rgba(78, 84, 87, 0.16);
 }
 
 .dark .tab-navitem:hover,
@@ -105,9 +113,18 @@
 .dark .tab-navitem.active {
   color: #dbd8d3;
   background-color: #1a1c1d;
-  padding-top: 8px;
-  padding-bottom: 8px;
   border: none;
+}
+
+.tabbar .tab-menu {
+  height: 2rem;
+  padding: 0rem 2rem;
+}
+
+.tabbar .tab-control {
+  height: 2rem;
+  width: 2rem;
+  padding: 0.25rem;
 }
 
 /* buttons */
@@ -130,8 +147,8 @@
 }
 
 .btn img {
-  height: 80%;
-  max-width: 80%;
+  height: 100%;
+  max-width: 100%;
   width: auto;
 }
 

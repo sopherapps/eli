@@ -13,21 +13,23 @@ export default function Tabbar(props: { tabs: Tab[] }) {
   return (
     <footer className="tabbar">
       <div>
-        <button className="btn">
+        <button className="absolute-left absolute-bottom btn tab-control">
           <img src={leftArrowWhite} alt="left" />
         </button>
-        {tabs.map((tab) => (
-          <Link
-            key={tab.title}
-            to={`/tabs/${tab.title}`}
-            className={`tab-navitem ${
-              activeTitle === tab.title ? "active" : ""
-            }`}
-          >
-            {tab.title}
-          </Link>
-        ))}
-        <button className="absolute-right btn">
+        <div className="tab-menu">
+          {tabs.map((tab) => (
+            <Link
+              key={tab.title}
+              to={`/tabs/${tab.title}`}
+              className={`tab-navitem ${
+                activeTitle === tab.title ? "active" : ""
+              }`}
+            >
+              {tab.title}
+            </Link>
+          ))}
+        </div>
+        <button className="absolute-right absolute-bottom btn tab-control">
           <img src={rightArrowWhite} alt="right" />
         </button>
       </div>
