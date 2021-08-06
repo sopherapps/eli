@@ -204,6 +204,7 @@ Note: _Each of these steps involves writing some tests of some kind_
 
 - [x] Clip the tabs in the tabbar
 - [x] Add ability to scroll the tabs in the tabbar if they are many
+- [ ] Update the Home page
 - [ ] Add ability to create tabs in the control panel
 - [ ] Add ability to add visualization configurations in the control panel
 - [ ] Add ability to save configurations every 3 seconds or so if anything changes when the control panel is open

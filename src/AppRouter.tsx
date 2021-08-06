@@ -20,7 +20,7 @@ export default function AppRouter() {
     <div className={`app h-100 ${themeClassName}`}>
       <Router>
         <Topbar />
-        <main className="fluid-container">
+        <main className="fluid-container h-100 eli-py-4">
           <Switch>
             <Route exact path="/">
               <Home />

@@ -35,6 +35,10 @@
   justify-content: space-between;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
 .align-center {
   align-items: center;
 }
@@ -58,6 +62,15 @@
   min-height: 100%;
 }
 
+.eli-py-4 {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.mt-neg-4 {
+  margin-top: -100px;
+}
+
 /* logo */
 .logo {
   font-family: "Qwigley";
@@ -69,6 +82,13 @@
 }
 
 /* Topbar */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
 .dark .topbar {
   background-color: #202124;
   box-shadow: inset 0px -1px 0px #4b5154;
@@ -76,6 +96,7 @@
 
 .topbar .logo {
   font-size: 2rem;
+  font-weight: 600;
 }
 
 /* Tabbar */
@@ -150,6 +171,35 @@
   height: 100%;
   max-width: 100%;
   width: auto;
+}
+
+/* cta */
+.cta {
+  text-align: center;
+}
+
+.cta .logo {
+  font-size: 4rem;
+  font-weight: 600;
+}
+
+.cta .btn {
+  padding: 0.5rem 2rem;
+  border-radius: 2rem;
+  font-size: 1.25rem;
+}
+
+.dark .cta .btn {
+  color: #dbd8d3;
+  background-color: #202124;
+}
+
+.dark .cta .btn:hover {
+  background-color: #4b5154;
+}
+
+.cta p {
+  font-size: 1.05rem;
 }
 
 /* Dark theme */
