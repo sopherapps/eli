@@ -15,7 +15,15 @@ function App() {
   useEffect(() => {
     const appConfigAsJson =
       localStorage.getItem(localStorageAppConfigKey) ||
-      '{"tabs":[{"title": "hello world"},{"title": "hi world hjfhajfuaoyfoaysua"},{"title": "foo bar hjgdahgdayditaiydtsa"}]}';
+      `{"tabs":[
+        {"title": "hello 1"},
+        {"title": "hello 2"},
+        {"title": "hello 3"},
+        {"title": "hello 4"},
+        {"title": "hello 5"},
+        {"title": "hi world hjfhajfuaoyfoaysua"},
+        {"title": "foo bar hjgdahgdayditaiydtsa"}]
+      }`;
     changeAppConfig(JSON.parse(appConfigAsJson));
   }, []);
 
