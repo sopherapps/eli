@@ -203,7 +203,7 @@ Note: \* Is a nice-to-have feature. We will start with the Dark theme
 Note: _Each of these steps involves writing some tests of some kind_
 
 - [x] Clip the tabs in the tabbar
-- [ ] Add ability to scroll the tabs in the tabbar if they are many
+- [x] Add ability to scroll the tabs in the tabbar if they are many
 - [ ] Add ability to create tabs in the control panel
 - [ ] Add ability to add visualization configurations in the control panel
 - [ ] Add ability to save configurations every 3 seconds or so if anything changes when the control panel is open
