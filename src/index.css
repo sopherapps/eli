@@ -1,0 +1,142 @@
+/* main css */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Qwigley&display=swap");
+
+* {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* React */
+#root {
+  height: 100vh;
+}
+
+/* Layout */
+.container {
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.fluid-container {
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.absolute-left {
+  position: absolute;
+  left: 0;
+}
+
+.absolute-right {
+  position: absolute;
+  right: 0;
+}
+
+.h-100 {
+  min-height: 100%;
+}
+
+/* logo */
+.logo {
+  font-family: "Qwigley";
+  text-decoration: none;
+}
+
+.dark .logo {
+  color: #dbd8d3;
+}
+
+/* Topbar */
+.dark .topbar {
+  background-color: #202124;
+  box-shadow: inset 0px -1px 0px #4b5154;
+}
+
+.topbar .logo {
+  font-size: 2rem;
+}
+
+/* Tabbar */
+.dark .tabbar {
+  background-color: #202124;
+}
+
+.tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.tab-navitem {
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  width: 160px;
+  /* There is need to clip long texts */
+  /* white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; */
+}
+
+.dark .tab-navitem {
+  color: #dbd8d3;
+  border-right: 0.5px solid #dbd8d3;
+}
+
+.dark .tab-navitem:hover,
+.dark .tab-navitem:active,
+.dark .tab-navitem.active {
+  color: #dbd8d3;
+  background-color: #1a1c1d;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border: none;
+}
+
+/* buttons */
+.btn {
+  cursor: pointer;
+  border: 1px solid transparent;
+  outline: none;
+  vertical-align: middle;
+}
+
+.btn:hover,
+.btn:active,
+.active {
+  background-color: rgba(78, 84, 87, 0.16);
+}
+
+.btn-round {
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.btn img {
+  height: 80%;
+  max-width: 80%;
+  width: auto;
+}
+
+/* Dark theme */
+.app.dark {
+  background-color: #1a1c1d;
+  color: #dbd8d3;
+}

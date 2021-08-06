@@ -8,7 +8,6 @@ export interface UserAppConfig {
 }
 
 export interface Tab {
-  isOpen: boolean;
   title: string;
 }
 

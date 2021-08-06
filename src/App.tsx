@@ -1,16 +1,12 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { UserAppConfig } from "./data/models";
 import AppRouter from "./AppRouter";
-
-enum Theme {
-  Dark = 1,
-  Light,
-}
-const defaultUserAppConfig: UserAppConfig = { tabs: [] };
-
-const ThemeContext = React.createContext(Theme.Dark); // other possibility is light
-const UserAppConfigContext = React.createContext(defaultUserAppConfig);
+import {
+  ThemeContext,
+  Theme,
+  UserAppConfigContext,
+  defaultUserAppConfig,
+} from "./context";
 
 function App() {
   const localStorageAppConfigKey = "eli:AppConfig";
@@ -18,7 +14,8 @@ function App() {
 
   useEffect(() => {
     const appConfigAsJson =
-      localStorage.getItem(localStorageAppConfigKey) || '{"tabs":[]}';
+      localStorage.getItem(localStorageAppConfigKey) ||
+      '{"tabs":[{"title": "hello world"},{"title": "hi world"},{"title": "foo bar"}]}';
     changeAppConfig(JSON.parse(appConfigAsJson));
   }, []);
 
