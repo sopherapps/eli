@@ -94,11 +94,12 @@ Do note that it can technically connect to any websocket URL as long as the data
 - Change the Title by clicking it and typing. Let's change it to "First Analytic"
 - Click the `+` button on the right of that window. A new Card should pop up with empty details.
 - Fill in the details as follows:
-  <br/>message = cet_time
+  ToDo
+  <!-- <br/>message = cet_time
   <br/>visualization = text
   <br/>type = card
   <br/>width = 80
-  <br/>height = 20
+  <br/>height = 20 -->
 - Click the 'refresh' icon at the top of the page.
 - Click the "Tabs" menu item in the top bar. And then click "First Analytic". You should be able to see a ticking clock.
 
