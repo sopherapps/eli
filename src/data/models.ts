@@ -3,6 +3,19 @@
  * Ideally there might be an option to clear past configurations
  */
 
+import whiteTextIcon from "../assets/images/text_snippet_white.svg";
+import whiteListIcon from "../assets/images/list_white.svg";
+import whiteBarChartIcon from "../assets/images/bar_chart_white.svg";
+import whiteMixedChartIcon from "../assets/images/multiline_chart_white.svg";
+import whitePieChartIcon from "../assets/images/pie_chart_white.svg";
+import whiteDonutChartIcon from "../assets/images/donut_small_white.svg";
+import whiteScatterChartIcon from "../assets/images/scatter_plot_white.svg";
+import whiteLineChartIcon from "../assets/images/show_chart_white.svg";
+import whiteStackedBarChartIcon from "../assets/images/stacked_bar_chart_white.svg";
+import whiteStackedLineChartIcon from "../assets/images/stacked_line_chart_white.svg";
+import whiteTableIcon from "../assets/images/table_chart_white.svg";
+import whiteMultipleBarChartIcon from "../assets/images/addchart_white.svg";
+
 export interface UserAppConfig {
   tabs: { [key: string]: Tab };
   tabOrder: string[];
@@ -24,186 +37,457 @@ export interface Visualization {
   dataSourceUrl: string;
   width: number;
   height: number;
-  type: string;
+  type: VisualizationType;
 }
 
-//  type Tab struct {
-// 	IsOpen bool `json:"is_open"`
-// 	Title string `json:"title"`
-// 	Visualizations map[string]Visualization `json:"visualizations"`
-// 	Order []string `json:"order"` // list of IDs that are randomly generated using system time and name of visualization
-// }
+export interface VisualizationType {
+  name: string;
+  icon: string;
+  config: { [key: string]: VisualizationProp };
+}
 
-// // Opens the tab and makes the visualizations start receiving data
-// func (t *Tab) Open(ctx context.Context, ipc *back.Ipc) error {
-// 	// cleanup just in case
-// 	t.cleanupVisualizations(ipc)
-// 	t.IsOpen = true
+export interface VisualizationProp {
+  label: string;
+  inputType: HTMLInputType;
+  orderPosition: number;
+  options: { [key: string]: any };
+}
 
-// 	errGroup, _ := errgroup.WithContext(ctx)
+// FIXME: I might need to create separte input components for each of these.
+// These are got from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
+export enum HTMLInputType {
+  Text,
+  Number,
+  Email,
+  Url,
+  TextArea,
+  Radio,
+  Checkbox,
+  Range,
+  Color,
+  Date,
+  Month,
+  Time,
+  Week,
+  Select,
+  Button,
+}
 
-// 	for _, v := range t.Visualizations {
-// 		visualization := v
-// 		errGroup.Go(func() error {
-// 			return visualization.ConnectToPubSubQ(ipc)
-// 		})
-// 	}
+/* Visualization Types */
 
-// 	return errGroup.Wait()
-// }
+export const TableType: VisualizationType = {
+  name: "table",
+  icon: whiteTableIcon,
+  config: {
+    columnField: {
+      label: "column field",
+      inputType: HTMLInputType.Text,
+      orderPosition: 1,
+      options: {},
+    },
+    rowField: {
+      label: "row field",
+      inputType: HTMLInputType.Text,
+      orderPosition: 2,
+      options: {},
+    },
+    valueField: {
+      label: "value field",
+      inputType: HTMLInputType.Text,
+      orderPosition: 3,
+      options: {},
+    },
+  },
+};
 
-// // Closes the tab and ensures all visualisations stop receiving data
-// func (t *Tab) Close(ipc *back.Ipc) {
-// 	t.cleanupVisualizations(ipc)
-// 	t.IsOpen = false
-// }
+export const ScatterChartType: VisualizationType = {
+  name: "scatter-chart",
+  icon: whiteScatterChartIcon,
+  config: {
+    label: {
+      label: "label",
+      inputType: HTMLInputType.Text,
+      orderPosition: 1,
+      options: {},
+    },
+    color: {
+      label: "color",
+      inputType: HTMLInputType.Color,
+      orderPosition: 2,
+      options: {},
+    },
+    xField: {
+      label: "X-axis field",
+      inputType: HTMLInputType.Text,
+      orderPosition: 3,
+      options: {},
+    },
+    yField: {
+      label: "Y-axis field",
+      inputType: HTMLInputType.Text,
+      orderPosition: 4,
+      options: {},
+    },
+  },
+};
 
-// // Saves the tab to the cache
-// func (t *Tab) Save(ipc *back.Ipc, jsonCache *JsonCache) {
-// 	t.Close(ipc)
-// 	jsonCache.Set(t.Title, *t)
-// }
+export const BarChartType: VisualizationType = {
+  name: "bar-chart",
+  icon: whiteBarChartIcon,
+  config: {
+    label: {
+      label: "label",
+      inputType: HTMLInputType.Text,
+      orderPosition: 1,
+      options: {},
+    },
+    color: {
+      label: "color",
+      inputType: HTMLInputType.Color,
+      orderPosition: 2,
+      options: {},
+    },
+    xField: {
+      label: "x-axis field",
+      inputType: HTMLInputType.Text,
+      orderPosition: 3,
+      options: {},
+    },
+    yField: {
+      label: "y-axis field",
+      inputType: HTMLInputType.Text,
+      orderPosition: 4,
+      options: {},
+    },
+    chartStyle: {
+      label: "chart style",
+      inputType: HTMLInputType.Select,
+      orderPosition: 5,
+      options: {
+        options: ["stacked", "normal"],
+        default: "normal",
+      },
+    },
+    orientation: {
+      label: "orientation",
+      inputType: HTMLInputType.Select,
+      orderPosition: 6,
+      options: {
+        options: ["horizontal", "vertical"],
+        default: "horizontal",
+      },
+    },
+  },
+};
 
-// // Deletes the tab from the cache
-// func (t *Tab) Delete(ipc *back.Ipc, jsonCache *JsonCache) {
-// 	t.Close(ipc)
-// 	jsonCache.Delete(t.Title)
-// }
+export const MultipleBarChartType: VisualizationType = {
+  name: "multiple-bar-chart",
+  icon: whiteMultipleBarChartIcon,
+  config: {
+    chartStyle: {
+      label: "chart style",
+      inputType: HTMLInputType.Select,
+      orderPosition: 1,
+      options: {
+        options: ["stacked", "normal"],
+        default: "normal",
+      },
+    },
+    orientation: {
+      label: "orientation",
+      inputType: HTMLInputType.Select,
+      orderPosition: 2,
+      options: {
+        options: ["horizontal", "vertical"],
+        default: "horizontal",
+      },
+    },
+    addDataset: {
+      label: "add dataset",
+      inputType: HTMLInputType.Button,
+      orderPosition: 3,
+      options: {
+        datasets: [],
+        defaultDataset: {
+          name: {
+            label: "name",
+            inputType: HTMLInputType.Text,
+            orderPosition: 1,
+            options: {},
+          },
+          label: {
+            label: "label",
+            inputType: HTMLInputType.Text,
+            orderPosition: 2,
+            options: {},
+          },
+          color: {
+            label: "color",
+            inputType: HTMLInputType.Color,
+            orderPosition: 3,
+            options: {},
+          },
+          xField: {
+            label: "x-axis field",
+            inputType: HTMLInputType.Text,
+            orderPosition: 4,
+            options: {},
+          },
+          yField: {
+            label: "y-axis field",
+            inputType: HTMLInputType.Text,
+            orderPosition: 5,
+            options: {},
+          },
+        },
+      },
+    },
+  },
+};
 
-// // Cleans up the visualizations in case a change is made on this tab
-// func (t *Tab) cleanupVisualizations(ipc *back.Ipc)  {
-// 	if !t.IsOpen {
-// 		return
-// 	}
+export const LineChartType: VisualizationType = {
+  name: "line-chart",
+  icon: whiteLineChartIcon,
+  config: {
+    label: {
+      label: "label",
+      inputType: HTMLInputType.Text,
+      orderPosition: 1,
+      options: {},
+    },
+    color: {
+      label: "color",
+      inputType: HTMLInputType.Color,
+      orderPosition: 2,
+      options: {},
+    },
+    xField: {
+      label: "x-axis field",
+      inputType: HTMLInputType.Text,
+      orderPosition: 3,
+      options: {},
+    },
+    yField: {
+      label: "y-axis field",
+      inputType: HTMLInputType.Text,
+      orderPosition: 4,
+      options: {},
+    },
+    chartStyle: {
+      label: "chart style",
+      inputType: HTMLInputType.Select,
+      orderPosition: 5,
+      options: {
+        options: ["dotted", "normal"],
+        default: "normal",
+      },
+    },
+    areaUnderTheLineColor: {
+      label: "color of area under line",
+      inputType: HTMLInputType.Color,
+      orderPosition: 6,
+      options: {},
+    },
+  },
+};
 
-// 	for _, v := range t.Visualizations {
-// 		ipc.EventsChan <- back.Event{Type: back.CloseVisualizationEvent, ElementId: v.GetID(), Data: nil}
-// 	}
-// }
+export const MultipleLineChartType: VisualizationType = {
+  name: "multiple-line-chart",
+  icon: whiteStackedLineChartIcon,
+  config: {
+    addDataset: {
+      label: "add dataset",
+      inputType: HTMLInputType.Button,
+      orderPosition: 3,
+      options: {
+        datasets: [],
+        defaultDataset: {
+          name: {
+            label: "name",
+            inputType: HTMLInputType.Text,
+            orderPosition: 1,
+            options: {},
+          },
+          label: {
+            label: "label",
+            inputType: HTMLInputType.Text,
+            orderPosition: 2,
+            options: {},
+          },
+          color: {
+            label: "color",
+            inputType: HTMLInputType.Color,
+            orderPosition: 3,
+            options: {},
+          },
+          xField: {
+            label: "x-axis field",
+            inputType: HTMLInputType.Text,
+            orderPosition: 4,
+            options: {},
+          },
+          yField: {
+            label: "y-axis field",
+            inputType: HTMLInputType.Text,
+            orderPosition: 5,
+            options: {},
+          },
+          chartStyle: {
+            label: "chart style",
+            inputType: HTMLInputType.Select,
+            orderPosition: 6,
+            options: {
+              options: ["dotted", "normal"],
+              default: "normal",
+            },
+          },
+          areaUnderTheLineColor: {
+            label: "color of area under line",
+            inputType: HTMLInputType.Color,
+            orderPosition: 7,
+            options: {},
+          },
+        },
+      },
+    },
+  },
+};
 
-// type Visualization interface {
-// 	ConnectToPubSubQ(ipc *back.Ipc) error
-// 	GetID() string
-// }
+export const MixedChartType: VisualizationType = {
+  name: "mixed-chart",
+  icon: whiteMixedChartIcon,
+  config: {
+    barChartStyle: {
+      label: "bar chart style",
+      inputType: HTMLInputType.Select,
+      orderPosition: 1,
+      options: {
+        options: ["stacked", "normal"],
+        default: "normal",
+      },
+    },
+    orientation: {
+      label: "orientation",
+      inputType: HTMLInputType.Select,
+      orderPosition: 2,
+      options: {
+        options: ["horizontal", "vertical"],
+        default: "horizontal",
+      },
+    },
+    addBarDataset: {
+      label: "add bar dataset",
+      inputType: HTMLInputType.Button,
+      orderPosition: 3,
+      options: {
+        datasets: [],
+        defaultDataset: {
+          name: {
+            label: "name",
+            inputType: HTMLInputType.Text,
+            orderPosition: 1,
+            options: {},
+          },
+          label: {
+            label: "label",
+            inputType: HTMLInputType.Text,
+            orderPosition: 2,
+            options: {},
+          },
+          color: {
+            label: "color",
+            inputType: HTMLInputType.Color,
+            orderPosition: 3,
+            options: {},
+          },
+          xField: {
+            label: "x-axis field",
+            inputType: HTMLInputType.Text,
+            orderPosition: 4,
+            options: {},
+          },
+          yField: {
+            label: "y-axis field",
+            inputType: HTMLInputType.Text,
+            orderPosition: 5,
+            options: {},
+          },
+        },
+      },
+    },
+    addLineDataset: {
+      label: "add Line dataset",
+      inputType: HTMLInputType.Button,
+      orderPosition: 4,
+      options: {
+        datasets: [],
+        defaultDataset: {
+          name: {
+            label: "name",
+            inputType: HTMLInputType.Text,
+            orderPosition: 1,
+            options: {},
+          },
+          label: {
+            label: "label",
+            inputType: HTMLInputType.Text,
+            orderPosition: 2,
+            options: {},
+          },
+          color: {
+            label: "color",
+            inputType: HTMLInputType.Color,
+            orderPosition: 3,
+            options: {},
+          },
+          xField: {
+            label: "x-axis field",
+            inputType: HTMLInputType.Text,
+            orderPosition: 4,
+            options: {},
+          },
+          yField: {
+            label: "y-axis field",
+            inputType: HTMLInputType.Text,
+            orderPosition: 5,
+            options: {},
+          },
+          chartStyle: {
+            label: "chart style",
+            inputType: HTMLInputType.Select,
+            orderPosition: 6,
+            options: {
+              options: ["dotted", "normal"],
+              default: "normal",
+            },
+          },
+          areaUnderTheLineColor: {
+            label: "color of area under line",
+            inputType: HTMLInputType.Color,
+            orderPosition: 7,
+            options: {},
+          },
+        },
+      },
+    },
+  },
+};
 
-// type BaseVisualization struct {
-// 	ID string `json:"id"`
-// 	Title string `json:"title"`
-// 	PubSubQUrl string `json:"pub_sub_q_url"`
-// 	Width float64 `json:"width"`
-// 	Height float64 `json:"height"`
-// }
+// FIXME: Create more
 
-// // Gets the ID of the given visualization
-// func (b *BaseVisualization) GetID() string {
-// 	return b.ID
-// }
-
-// // Connects to the PubSubQ instance, listens to the data and pushes it to the
-// // front end via the ipc but closes it if the front end decides to close the visualization
-// func (b *BaseVisualization) ConnectToPubSubQ(ipc *back.Ipc) error {
-// 	p, err := back.ConnectToPubSubQ(b.PubSubQUrl)
-// 	if err != nil {
-// 		return fmt.Errorf("error connecting to PubSubQ: %s", err)
-// 	}
-// 	defer p.Close()
-
-// 	errChan := make(chan error)
-// 	msgChan := make(chan []byte)
-
-// 	go p.Listen(msgChan, errChan)
-
-// 	for {
-// 		select {
-// 		case e := <- errChan:
-// 			return e
-// 		case msg := <- msgChan:
-// 			event := back.Event{Type: back.PubSubQMessageEvent, Data: msg, ElementId: b.ID}
-// 			err = ipc.SendToFront(event)
-// 			if err != nil {
-// 				errChan <- err
-// 			}
-// 		case ev := <- ipc.EventsChan:
-// 			if (ev.Type == back.CloseVisualizationEvent ||
-// 				ev.Type == back.DeleteVisualizationEvent ||
-// 				ev.Type == back.UpdateVisualizationEvent) && ev.ElementId == b.ID {
-// 				return nil
-// 			}
-// 		}
-// 	}
-// }
-
-// // Tables
-// type Table struct {
-// 	BaseVisualization
-// 	ColumnField string `json:"column_field"`
-// 	RowField string `json:"row_field"`
-// 	ValueField string `json:"value_field"`
-// }
-
-// // Scatter charts
-// type ScatterChart struct {
-// 	BaseVisualization
-// 	Config ScatterChartConfig `json:"config"`
-// }
-
-// type ScatterChartConfig struct {
-// 	Type string `json:"type"`
-// 	Label string `json:"label"`
-// 	Color string `json:"color"`
-// 	Style string `json:"style"`
-// 	XField string `json:"x_field"`
-// 	YField string `json:"y_field"`
-// }
-
-// // Bar charts
-// type BarChart struct {
-// 	BaseVisualization
-// 	Config BarChartConfig `json:"config"`
-// }
-
-// type MultipleBarChart struct {
-// 	BaseVisualization
-// 	Config []BarChartConfig `json:"config"`
-// }
-
-// type BarChartConfig struct {
-// 	Type string `json:"type"`
-// 	Label string `json:"label"`
-// 	Color string `json:"color"`
-// 	Style string `json:"style"`
-// 	XField string `json:"x_field"` // stacked, normal
-// 	YField string `json:"y_field"`
-// 	Horizontal bool `json:"horizontal"`
-// }
-
-// // Line charts
-// type LineChart struct {
-// 	BaseVisualization
-// 	Config LineChartConfig `json:"config"`
-// }
-
-// type MultipleLineChart struct {
-// 	BaseVisualization
-// 	Config []LineChartConfig `json:"config"`
-// }
-
-// type LineChartConfig struct {
-// 	Type string `json:"type"`
-// 	Label string `json:"label"`
-// 	Color string `json:"color"`
-// 	Style string `json:"style"` // dotted, normal
-// 	XField string `json:"x_field"`
-// 	YField string `json:"y_field"`
-// 	AreaUnderLineColor string `json:"area_under_line_color"`
-// }
-
-// // MixedChart
-// type MixedChart struct {
-// 	BaseVisualization
-// 	LineConfig []LineChartConfig `json:"line_config"`
-// 	BarConfig []BarChartConfig `json:"bar_config"`
-// }
+// const visualizationTypeIcons: { [key: string]: string } = {
+//   text: whiteTextIcon,
+//   list: whiteListIcon,
+//   bar: whiteBarChartIcon,
+//   mixed: whiteMixedChartIcon,
+//   pie: whitePieChartIcon,
+//   donut: whiteDonutChartIcon,
+//   scatter: whiteScatterChartIcon,
+//   line: whiteLineChartIcon,
+//   "stacked-line": whiteStackedLineChartIcon,
+//   "stacked-bar": whiteStackedBarChartIcon,
+//   table: whiteTableIcon,
+// };
 
 // // Ordered Lists
 // type OrderedList struct {
