@@ -206,7 +206,7 @@ Note: _Each of these steps involves writing some tests of some kind_
 - [x] Add ability to scroll the tabs in the tabbar if they are many
 - [x] Update the Home page
 - [x] Add ability to create tabs in the control panel
-- [ ] Add ability to delete tab in the control panel
+- [x] Add ability to delete tab in the control panel
 - [ ] Add ability to add visualization configurations in the control panel
 - [ ] Add ability to save configurations every 3 seconds or so if anything changes when the control panel is open
 - [ ] Add ability to connect to websocket
@@ -219,4 +219,4 @@ Note: _Each of these steps involves writing some tests of some kind_
 - [ ] Add ability to display charts (piecharts, doughnut, bar, stacked bar, line, scatter, mixed, multiline)
 - [ ] Deploy to firebase, netlify or vercel
 - [ ] List the app on SopherApps
-- [ ] Write aboute the app on SopherApps blog
+- [ ] Write about the app on SopherApps blog
