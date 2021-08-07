@@ -5,13 +5,26 @@
 
 export interface UserAppConfig {
   tabs: { [key: string]: Tab };
+  tabOrder: string[];
   createTab: () => Tab;
-  updateTab: (title: string, tab: Tab) => Tab;
-  deleteTab: (title: string) => void;
+  updateTab: (id: string, tab: Tab) => Tab;
+  deleteTab: (id: string) => void;
 }
 
 export interface Tab {
+  id: string;
   title: string;
+  visualizations: { [key: string]: Visualization };
+  order: string[];
+}
+
+export interface Visualization {
+  id: string;
+  title: string;
+  dataSourceUrl: string;
+  width: number;
+  height: number;
+  type: string;
 }
 
 //  type Tab struct {

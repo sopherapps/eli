@@ -5,17 +5,18 @@ import { UserAppConfigContext } from "../context";
 
 export default function Home() {
   const appConfig = useContext(UserAppConfigContext);
-  const tabTitles = Object.keys(appConfig.tabs).sort();
-  if (tabTitles.length > 0) {
+  if (appConfig.tabOrder.length > 0) {
     return (
       <Redirect
-        to={{ pathname: `/tabs/${appConfig.tabs[tabTitles[0]].title}` }}
+        to={{
+          pathname: `/tabs/${appConfig.tabs[appConfig.tabOrder[0]].id}`,
+        }}
       />
     );
   }
 
   return (
-    <div className="d-flex justify-center align-center h-100">
+    <div className="d-flex justify-center align-center full-height">
       <div className="cta mt-neg-4">
         <h2 className="logo">Eli</h2>
         <p>Create Your First Visualization</p>

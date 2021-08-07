@@ -8,9 +8,15 @@ export enum Theme {
 
 const defaultUserAppConfig: UserAppConfig = {
   tabs: {},
-  createTab: () => ({ title: "" }),
-  updateTab: (title: string, tab: Tab) => tab,
-  deleteTab: (title: string) => {},
+  tabOrder: [],
+  createTab: () => ({
+    id: `${new Date().getTime()}`,
+    title: "",
+    visualizations: {},
+    order: [],
+  }),
+  updateTab: (id: string, tab: Tab) => tab,
+  deleteTab: (id: string) => {},
 };
 
 export const ThemeContext = React.createContext(Theme.Dark); // other possibility is light

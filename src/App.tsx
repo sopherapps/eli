@@ -7,56 +7,65 @@ import { Tab, UserAppConfig } from "./data/models";
 
 function App() {
   const localStorageAppConfigKey = "eli:AppConfig";
-  const tabList: { [key: string]: Tab } = {};
-  const [tabs, setTabs] = useState(tabList);
+  const tabsKey = `${localStorageAppConfigKey}:tabs`;
+  const tabOrderKey = `${localStorageAppConfigKey}:tabOrder`;
+  const mapOfTabs: { [key: string]: Tab } = {};
+  const stringArray: string[] = [];
+
+  const [tabs, setTabs] = useState(mapOfTabs);
+  const [tabOrder, setTabOrder] = useState(stringArray);
+
   const appConfig: UserAppConfig = {
-    tabs: tabs,
+    tabs,
+    tabOrder,
     createTab: useCallback(() => {
       // ensure no title duplicates
-      let title = "New Tab";
-      let newTabNumber = 1;
+      const defaultTitle = "New Tab";
+      let title = defaultTitle;
+      let newTabNumber = 0;
 
-      while (tabs[title]) {
-        title = `${title} (${newTabNumber})`;
-        newTabNumber++;
+      const availableTitles: { [key: string]: boolean } = {};
+      for (let _id in tabs) {
+        availableTitles[tabs[_id].title] = true;
       }
 
-      const newTab: Tab = { title };
-      setTabs({ ...tabs, title: newTab });
+      while (availableTitles[title]) {
+        newTabNumber++;
+        title = `${defaultTitle} (${newTabNumber})`;
+      }
+
+      const id = `${new Date().getTime()}-${newTabNumber}`;
+
+      const newTab: Tab = { id, title, visualizations: {}, order: [] };
+      setTabs({ ...tabs, [id]: newTab });
+      setTabOrder([id, ...tabOrder]);
       return newTab;
-    }, [tabs]),
-    updateTab: (title: string, tab: Tab) => {
-      const tabsCopy = { ...tabs };
-      delete tabsCopy[title];
-      setTabs({ ...tabsCopy, [tab.title]: tab });
+    }, [tabs, tabOrder]),
+    updateTab: (id: string, tab: Tab) => {
+      setTabs({ ...tabs, [tab.id]: tab });
       return tab;
     },
-    deleteTab: (title: string) => {
+    deleteTab: (id: string) => {
       const tabsCopy = { ...tabs };
-      delete tabsCopy[title];
+      delete tabsCopy[id];
       setTabs(tabsCopy);
+      setTabOrder(tabOrder.filter((value) => value !== id));
     },
   };
 
   useEffect(() => {
-    const tabsAsJson =
-      localStorage.getItem(localStorageAppConfigKey) ||
-      `{
-        "hello 1": {"title": "hello 1"},
-        "hello 2": {"title": "hello 2"},
-        "hello 3": {"title": "hello 3"},
-        "hello 4": {"title": "hello 4"},
-        "hello 5": {"title": "hello 5"},
-        "hi world hjfhajfuaoyfoaysua": {"title": "hi world hjfhajfuaoyfoaysua"},
-        "foo bar hjgdahgdayditaiydtsa": {"title": "foo bar hjgdahgdayditaiydtsa"}
-      }`;
+    const tabsAsJson = localStorage.getItem(tabsKey) || `{}`;
+    const tabOrderAsJson = localStorage.getItem(tabOrderKey) || `[]`;
     setTabs(JSON.parse(tabsAsJson));
-  }, []);
+    setTabOrder(JSON.parse(tabOrderAsJson));
+  }, [tabsKey, tabOrderKey]);
 
   useEffect(() => {
     const tabsAsJson = JSON.stringify(tabs);
-    localStorage.setItem(localStorageAppConfigKey, tabsAsJson);
-  }, [tabs]);
+    const tabOrderAsJson = JSON.stringify(tabOrder);
+    localStorage.setItem(tabsKey, tabsAsJson);
+    localStorage.setItem(tabOrderKey, tabOrderAsJson);
+  }, [tabs, tabOrder, tabOrderKey, tabsKey]);
 
   return (
     <ThemeContext.Provider value={Theme.Dark}>

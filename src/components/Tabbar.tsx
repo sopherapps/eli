@@ -1,24 +1,26 @@
 // Component to show the footer
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import leftArrowWhite from "../assets/images/arrow_left_white.svg";
 import rightArrowWhite from "../assets/images/arrow_right_white.svg";
 import { Link, useRouteMatch } from "react-router-dom";
 import { useCallback } from "react";
-import { useMemo } from "react";
+import { UserAppConfigContext } from "../context";
 
-export default function Tabbar(props: { tabTitles: string[] }) {
-  const tabTitles = useMemo(() => props.tabTitles || [], [props]);
+export default function Tabbar() {
   // @ts-ignore
-  const activeTitle = useRouteMatch("/tabs/:title")?.params?.title;
+  const activeId = useRouteMatch("/tabs/:id")?.params?.id;
   const [firstTabIndex, setFirstTabIndex] = useState(0);
+  const appConfig = useContext(UserAppConfigContext);
 
   const slideRight = useCallback(() => {
     setFirstTabIndex(Math.max(0, firstTabIndex - 1));
   }, [firstTabIndex]);
 
   const slideLeft = useCallback(() => {
-    setFirstTabIndex(Math.min(tabTitles.length - 1, firstTabIndex + 1));
-  }, [firstTabIndex, tabTitles]);
+    setFirstTabIndex(
+      Math.min(appConfig.tabOrder.length - 1, firstTabIndex + 1)
+    );
+  }, [firstTabIndex, appConfig.tabOrder]);
 
   return (
     <footer className="tabbar">
@@ -30,13 +32,13 @@ export default function Tabbar(props: { tabTitles: string[] }) {
           <img src={leftArrowWhite} alt="left" />
         </button>
         <div className="tab-menu">
-          {tabTitles.slice(firstTabIndex).map((title) => (
+          {appConfig.tabOrder.slice(firstTabIndex).map((id) => (
             <Link
-              key={title}
-              to={`/tabs/${title}`}
-              className={`tab-navitem ${activeTitle === title ? "active" : ""}`}
+              key={id}
+              to={`/tabs/${id}`}
+              className={`tab-navitem ${activeId === id ? "active" : ""}`}
             >
-              {title}
+              {appConfig.tabs[id]?.title || ""}
             </Link>
           ))}
         </div>

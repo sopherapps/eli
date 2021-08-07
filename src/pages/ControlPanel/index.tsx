@@ -13,7 +13,7 @@ export default function ControlPanel() {
       <Route exact path={path}>
         <MultiTabEdit />
       </Route>
-      <Route path={`${path}/tabs/:title`}>
+      <Route path={`${path}/tabs/:id`}>
         <SingleTabEdit />
       </Route>
     </Switch>

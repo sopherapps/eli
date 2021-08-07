@@ -4,6 +4,6 @@ import { useParams } from "react-router-dom";
 
 export default function TabPage() {
   // @ts-ignore
-  const { title } = useParams();
-  return <div>Tab {title}</div>;
+  const { id } = useParams();
+  return <div>Tab {id}</div>;
 }

@@ -58,7 +58,7 @@
   bottom: 0;
 }
 
-.h-100 {
+.eli-h-100 {
   min-height: 100%;
 }
 
@@ -69,6 +69,10 @@
 
 .mt-neg-4 {
   margin-top: -100px;
+}
+
+.app .full-height {
+  height: 80vh;
 }
 
 /* logo */
@@ -87,6 +91,7 @@
   top: 0;
   left: 0;
   right: 0;
+  z-index: 1000;
 }
 
 .dark .topbar {
@@ -202,10 +207,57 @@
   font-size: 1.05rem;
 }
 
-/* Page heading */
+/* Page banner */
+.page-banner {
+  margin-bottom: 2rem;
+}
+
 .page-heading .subtitle {
   text-transform: uppercase;
   margin-bottom: 0;
+  font-size: 0.75rem;
+}
+
+.page-banner .btn-round {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+/* card */
+.card {
+  background-color: inherit;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border: 0.5px solid #4b5154;
+  border-radius: 0.5rem;
+  color: inherit;
+}
+
+.card .card-header {
+  background-color: inherit;
+  border: none;
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+.card .card-body {
+  padding: 0.5rem;
+}
+
+.card-control .btn {
+  height: 1.25rem;
+  width: 1.25rem;
+  padding: 0.05rem;
+  margin: 0 0.15rem;
+}
+
+/* forms */
+.editable-text {
+  outline: 0px solid transparent;
+  width: 100%;
+  background-color: inherit;
+  color: inherit;
+  border: none;
 }
 
 /* Dark theme */
