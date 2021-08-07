@@ -6,7 +6,7 @@ export enum Theme {
   Light,
 }
 
-const defaultUserAppConfig: UserAppConfig = {
+export const defaultUserAppConfig: UserAppConfig = {
   tabs: {},
   tabOrder: [],
   createTab: () => ({
