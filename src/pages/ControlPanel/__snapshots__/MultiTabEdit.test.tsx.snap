@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the MultiEdit screen correctly 1`] = `
+<div
+  className="container"
+>
+  <section
+    className="page-banner d-flex justify-space-between"
+  >
+    <div
+      className="page-heading"
+    >
+      <p
+        className="subtitle"
+      >
+        TABS
+      </p>
+      <h4
+        className="title"
+      >
+        Control Panel
+      </h4>
+    </div>
+    <button
+      className="btn btn-round"
+      onClick={[Function]}
+    >
+      <img
+        alt="Create New Tab"
+        src="add_white.svg"
+      />
+    </button>
+  </section>
+  <section
+    className="scrollview"
+  >
+    <div
+      className="card"
+    >
+      <div
+        className="card-header d-flex justify-space-between"
+      >
+        <input
+          className="editable-text"
+          data-name="title"
+          onChange={[Function]}
+          spellCheck={true}
+          type="text"
+          value="hi you"
+        />
+        <div
+          className="card-control d-flex justify-space-between"
+        >
+          <button
+            className="btn"
+          >
+            <img
+              alt="edit"
+              src="edit_white.svg"
+            />
+          </button>
+          <button
+            className="btn"
+          >
+            <img
+              alt="close"
+              src="close_white.svg"
+            />
+          </button>
+        </div>
+      </div>
+      <div
+        className="card-body list-with-images"
+      />
+    </div>
+    <div
+      className="card"
+    >
+      <div
+        className="card-header d-flex justify-space-between"
+      >
+        <input
+          className="editable-text"
+          data-name="title"
+          onChange={[Function]}
+          spellCheck={true}
+          type="text"
+          value="hello ha"
+        />
+        <div
+          className="card-control d-flex justify-space-between"
+        >
+          <button
+            className="btn"
+          >
+            <img
+              alt="edit"
+              src="edit_white.svg"
+            />
+          </button>
+          <button
+            className="btn"
+          >
+            <img
+              alt="close"
+              src="close_white.svg"
+            />
+          </button>
+        </div>
+      </div>
+      <div
+        className="card-body list-with-images"
+      />
+    </div>
+  </section>
+</div>
+`;
