@@ -208,7 +208,7 @@ Note: _Each of these steps involves writing some tests of some kind_
 - [x] Add ability to create tabs in the control panel
 - [x] Add ability to delete tab in the control panel
 - [ ] Add ability to add visualization configurations in the control panel
-- [ ] Add ability to save configurations every 3 seconds or so if anything changes when the control panel is open
+- [x] Add ability to save configurations as soon as a change is made.
 - [ ] Add ability to connect to websocket
 - [ ] Add ability to merge any new message to the preexisting client-style JSON for that visualization
 - [ ] Add ability to set the maximum range of the x-axis for charts
