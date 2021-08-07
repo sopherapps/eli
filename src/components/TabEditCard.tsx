@@ -18,6 +18,7 @@ import whiteStackedLineChartIcon from "../assets/images/stacked_line_chart_white
 import whiteTableIcon from "../assets/images/table_chart_white.svg";
 import { UserAppConfigContext } from "../context";
 import { useCallback } from "react";
+import { Link, useRouteMatch } from "react-router-dom";
 
 const visualizationTypeIcons: { [key: string]: string } = {
   text: whiteTextIcon,
@@ -35,6 +36,7 @@ const visualizationTypeIcons: { [key: string]: string } = {
 
 export default function TabEditCard({ tab }: { tab: Tab }) {
   const appConfig = useContext(UserAppConfigContext);
+  const { path } = useRouteMatch();
 
   const handleEdit = useCallback(
     (e) => {
@@ -44,6 +46,14 @@ export default function TabEditCard({ tab }: { tab: Tab }) {
       // @ts-ignore
       const newValue = e.target?.value;
       appConfig.updateTab(tab.id, { ...tab, [property]: newValue });
+    },
+    [appConfig, tab]
+  );
+
+  const handleDelete = useCallback(
+    (e) => {
+      e.preventDefault();
+      appConfig.deleteTab(tab.id);
     },
     [appConfig, tab]
   );
@@ -60,11 +70,11 @@ export default function TabEditCard({ tab }: { tab: Tab }) {
           value={tab.title || ""}
         />
         <div className="card-control d-flex justify-space-between">
-          <button className="btn">
+          <Link className="btn" to={`${path}/tabs/${tab.id}`}>
             <img src={whiteEditIcon} alt="edit" />
-          </button>
+          </Link>
           <button className="btn">
-            <img src={whiteCloseIcon} alt="close" />
+            <img src={whiteCloseIcon} alt="close" onClick={handleDelete} />
           </button>
         </div>
       </div>
