@@ -1,12 +1,17 @@
 import React from "react";
-import { UserAppConfig } from "./data/models";
+import { UserAppConfig, Tab } from "./data/models";
 
 export enum Theme {
   Dark,
   Light,
 }
 
-export const defaultUserAppConfig: UserAppConfig = { tabs: [] };
+const defaultUserAppConfig: UserAppConfig = {
+  tabs: {},
+  createTab: () => ({ title: "" }),
+  updateTab: (title: string, tab: Tab) => tab,
+  deleteTab: (title: string) => {},
+};
 
 export const ThemeContext = React.createContext(Theme.Dark); // other possibility is light
 export const UserAppConfigContext = React.createContext(defaultUserAppConfig);

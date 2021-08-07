@@ -5,8 +5,13 @@ import { UserAppConfigContext } from "../context";
 
 export default function Home() {
   const appConfig = useContext(UserAppConfigContext);
-  if (appConfig.tabs.length > 0) {
-    return <Redirect to={{ pathname: `/tabs/${appConfig.tabs[0].title}` }} />;
+  const tabTitles = Object.keys(appConfig.tabs).sort();
+  if (tabTitles.length > 0) {
+    return (
+      <Redirect
+        to={{ pathname: `/tabs/${appConfig.tabs[tabTitles[0]].title}` }}
+      />
+    );
   }
 
   return (

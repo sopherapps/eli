@@ -1,25 +1,24 @@
 // Component to show the footer
 import React, { useState } from "react";
-import { Tab } from "../data/models";
 import leftArrowWhite from "../assets/images/arrow_left_white.svg";
 import rightArrowWhite from "../assets/images/arrow_right_white.svg";
 import { Link, useRouteMatch } from "react-router-dom";
 import { useCallback } from "react";
 import { useMemo } from "react";
 
-export default function Tabbar(props: { tabs: Tab[] }) {
-  const tabs = useMemo(() => props.tabs || [], [props]);
+export default function Tabbar(props: { tabTitles: string[] }) {
+  const tabTitles = useMemo(() => props.tabTitles || [], [props]);
   // @ts-ignore
   const activeTitle = useRouteMatch("/tabs/:title")?.params?.title;
   const [firstTabIndex, setFirstTabIndex] = useState(0);
 
-  const slideLeft = useCallback(() => {
+  const slideRight = useCallback(() => {
     setFirstTabIndex(Math.max(0, firstTabIndex - 1));
   }, [firstTabIndex]);
 
-  const slideRight = useCallback(() => {
-    setFirstTabIndex(Math.min(tabs.length - 1, firstTabIndex + 1));
-  }, [firstTabIndex, tabs]);
+  const slideLeft = useCallback(() => {
+    setFirstTabIndex(Math.min(tabTitles.length - 1, firstTabIndex + 1));
+  }, [firstTabIndex, tabTitles]);
 
   return (
     <footer className="tabbar">
@@ -31,15 +30,13 @@ export default function Tabbar(props: { tabs: Tab[] }) {
           <img src={leftArrowWhite} alt="left" />
         </button>
         <div className="tab-menu">
-          {tabs.slice(firstTabIndex).map((tab) => (
+          {tabTitles.slice(firstTabIndex).map((title) => (
             <Link
-              key={tab.title}
-              to={`/tabs/${tab.title}`}
-              className={`tab-navitem ${
-                activeTitle === tab.title ? "active" : ""
-              }`}
+              key={title}
+              to={`/tabs/${title}`}
+              className={`tab-navitem ${activeTitle === title ? "active" : ""}`}
             >
-              {tab.title}
+              {title}
             </Link>
           ))}
         </div>

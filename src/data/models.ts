@@ -4,7 +4,10 @@
  */
 
 export interface UserAppConfig {
-  tabs: Tab[];
+  tabs: { [key: string]: Tab };
+  createTab: () => Tab;
+  updateTab: (title: string, tab: Tab) => Tab;
+  deleteTab: (title: string) => void;
 }
 
 export interface Tab {

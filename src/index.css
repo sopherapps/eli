@@ -202,6 +202,12 @@
   font-size: 1.05rem;
 }
 
+/* Page heading */
+.page-heading .subtitle {
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
 /* Dark theme */
 .app.dark {
   background-color: #1a1c1d;

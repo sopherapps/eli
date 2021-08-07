@@ -2,6 +2,7 @@
  * Module containing the main router of the app
  */
 import React, { useContext } from "react";
+import { useMemo } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Tabbar from "./components/Tabbar";
 import Topbar from "./components/Topbar";
@@ -15,6 +16,10 @@ export default function AppRouter() {
   const themeClassName = theme === Theme.Dark ? "dark" : "light";
 
   const appConfig = useContext(UserAppConfigContext);
+  const tabTitles = useMemo(
+    () => Object.keys(appConfig.tabs).sort(),
+    [appConfig.tabs]
+  );
 
   return (
     <div className={`app h-100 ${themeClassName}`}>
@@ -33,7 +38,7 @@ export default function AppRouter() {
             </Route>
           </Switch>
         </main>
-        <Tabbar tabs={appConfig.tabs} />
+        <Tabbar tabTitles={tabTitles} />
       </Router>
     </div>
   );
