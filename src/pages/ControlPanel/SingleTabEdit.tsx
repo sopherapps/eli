@@ -1,15 +1,18 @@
 // Page for the editing of a single tab, by adding, editing, or deleting given visualizations
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { UserAppConfigContext } from "../../context";
-import { Tab, TableType, Visualization } from "../../data/models";
+import { TableType, Visualization } from "../../data/models";
 import backArrow from "../../assets/images/arrow_back_white.svg";
 import plusIconWhite from "../../assets/images/add_white.svg";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link, Redirect, useRouteMatch } from "react-router-dom";
 import VisualizationEditCard from "../../components/VisualizationEditCard";
 import { useCallback } from "react";
 
-export default function SingleTabEdit({ tab }: { tab: Tab }) {
+export default function SingleTabEdit() {
+  // @ts-ignore
+  const { id } = useParams();
   const appConfig = useContext(UserAppConfigContext);
+  const tab = useMemo(() => appConfig.tabs[id], [id, appConfig]);
   const { path } = useRouteMatch();
 
   const createVisualization = useCallback(() => {
@@ -28,6 +31,10 @@ export default function SingleTabEdit({ tab }: { tab: Tab }) {
       order: [...tab.order, newVisual.id],
     });
   }, [appConfig, tab]);
+
+  if (!tab) {
+    return <Redirect to={{ pathname: "/not-found" }} />;
+  }
 
   return (
     <div className="container">

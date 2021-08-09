@@ -8,6 +8,7 @@ import Topbar from "./components/Topbar";
 import { Theme, ThemeContext } from "./context";
 import ControlPanel from "./pages/ControlPanel";
 import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 import TabPage from "./pages/TabPage";
 
 export default function AppRouter() {
@@ -28,6 +29,12 @@ export default function AppRouter() {
             </Route>
             <Route path="/control-panel">
               <ControlPanel />
+            </Route>
+            <Route path="/not-found">
+              <NotFound />
+            </Route>
+            <Route path="*">
+              <NotFound />
             </Route>
           </Switch>
         </main>
