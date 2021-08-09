@@ -11,7 +11,7 @@ import whitePieChartIcon from "../assets/images/pie_chart_white.svg";
 import whiteDonutChartIcon from "../assets/images/donut_small_white.svg";
 import whiteScatterChartIcon from "../assets/images/scatter_plot_white.svg";
 import whiteLineChartIcon from "../assets/images/show_chart_white.svg";
-import whiteStackedBarChartIcon from "../assets/images/stacked_bar_chart_white.svg";
+import whiteNumberdListIcon from "../assets/images/format_list_numbered_white.svg";
 import whiteStackedLineChartIcon from "../assets/images/stacked_line_chart_white.svg";
 import whiteTableIcon from "../assets/images/table_chart_white.svg";
 import whiteMultipleBarChartIcon from "../assets/images/addchart_white.svg";
@@ -473,49 +473,130 @@ export const MixedChartType: VisualizationType = {
   },
 };
 
-// FIXME: Create more
+export const PieChartType: VisualizationType = {
+  name: "pie-chart",
+  icon: whitePieChartIcon,
+  config: {
+    labelField: {
+      label: "label field",
+      inputType: HTMLInputType.Text,
+      orderPosition: 1,
+      options: {},
+    },
+    valueField: {
+      label: "value field",
+      inputType: HTMLInputType.Text,
+      orderPosition: 2,
+      options: {},
+    },
+  },
+};
 
-// const visualizationTypeIcons: { [key: string]: string } = {
-//   text: whiteTextIcon,
-//   list: whiteListIcon,
-//   bar: whiteBarChartIcon,
-//   mixed: whiteMixedChartIcon,
-//   pie: whitePieChartIcon,
-//   donut: whiteDonutChartIcon,
-//   scatter: whiteScatterChartIcon,
-//   line: whiteLineChartIcon,
-//   "stacked-line": whiteStackedLineChartIcon,
-//   "stacked-bar": whiteStackedBarChartIcon,
-//   table: whiteTableIcon,
-// };
+export const DonutChartType: VisualizationType = {
+  name: "donut-chart",
+  icon: whiteDonutChartIcon,
+  config: {
+    labelField: {
+      label: "label field",
+      inputType: HTMLInputType.Text,
+      orderPosition: 1,
+      options: {},
+    },
+    valueField: {
+      label: "value field",
+      inputType: HTMLInputType.Text,
+      orderPosition: 2,
+      options: {},
+    },
+  },
+};
 
-// // Ordered Lists
-// type OrderedList struct {
-// 	BaseVisualization
-// 	Style string `json:"style"` // upper-roman, lower-alpha
-// 	ValueField string `json:"value_field"`
-// }
+export const UnorderedListType: VisualizationType = {
+  name: "unordered-list",
+  icon: whiteListIcon,
+  config: {
+    valueField: {
+      label: "value field",
+      inputType: HTMLInputType.Text,
+      orderPosition: 1,
+      options: {},
+    },
+    style: {
+      label: "style",
+      inputType: HTMLInputType.Select,
+      orderPosition: 2,
+      options: {
+        options: ["circle", "square"],
+      },
+    },
+  },
+};
 
-// // Unorderd Lists
-// type UnorderedList struct {
-// 	BaseVisualization
-// 	Style string `json:"style"` // circle, square
-// 	ValueField string `json:"value_field"`
-// }
+export const OrderedListType: VisualizationType = {
+  name: "ordered-list",
+  icon: whiteNumberdListIcon,
+  config: {
+    valueField: {
+      label: "value field",
+      inputType: HTMLInputType.Text,
+      orderPosition: 1,
+      options: {},
+    },
+    style: {
+      label: "style",
+      inputType: HTMLInputType.Select,
+      orderPosition: 2,
+      options: {
+        options: ["upper-roman", "lower-roman", "upper-alpha", "lower-alpha"],
+      },
+    },
+  },
+};
 
-// // Text
-// type Text struct {
-// 	BaseVisualization
-// 	FontSize int64 `json:"font_size"`
-// 	ValueField string `json:"value_field"`
-// 	Bold bool `json:"bold"`
-// 	Italic bool `json:"italic"`
-// 	Alignment string `json:"alignment"` // right, left, center
-// }
-
-// // Piechart
-// type PieChart struct {
-// 	BaseVisualization
-// 	ValueField string `json:"value_field"`
-// 	LabelField string `json:"label_field"`
-// }
+export const TextType: VisualizationType = {
+  name: "text",
+  icon: whiteTextIcon,
+  config: {
+    valueField: {
+      label: "value field",
+      inputType: HTMLInputType.Text,
+      orderPosition: 1,
+      options: {},
+    },
+    fontSize: {
+      label: "font size",
+      inputType: HTMLInputType.Range,
+      orderPosition: 2,
+      options: {
+        min: 8,
+        max: 600,
+        default: 16,
+      },
+    },
+    bold: {
+      label: "bold",
+      inputType: HTMLInputType.Checkbox,
+      orderPosition: 3,
+      options: {
+        default: false,
+      },
+    },
+    italic: {
+      label: "italic",
+      inputType: HTMLInputType.Checkbox,
+      orderPosition: 4,
+      options: {
+        default: false,
+      },
+    },
+    alignment: {
+      label: "alignment",
+      inputType: HTMLInputType.Select,
+      orderPosition: 5,
+      options: {
+        default: "left",
+        options: ["left", "center", "right"],
+      },
+    },
+  },
+};
