@@ -218,6 +218,10 @@
   font-size: 0.75rem;
 }
 
+.page-heading .btn {
+  margin-right: 1.5rem;
+}
+
 .page-banner .btn-round {
   height: 2.5rem;
   width: 2.5rem;
@@ -249,6 +253,15 @@
   width: 1.25rem;
   padding: 0.05rem;
   margin: 0 0.15rem;
+}
+
+/* lists */
+.list-with-images .list-item img {
+  margin-right: 1rem;
+}
+
+.list-item {
+  margin-bottom: 0.5rem;
 }
 
 /* forms */

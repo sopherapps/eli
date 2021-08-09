@@ -51,6 +51,7 @@ export interface VisualizationProp {
   inputType: HTMLInputType;
   orderPosition: number;
   options: { [key: string]: any };
+  value?: any;
 }
 
 // FIXME: I might need to create separte input components for each of these.
