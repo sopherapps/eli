@@ -273,6 +273,62 @@
   border: none;
 }
 
+.eli-form-control-group {
+  margin-bottom: 1rem;
+}
+
+.eli-form-control {
+  width: 50%;
+}
+
+input.eli-form-control,
+textarea.eli-form-control,
+select.eli-form-control {
+  background-color: inherit;
+  color: inherit;
+  border: none;
+  border-bottom: 1px solid #dbd8d3;
+  outline: 0px solid transparent;
+}
+
+.dark select.eli-form-control option {
+  background-color: #1a1c1d;
+  color: #dbd8d3;
+  padding-bottom: 0.25rem;
+}
+
+div.eli-form-control input:first-child {
+  width: 90%;
+}
+
+div.eli-form-control input:last-child {
+  width: 10%;
+  text-align: end;
+  border-bottom: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+  padding: 1px 5px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+input:invalid,
+textarea:invalid {
+  border: 1px solid rgb(112, 22, 22);
+}
+
+input:focus:invalid,
+input:focus:invalid {
+  border: none;
+  border-bottom: 1px solid #dbd8d3;
+}
+
 /* Dark theme */
 .app.dark {
   background-color: #1a1c1d;
