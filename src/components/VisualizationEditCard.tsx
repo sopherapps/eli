@@ -28,12 +28,15 @@ export default function VisualizationEditCard({
     (e) => {
       e.preventDefault();
       e.target.checkValidity();
-
-      // @ts-ignore
       const prop = e.target?.dataset.name;
-      // @ts-ignore
       const value = e.target?.value;
-      onEdit(visualization.id, { ...visualization, [prop]: value });
+      const error = e.target?.validationMessage;
+
+      onEdit(visualization.id, {
+        ...visualization,
+        errors: { ...visualization.errors, [prop]: error },
+        [prop]: value,
+      });
     },
     [visualization, onEdit]
   );

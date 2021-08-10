@@ -24,6 +24,8 @@ export default function VisualizationForm({
       const configName = e.target?.dataset.name;
       // @ts-ignore
       const value = e.target?.value;
+      const error = e.target?.validationMessage;
+
       onEdit({
         ...e,
         preventDefault: () => e.preventDefault(),
@@ -34,7 +36,7 @@ export default function VisualizationForm({
           value: {
             ...data.type,
             config: data.type.config.map((item) =>
-              item.name !== configName ? item : { ...item, value }
+              item.name !== configName ? item : { ...item, value, error }
             ),
           },
         },
@@ -91,6 +93,9 @@ export default function VisualizationForm({
         label="Data Source URL"
         onEdit={onEdit}
         name="dataSourceUrl"
+        error={data.errors?.dataSourceUrl}
+        required={true}
+        pattern="wss?://.*"
       />
       <RangeInput
         name="width"
@@ -100,6 +105,8 @@ export default function VisualizationForm({
         value={data.width || 50}
         max={100}
         min={0}
+        error={data.errors?.width}
+        required={true}
       />
       <RangeInput
         name="height"
@@ -109,6 +116,8 @@ export default function VisualizationForm({
         value={data.height || 50}
         max={100}
         min={0}
+        error={data.errors?.height}
+        required={true}
       />
       <SelectInput
         name="type"
@@ -117,6 +126,8 @@ export default function VisualizationForm({
         onEdit={changeType}
         value={data.type?.name}
         options={visualizationTypeList}
+        error={data.errors?.type}
+        required={true}
       />
       {data.type?.addMoreConfigsButtons?.map((btnConfig) => (
         <AddMoreConfigButton

@@ -10,6 +10,8 @@ export default function TimeInput({
   onEdit,
   value,
   step,
+  error,
+  required,
 }: {
   id: string;
   name: string;
@@ -17,22 +19,28 @@ export default function TimeInput({
   onEdit: EventHandler<any>;
   value: string;
   step?: number;
+  error: string | undefined;
+  required?: boolean;
 }) {
   return (
     <div className="eli-form-control-group d-flex">
       <label className="eli-form-control" htmlFor={id}>
         {label}
       </label>
-      <input
-        id={id}
-        type="time"
-        className="eli-form-control"
-        data-name={name}
-        value={value}
-        onChange={onEdit}
-        step={step}
-        autoComplete="off"
-      />
+      <div className="eli-form-control">
+        <input
+          id={id}
+          type="time"
+          className="sole-control"
+          data-name={name}
+          value={value}
+          onChange={onEdit}
+          step={step}
+          autoComplete="off"
+          required={required}
+        />
+        {error && <small className="form-error">{error}</small>}
+      </div>
     </div>
   );
 }

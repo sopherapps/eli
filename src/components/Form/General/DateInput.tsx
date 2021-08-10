@@ -11,12 +11,16 @@ export default function DateInput({
   label,
   onEdit,
   value,
+  required,
+  error,
 }: {
   id: string;
   name: string;
   label: string;
   onEdit: EventHandler<any>;
   value: string | Date;
+  required?: boolean;
+  error: string | undefined;
 }) {
   const stringifiedDate = useMemo(() => {
     if (typeof value === "string") {
@@ -30,15 +34,19 @@ export default function DateInput({
       <label className="eli-form-control" htmlFor={id}>
         {label}
       </label>
-      <input
-        id={id}
-        type="date"
-        className="eli-form-control"
-        data-name={name}
-        value={stringifiedDate}
-        onChange={onEdit}
-        autoComplete="off"
-      />
+      <div className="eli-form-control">
+        <input
+          id={id}
+          type="date"
+          className="sole-control"
+          data-name={name}
+          value={stringifiedDate}
+          onChange={onEdit}
+          autoComplete="off"
+          required={required}
+        />
+        {error && <small className="form-error">{error}</small>}
+      </div>
     </div>
   );
 }

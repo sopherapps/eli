@@ -207,7 +207,8 @@ Note: _Each of these steps involves writing some tests of some kind_
 - [x] Update the Home page
 - [x] Add ability to create tabs in the control panel
 - [x] Add ability to delete tab in the control panel
-- [ ] Add ability to add visualization configurations in the control panel
+- [x] Add ability to add visualization configurations in the control panel
+- [x] Add validation, and showing of errors (this might mean saving erroneous data but with an error prop on Visualization with the keys being the keys in instance)
 - [x] Add ability to save configurations as soon as a change is made.
 - [x] Add ability to update the multiple chart datasets when the addMore buttons are clicked (should I just add more fields to the config, while appending the name of the dataset and type?)
 - [ ] Add ability to connect to websocket

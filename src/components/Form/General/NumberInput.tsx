@@ -12,6 +12,8 @@ export default function NumberInput({
   value,
   min,
   max,
+  required,
+  error,
 }: {
   id: string;
   name: string;
@@ -20,23 +22,29 @@ export default function NumberInput({
   max: number;
   onEdit: EventHandler<any>;
   value: string;
+  required?: boolean;
+  error: string | undefined;
 }) {
   return (
     <div className="eli-form-control-group d-flex">
       <label className="eli-form-control" htmlFor={id}>
         {label}
       </label>
-      <input
-        id={id}
-        type="number"
-        className="eli-form-control"
-        min={min}
-        max={max}
-        data-name={name}
-        value={value}
-        onChange={onEdit}
-        autoComplete="off"
-      />
+      <div className="eli-form-control">
+        <input
+          id={id}
+          type="number"
+          className="sole-control"
+          min={min}
+          max={max}
+          data-name={name}
+          value={value}
+          onChange={onEdit}
+          autoComplete="off"
+          required={required}
+        />
+        {error && <small className="form-error">{error}</small>}
+      </div>
     </div>
   );
 }

@@ -9,11 +9,17 @@ export default function URLInput({
   value,
   label,
   name,
+  error,
+  required,
+  pattern,
 }: {
   id: string;
   value: string;
   label: string;
   name: string;
+  error: string | undefined;
+  required?: boolean;
+  pattern?: string;
   onEdit: EventHandler<any>;
 }) {
   return (
@@ -21,15 +27,20 @@ export default function URLInput({
       <label className="eli-form-control" htmlFor={id}>
         {label}
       </label>
-      <input
-        id={id}
-        type="url"
-        className="eli-form-control"
-        onChange={onEdit}
-        data-name={name}
-        value={value}
-        autoComplete="off"
-      />
+      <div className="eli-form-control">
+        <input
+          id={id}
+          type="url"
+          className="sole-control"
+          onChange={onEdit}
+          data-name={name}
+          value={value}
+          autoComplete="off"
+          required={required}
+          pattern={pattern}
+        />
+        {error && <small className="form-error">{error}</small>}
+      </div>
     </div>
   );
 }

@@ -37,6 +37,8 @@ export default function GeneralConfigInput({
           label={config.label}
           value={config.value}
           onEdit={onEdit}
+          error={config.error}
+          required={config.required}
         />
       );
 
@@ -48,6 +50,8 @@ export default function GeneralConfigInput({
           name={config.name}
           onEdit={onEdit}
           value={config.value}
+          error={config.error}
+          required={config.required}
         />
       );
 
@@ -59,6 +63,8 @@ export default function GeneralConfigInput({
           label={config.label}
           onEdit={onEdit}
           value={config.value}
+          error={config.error}
+          required={config.required}
         />
       );
 
@@ -70,6 +76,8 @@ export default function GeneralConfigInput({
           label={config.label}
           onEdit={onEdit}
           value={config.value}
+          error={config.error}
+          required={config.required}
         />
       );
 
@@ -81,6 +89,8 @@ export default function GeneralConfigInput({
           name={config.name}
           onEdit={onEdit}
           value={config.value}
+          error={config.error}
+          required={config.required}
         />
       );
 
@@ -94,6 +104,8 @@ export default function GeneralConfigInput({
           value={config.value}
           min={config.options.min}
           max={config.options.max}
+          error={config.error}
+          required={config.required}
         />
       );
 
@@ -107,6 +119,8 @@ export default function GeneralConfigInput({
           value={config.value}
           min={config.options.min}
           max={config.options.max}
+          error={config.error}
+          required={config.required}
         />
       );
 
@@ -119,6 +133,8 @@ export default function GeneralConfigInput({
           onEdit={onEdit}
           value={config.value}
           options={config.options.options}
+          error={config.error}
+          required={config.required}
         />
       );
 
@@ -130,6 +146,8 @@ export default function GeneralConfigInput({
           name={config.name}
           onEdit={onEdit}
           value={config.value}
+          error={config.error}
+          required={config.required}
         />
       );
 
@@ -141,6 +159,8 @@ export default function GeneralConfigInput({
           name={config.name}
           onEdit={onEdit}
           value={config.value}
+          error={config.error}
+          required={config.required}
         />
       );
 
@@ -153,6 +173,8 @@ export default function GeneralConfigInput({
           onEdit={onEdit}
           value={config.value}
           step={config.options.step}
+          error={config.error}
+          required={config.required}
         />
       );
 
@@ -164,6 +186,9 @@ export default function GeneralConfigInput({
           name={config.name}
           onEdit={onEdit}
           value={config.value}
+          error={config.error}
+          required={config.required}
+          pattern={config.options?.pattern}
         />
       );
 
@@ -175,6 +200,8 @@ export default function GeneralConfigInput({
           name={config.name}
           onEdit={onEdit}
           value={config.value}
+          error={config.error}
+          required={config.required}
         />
       );
 

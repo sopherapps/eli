@@ -281,9 +281,9 @@
   width: 50%;
 }
 
-input.eli-form-control,
-textarea.eli-form-control,
-select.eli-form-control {
+.sole-control,
+.main-control,
+.minor-control {
   background-color: inherit;
   color: inherit;
   border: none;
@@ -300,17 +300,23 @@ select.eli-form-control {
   background-color: #4b5154;
 }
 
-.dark select.eli-form-control option {
+.dark select.main-control option,
+.dark select.minor-control option,
+.dark select.sole-control option {
   background-color: #1a1c1d;
   color: #dbd8d3;
   padding-bottom: 0.25rem;
 }
 
-div.eli-form-control input:first-child {
+.eli-form-control .sole-control {
+  width: 100%;
+}
+
+.eli-form-control .main-control {
   width: 90%;
 }
 
-div.eli-form-control input:last-child {
+.eli-form-control .minor-control {
   width: 10%;
   text-align: end;
   border-bottom: none;
@@ -329,13 +335,18 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input:invalid,
 textarea:invalid {
-  border: 1px solid rgb(112, 22, 22);
+  border: 1px solid rgb(204, 66, 66);
 }
 
 input:focus:invalid,
-input:focus:invalid {
+textarea:focus:invalid {
   border: none;
   border-bottom: 1px solid #dbd8d3;
+}
+
+.form-error {
+  font-size: 0.75rem;
+  color: rgb(204, 66, 66);
 }
 
 /* Dark theme */

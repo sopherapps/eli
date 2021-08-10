@@ -9,11 +9,15 @@ export default function WeekInput({
   value,
   label,
   name,
+  error,
+  required,
 }: {
   id: string;
   value: string;
   label: string;
   name: string;
+  error: string | undefined;
+  required?: boolean;
   onEdit: EventHandler<any>;
 }) {
   return (
@@ -21,15 +25,19 @@ export default function WeekInput({
       <label className="eli-form-control" htmlFor={id}>
         {label}
       </label>
-      <input
-        id={id}
-        type="week"
-        className="eli-form-control"
-        onChange={onEdit}
-        data-name={name}
-        value={value}
-        autoComplete="off"
-      />
+      <div className="eli-form-control">
+        <input
+          id={id}
+          type="week"
+          className="sole-control"
+          onChange={onEdit}
+          data-name={name}
+          value={value}
+          autoComplete="off"
+          required={required}
+        />
+        {error && <small className="form-error">{error}</small>}
+      </div>
     </div>
   );
 }

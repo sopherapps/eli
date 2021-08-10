@@ -23,6 +23,7 @@ export default function SingleTabEdit() {
       width: 50,
       height: 50,
       type: TableType,
+      errors: {},
     };
 
     appConfig.updateTab(tab.id, {

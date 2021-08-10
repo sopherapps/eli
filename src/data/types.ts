@@ -23,6 +23,7 @@ export interface Visualization {
   width: number;
   height: number;
   type: VisualizationType;
+  errors: { [key: string]: string };
 }
 
 export interface VisualizationType {
@@ -47,6 +48,8 @@ export interface VisualizationProp {
   inputType: HTMLInputType;
   options: { [key: string]: any };
   value?: any;
+  error?: string;
+  required?: boolean;
 }
 
 export enum HTMLInputType {

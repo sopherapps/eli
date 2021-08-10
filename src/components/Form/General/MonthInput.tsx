@@ -10,27 +10,35 @@ export default function MonthInput({
   label,
   onEdit,
   value,
+  required,
+  error,
 }: {
   id: string;
   name: string;
   label: string;
   onEdit: EventHandler<any>;
   value: string;
+  required?: boolean;
+  error: string | undefined;
 }) {
   return (
     <div className="eli-form-control-group d-flex">
       <label className="eli-form-control" htmlFor={id}>
         {label}
       </label>
-      <input
-        id={id}
-        type="month"
-        className="eli-form-control"
-        data-name={name}
-        value={value}
-        onChange={onEdit}
-        autoComplete="off"
-      />
+      <div className="eli-form-control">
+        <input
+          id={id}
+          type="month"
+          className="sole-control"
+          data-name={name}
+          value={value}
+          onChange={onEdit}
+          autoComplete="off"
+          required={required}
+        />
+        {error && <small className="form-error">{error}</small>}
+      </div>
     </div>
   );
 }
