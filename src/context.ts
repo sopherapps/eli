@@ -1,5 +1,5 @@
 import React from "react";
-import { UserAppConfig, Tab } from "./data/models";
+import { UserAppConfig, Tab } from "./data/types";
 
 export enum Theme {
   Dark,

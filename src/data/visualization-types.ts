@@ -1,6 +1,5 @@
 /**
- * Module contains the models to store as configuration for a given user.
- * Ideally there might be an option to clear past configurations
+ * Module contains the configurations of the Visualization types available
  */
 
 import whiteTextIcon from "../assets/images/text_snippet_white.svg";
@@ -15,65 +14,7 @@ import whiteNumberdListIcon from "../assets/images/format_list_numbered_white.sv
 import whiteStackedLineChartIcon from "../assets/images/stacked_line_chart_white.svg";
 import whiteTableIcon from "../assets/images/table_chart_white.svg";
 import whiteMultipleBarChartIcon from "../assets/images/addchart_white.svg";
-
-export interface UserAppConfig {
-  tabs: { [key: string]: Tab };
-  tabOrder: string[];
-  createTab: () => Tab;
-  updateTab: (id: string, tab: Tab) => Tab;
-  deleteTab: (id: string) => void;
-}
-
-export interface Tab {
-  id: string;
-  title: string;
-  visualizations: { [key: string]: Visualization };
-  order: string[];
-}
-
-export interface Visualization {
-  id: string;
-  title: string;
-  dataSourceUrl: string;
-  width: number;
-  height: number;
-  type: VisualizationType;
-}
-
-export interface VisualizationType {
-  name: string;
-  icon: string;
-  config: VisualizationProp[];
-}
-
-export interface VisualizationProp {
-  name: string;
-  label: string;
-  inputType: HTMLInputType;
-  options: { [key: string]: any };
-  value?: any;
-}
-
-// FIXME: I might need to create separte input components for each of these.
-// These are got from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
-export enum HTMLInputType {
-  Text,
-  Number,
-  Email,
-  Url,
-  TextArea,
-  Checkbox,
-  Range,
-  Color,
-  Date,
-  Month,
-  Time,
-  Week,
-  Select,
-  AddMoreButton,
-}
-
-/* Visualization Types */
+import { VisualizationType, HTMLInputType } from "./types";
 
 export const TableType: VisualizationType = {
   name: "table",
@@ -600,20 +541,3 @@ export const TextType: VisualizationType = {
     },
   ],
 };
-
-export const visualizationTypeMap: { [key: string]: VisualizationType } = {
-  [TableType.name]: TableType,
-  [ScatterChartType.name]: ScatterChartType,
-  [BarChartType.name]: BarChartType,
-  [MultipleBarChartType.name]: MultipleBarChartType,
-  [LineChartType.name]: LineChartType,
-  [MultipleLineChartType.name]: MultipleLineChartType,
-  [MixedChartType.name]: MixedChartType,
-  [PieChartType.name]: PieChartType,
-  [DonutChartType.name]: DonutChartType,
-  [TextType.name]: TextType,
-  [OrderedListType.name]: OrderedListType,
-  [UnorderedListType.name]: UnorderedListType,
-};
-
-export const visualizationTypeList = Object.keys(visualizationTypeMap).sort();

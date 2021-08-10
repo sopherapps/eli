@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useState } from "react";
 import AppRouter from "./AppRouter";
 import { ThemeContext, Theme, UserAppConfigContext } from "./context";
-import { Tab, UserAppConfig } from "./data/models";
+import { Tab, UserAppConfig } from "./data/types";
 
 function App() {
   const localStorageAppConfigKey = "eli:AppConfig";

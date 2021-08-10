@@ -1,12 +1,13 @@
 // Page for the editing of a single tab, by adding, editing, or deleting given visualizations
 import React, { useContext, useMemo } from "react";
 import { UserAppConfigContext } from "../../context";
-import { TableType, Visualization } from "../../data/models";
 import backArrow from "../../assets/images/arrow_back_white.svg";
 import plusIconWhite from "../../assets/images/add_white.svg";
 import { Link, Redirect, useParams } from "react-router-dom";
 import VisualizationEditCard from "../../components/VisualizationEditCard";
 import { useCallback } from "react";
+import { Visualization } from "../../data/types";
+import { TableType } from "../../data/visualization-types";
 
 export default function SingleTabEdit() {
   // @ts-ignore

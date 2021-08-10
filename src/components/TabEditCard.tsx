@@ -1,6 +1,5 @@
 // Component to show the card for editting a tab
 import React, { useContext } from "react";
-import { Tab, Visualization } from "../data/models";
 
 import whiteCloseIcon from "../assets/images/close_white.svg";
 import whiteEditIcon from "../assets/images/edit_white.svg";
@@ -8,6 +7,7 @@ import whiteEditIcon from "../assets/images/edit_white.svg";
 import { UserAppConfigContext } from "../context";
 import { useCallback } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
+import { Tab, Visualization } from "../data/types";
 
 export default function TabEditCard({ tab }: { tab: Tab }) {
   const appConfig = useContext(UserAppConfigContext);
