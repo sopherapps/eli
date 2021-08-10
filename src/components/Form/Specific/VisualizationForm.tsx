@@ -19,21 +19,21 @@ export default function VisualizationForm({
 }) {
   const updateConfigFields = useCallback(
     (e) => {
-      e.preventDefault();
-      //   e.target.checkValidity();
       // @ts-ignore
       const configName = e.target?.dataset.name;
       // @ts-ignore
       const value = e.target?.value;
       onEdit({
         ...e,
+        preventDefault: () => e.preventDefault(),
         target: {
           ...e.target,
-          dataset: { ...e.target.dataset, name: "type" },
+          checkValidity: () => e.target.checkValidity(),
+          dataset: { name: "type" },
           value: {
             ...data.type,
             config: data.type.config.map((item) =>
-              item.name !== configName ? item : value
+              item.name !== configName ? item : { ...item, value }
             ),
           },
         },
@@ -44,13 +44,20 @@ export default function VisualizationForm({
 
   const changeType = useCallback(
     (e) => {
-      e.preventDefault();
-      //   e.target.checkValidity();
       // @ts-ignore
       const typeAsString = e.target?.value;
+      // @ts-ignore
+      const configName = e.target?.dataset.name;
+
       onEdit({
         ...e,
-        target: { ...e.target, value: visualizationTypeMap[typeAsString] },
+        preventDefault: () => e.preventDefault(),
+        target: {
+          ...e.target,
+          dataset: { name: configName },
+          checkValidity: () => e.target.checkValidity(),
+          value: visualizationTypeMap[typeAsString],
+        },
       });
     },
     [onEdit]

@@ -32,7 +32,7 @@ export default function Select({
         defaultValue={value}
       >
         {options.map((option) => (
-          <option value={option} key={option}>
+          <option data-name={name} value={option} key={option}>
             {option}
           </option>
         ))}

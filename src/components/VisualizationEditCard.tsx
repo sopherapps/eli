@@ -27,7 +27,8 @@ export default function VisualizationEditCard({
   const memoizedOnEdit = useCallback(
     (e) => {
       e.preventDefault();
-      // e.target.checkValidity();
+      e.target.checkValidity();
+
       // @ts-ignore
       const prop = e.target?.dataset.name;
       // @ts-ignore
