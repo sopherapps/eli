@@ -209,7 +209,7 @@ Note: _Each of these steps involves writing some tests of some kind_
 - [x] Add ability to delete tab in the control panel
 - [ ] Add ability to add visualization configurations in the control panel
 - [x] Add ability to save configurations as soon as a change is made.
-- [ ] Add ability to update the multiple chart datasets when the addMore buttons are clicked (should I just add more fields to the config, while appending the name of the dataset and type?)
+- [x] Add ability to update the multiple chart datasets when the addMore buttons are clicked (should I just add more fields to the config, while appending the name of the dataset and type?)
 - [ ] Add ability to connect to websocket
 - [ ] Add ability to merge any new message to the preexisting client-style JSON for that visualization
 - [ ] Add ability to set the maximum range of the x-axis for charts
@@ -218,6 +218,9 @@ Note: _Each of these steps involves writing some tests of some kind_
 - [ ] Add ability to display plain text visualization from data from websocket
 - [ ] Add ability to display table visualizations from data from websocket
 - [ ] Add ability to display charts (piecharts, doughnut, bar, stacked bar, line, scatter, mixed, multiline)
+- [ ] Add ability to delete the entire store via a button/menu click
+- [ ] Add ability to download config from localstorage
+- [ ] Add ability to load config from a file via an HTML file input (to allow sharing of configs)
 - [ ] Deploy to firebase, netlify or vercel
 - [ ] List the app on SopherApps
 - [ ] Write about the app on SopherApps blog

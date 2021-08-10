@@ -143,45 +143,45 @@ export const MultipleBarChartType: VisualizationType = {
         default: "horizontal",
       },
     },
+  ],
+  addMoreConfigsButtons: [
     {
-      name: "addDataset",
       label: "add dataset",
-      inputType: HTMLInputType.AddMoreButton,
-      options: {
-        datasets: [],
-        defaultDataset: [
+      datasetConfigGenerator: (time: Date) => ({
+        id: `${time.getTime()}-add-dt`,
+        configs: [
           {
-            name: "name",
+            name: `${time.getTime()}-add-dt-name`,
             label: "name",
             inputType: HTMLInputType.Text,
             options: {},
           },
           {
-            name: "label",
+            name: `${time.getTime()}-add-dt-label`,
             label: "label",
             inputType: HTMLInputType.Text,
             options: {},
           },
           {
-            name: "color",
+            name: `${time.getTime()}-add-dt-color`,
             label: "color",
             inputType: HTMLInputType.Color,
             options: {},
           },
           {
-            name: "xField",
+            name: `${time.getTime()}-add-dt-xField`,
             label: "x-axis field",
             inputType: HTMLInputType.Text,
             options: {},
           },
           {
-            name: "yField",
+            name: `${time.getTime()}-add-dt-yField`,
             label: "y-axis field",
             inputType: HTMLInputType.Text,
             options: {},
           },
         ],
-      },
+      }),
     },
   ],
 };
@@ -235,46 +235,45 @@ export const LineChartType: VisualizationType = {
 export const MultipleLineChartType: VisualizationType = {
   name: "multiple-line-chart",
   icon: whiteStackedLineChartIcon,
-  config: [
+  config: [],
+  addMoreConfigsButtons: [
     {
-      name: "addDataset",
       label: "add dataset",
-      inputType: HTMLInputType.AddMoreButton,
-      options: {
-        datasets: [],
-        defaultDataset: [
+      datasetConfigGenerator: (time: Date) => ({
+        id: `${time.getTime()}-add-ln-dt`,
+        configs: [
           {
-            name: "name",
+            name: `${time.getTime()}-add-ln-dt-name`,
             label: "name",
             inputType: HTMLInputType.Text,
             options: {},
           },
           {
-            name: "label",
+            name: `${time.getTime()}-add-ln-dt-label`,
             label: "label",
             inputType: HTMLInputType.Text,
             options: {},
           },
           {
-            name: "color",
+            name: `${time.getTime()}-add-ln-dt-color`,
             label: "color",
             inputType: HTMLInputType.Color,
             options: {},
           },
           {
-            name: "xField",
+            name: `${time.getTime()}-add-ln-dt-xField`,
             label: "x-axis field",
             inputType: HTMLInputType.Text,
             options: {},
           },
           {
-            name: "yField",
+            name: `${time.getTime()}-add-ln-dt-yField`,
             label: "y-axis field",
             inputType: HTMLInputType.Text,
             options: {},
           },
           {
-            name: "chartStyle",
+            name: `${time.getTime()}-add-ln-dt-chartStyle`,
             label: "chart style",
             inputType: HTMLInputType.Select,
             options: {
@@ -283,13 +282,13 @@ export const MultipleLineChartType: VisualizationType = {
             },
           },
           {
-            name: "areaUnderTheLineColor",
+            name: `${time.getTime()}-add-ln-dt-areaUnderTheLineColor`,
             label: "color of area under line",
             inputType: HTMLInputType.Color,
             options: {},
           },
         ],
-      },
+      }),
     },
   ],
 };
@@ -316,85 +315,93 @@ export const MixedChartType: VisualizationType = {
         default: "horizontal",
       },
     },
+  ],
+  addMoreConfigsButtons: [
     {
-      name: "addBarDataset",
       label: "add bar dataset",
-      inputType: HTMLInputType.AddMoreButton,
-      options: {
-        datasets: [],
-        defaultDataset: [
+      datasetConfigGenerator: (time: Date) => ({
+        id: `${time.getTime()}-add-bar-dt`,
+        configs: [
           {
-            name: "name",
+            name: `${time.getTime()}-add-bar-dt-name`,
             label: "name",
             inputType: HTMLInputType.Text,
-            options: {},
+            options: {
+              datasetId: "",
+            },
           },
           {
-            name: "label",
+            name: `${time.getTime()}-add-bar-dt-label`,
             label: "label",
             inputType: HTMLInputType.Text,
-            options: {},
+            options: {
+              datasetId: "",
+            },
           },
           {
-            name: "color",
+            name: `${time.getTime()}-add-bar-dt-color`,
             label: "color",
             inputType: HTMLInputType.Color,
-            options: {},
+            options: {
+              datasetId: "",
+            },
           },
           {
-            name: "xField",
+            name: `${time.getTime()}-add-bar-dt-xField`,
             label: "x-axis field",
             inputType: HTMLInputType.Text,
-            options: {},
+            options: {
+              datasetId: "",
+            },
           },
           {
-            name: "yField",
+            name: `${time.getTime()}-add-bar-dt-yField`,
             label: "y-axis field",
             inputType: HTMLInputType.Text,
-            options: {},
+            options: {
+              datasetId: "",
+            },
           },
         ],
-      },
+      }),
     },
     {
-      name: "addLineDataset",
-      label: "add Line dataset",
-      inputType: HTMLInputType.AddMoreButton,
-      options: {
-        datasets: [],
-        defaultDataset: [
+      label: "add line dataset",
+      datasetConfigGenerator: (time: Date) => ({
+        id: `${time.getTime()}-add-line-dt`,
+        configs: [
           {
-            name: "name",
+            name: `${time.getTime()}-add-line-dt-name`,
             label: "name",
             inputType: HTMLInputType.Text,
             options: {},
           },
           {
-            name: "label",
+            name: `${time.getTime()}-add-line-dt-label`,
             label: "label",
             inputType: HTMLInputType.Text,
             options: {},
           },
           {
-            name: "color",
+            name: `${time.getTime()}-add-line-dt-color`,
             label: "color",
             inputType: HTMLInputType.Color,
             options: {},
           },
           {
-            name: "xField",
+            name: `${time.getTime()}-add-line-dt-xField`,
             label: "x-axis field",
             inputType: HTMLInputType.Text,
             options: {},
           },
           {
-            name: "yField",
+            name: `${time.getTime()}-add-line-dt-yField`,
             label: "y-axis field",
             inputType: HTMLInputType.Text,
             options: {},
           },
           {
-            name: "chartStyle",
+            name: `${time.getTime()}-add-line-dt-chartStyle`,
             label: "chart style",
             inputType: HTMLInputType.Select,
             options: {
@@ -403,13 +410,13 @@ export const MixedChartType: VisualizationType = {
             },
           },
           {
-            name: "areaUnderTheLineColor",
+            name: `${time.getTime()}-add-line-dt-areaUnderTheLineColor`,
             label: "color of area under line",
             inputType: HTMLInputType.Color,
             options: {},
           },
         ],
-      },
+      }),
     },
   ],
 };

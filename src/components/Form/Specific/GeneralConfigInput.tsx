@@ -18,7 +18,6 @@ import TextInput from "../General/TextInput";
 import TimeInput from "../General/TimeInput";
 import URLInput from "../General/URLInput";
 import WeekInput from "../General/WeekInput";
-import AddMoreConfigButton from "./AddMoreConfigButton";
 
 export default function GeneralConfigInput({
   config,
@@ -30,9 +29,6 @@ export default function GeneralConfigInput({
   onEdit: EventHandler<any>;
 }) {
   switch (config.inputType) {
-    case HTMLInputType.AddMoreButton:
-      return <AddMoreConfigButton id={id} config={config} onEdit={onEdit} />;
-
     case HTMLInputType.Checkbox:
       return (
         <CheckboxInput

@@ -29,6 +29,16 @@ export interface VisualizationType {
   name: string;
   icon: string;
   config: VisualizationProp[];
+  addMoreConfigsButtons?: AddMoreConfigsProp[];
+  datasetIds?: string[];
+}
+
+export interface AddMoreConfigsProp {
+  label: string;
+  datasetConfigGenerator: (time: Date) => {
+    configs: VisualizationProp[];
+    id: string;
+  };
 }
 
 export interface VisualizationProp {
@@ -53,5 +63,4 @@ export enum HTMLInputType {
   Time,
   Week,
   Select,
-  AddMoreButton,
 }

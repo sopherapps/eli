@@ -4,10 +4,11 @@
 
 import { EventHandler, useCallback } from "react";
 import { visualizationTypeMap, visualizationTypeList } from "../../../data";
-import { Visualization } from "../../../data/types";
+import { Visualization, VisualizationProp } from "../../../data/types";
 import RangeInput from "../General/RangeInput";
 import SelectInput from "../General/SelectInput";
 import URLInput from "../General/URLInput";
+import AddMoreConfigButton from "./AddMoreConfigButton";
 import GeneralConfigInput from "./GeneralConfigInput";
 
 export default function VisualizationForm({
@@ -63,6 +64,25 @@ export default function VisualizationForm({
     [onEdit]
   );
 
+  // adds more configs to the list of configurations of the visualization type
+  const addMoreConfigs = useCallback(
+    ({ configs, id }: { configs: VisualizationProp[]; id: string }) => {
+      onEdit({
+        preventDefault: () => {},
+        target: {
+          dataset: { name: "type" },
+          checkValidity: () => {},
+          value: {
+            ...data.type,
+            config: [...data.type.config, ...configs],
+            datasetIds: [...(data.type.datasetIds || []), id],
+          },
+        },
+      });
+    },
+    [onEdit, data]
+  );
+
   return (
     <>
       <URLInput
@@ -98,6 +118,12 @@ export default function VisualizationForm({
         value={data.type?.name}
         options={visualizationTypeList}
       />
+      {data.type?.addMoreConfigsButtons?.map((btnConfig) => (
+        <AddMoreConfigButton
+          btnConfig={btnConfig}
+          updateConfigSet={addMoreConfigs}
+        />
+      ))}
       {data.type?.config.map((prop) => (
         <GeneralConfigInput
           key={`${data.id}-config-${prop.name}`}
