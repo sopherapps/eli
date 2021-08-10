@@ -29,9 +29,10 @@ export default function Select({
         className="eli-form-control"
         data-name={name}
         onChange={onEdit}
+        defaultValue={value}
       >
         {options.map((option) => (
-          <option value={option} selected={value === option}>
+          <option value={option} key={option}>
             {option}
           </option>
         ))}

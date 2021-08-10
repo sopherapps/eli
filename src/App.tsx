@@ -1,19 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useCallback } from "react";
 import { useState } from "react";
 import AppRouter from "./AppRouter";
-import { ThemeContext, Theme, UserAppConfigContext } from "./context";
+import {
+  ThemeContext,
+  Theme,
+  UserAppConfigContext,
+  saveAppConfigToStore,
+  loadTabsAndTabOrderFromStorage,
+} from "./context";
 import { Tab, UserAppConfig } from "./data/types";
 
 function App() {
-  const localStorageAppConfigKey = "eli:AppConfig";
-  const tabsKey = `${localStorageAppConfigKey}:tabs`;
-  const tabOrderKey = `${localStorageAppConfigKey}:tabOrder`;
-  const mapOfTabs: { [key: string]: Tab } = {};
-  const stringArray: string[] = [];
+  const storedData = useMemo(loadTabsAndTabOrderFromStorage, []);
 
-  const [tabs, setTabs] = useState(mapOfTabs);
-  const [tabOrder, setTabOrder] = useState(stringArray);
+  const [tabs, setTabs] = useState(storedData.tabs);
+  const [tabOrder, setTabOrder] = useState(storedData.tabOrder);
 
   const appConfig: UserAppConfig = {
     tabs,
@@ -54,18 +56,8 @@ function App() {
   };
 
   useEffect(() => {
-    const tabsAsJson = localStorage.getItem(tabsKey) || `{}`;
-    const tabOrderAsJson = localStorage.getItem(tabOrderKey) || `[]`;
-    setTabs(JSON.parse(tabsAsJson));
-    setTabOrder(JSON.parse(tabOrderAsJson));
-  }, [tabsKey, tabOrderKey]);
-
-  useEffect(() => {
-    const tabsAsJson = JSON.stringify(tabs);
-    const tabOrderAsJson = JSON.stringify(tabOrder);
-    localStorage.setItem(tabsKey, tabsAsJson);
-    localStorage.setItem(tabOrderKey, tabOrderAsJson);
-  }, [tabs, tabOrder, tabOrderKey, tabsKey]);
+    saveAppConfigToStore(tabs, tabOrder);
+  }, [tabs, tabOrder]);
 
   return (
     <ThemeContext.Provider value={Theme.Dark}>
