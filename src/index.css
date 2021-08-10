@@ -94,6 +94,11 @@
   z-index: 1000;
 }
 
+.topbar .btn-round {
+  width: 2rem;
+  height: 2rem;
+}
+
 .dark .topbar {
   background-color: #202124;
   box-shadow: inset 0px -1px 0px #4b5154;
@@ -159,6 +164,7 @@
   border: 1px solid transparent;
   outline: none;
   vertical-align: middle;
+  background-color: inherit;
 }
 
 .btn:hover,
@@ -308,7 +314,10 @@
   padding-bottom: 0.25rem;
 }
 
-.eli-form-control .sole-control {
+.eli-form-control
+  input[class="sole-control"]:not([type~="radio"]):not([type~="checkbox"]),
+.eli-form-control select.sole-control,
+.eli-form-control textarea.sole-control {
   width: 100%;
 }
 

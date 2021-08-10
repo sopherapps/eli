@@ -129,9 +129,10 @@ export default function VisualizationForm({
         error={data.errors?.type}
         required={true}
       />
-      {data.type?.addMoreConfigsButtons?.map((btnConfig) => (
+      {data.type?.addMoreConfigsButtons?.map((btnConfig, index) => (
         <AddMoreConfigButton
           btnConfig={btnConfig}
+          key={`${btnConfig.label}-${index}`}
           updateConfigSet={addMoreConfigs}
         />
       ))}
