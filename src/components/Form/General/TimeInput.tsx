@@ -31,6 +31,7 @@ export default function TimeInput({
         value={value}
         onChange={onEdit}
         step={step}
+        autoComplete="off"
       />
     </div>
   );

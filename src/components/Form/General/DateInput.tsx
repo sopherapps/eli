@@ -37,6 +37,7 @@ export default function DateInput({
         data-name={name}
         value={stringifiedDate}
         onChange={onEdit}
+        autoComplete="off"
       />
     </div>
   );

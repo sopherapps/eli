@@ -291,6 +291,15 @@ select.eli-form-control {
   outline: 0px solid transparent;
 }
 
+.dark .form-btn {
+  color: #dbd8d3;
+  background-color: #202124;
+}
+
+.dark .form-btn:hover {
+  background-color: #4b5154;
+}
+
 .dark select.eli-form-control option {
   background-color: #1a1c1d;
   color: #dbd8d3;

@@ -30,6 +30,7 @@ export default function ColorInput({
           data-name={name}
           value={value}
           onChange={onEdit}
+          autoComplete="off"
         />
         <input
           id={`${id}-color`}

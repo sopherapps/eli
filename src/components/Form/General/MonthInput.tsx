@@ -29,6 +29,7 @@ export default function MonthInput({
         data-name={name}
         value={value}
         onChange={onEdit}
+        autoComplete="off"
       />
     </div>
   );

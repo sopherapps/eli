@@ -28,6 +28,7 @@ export default function TextArea({
         data-name={name}
         value={value}
         onChange={onEdit}
+        autoComplete="off"
       />
     </div>
   );

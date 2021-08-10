@@ -28,6 +28,7 @@ export default function URLInput({
         onChange={onEdit}
         data-name={name}
         value={value}
+        autoComplete="off"
       />
     </div>
   );

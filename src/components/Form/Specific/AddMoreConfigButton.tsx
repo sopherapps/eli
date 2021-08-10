@@ -23,8 +23,11 @@ export default function AddMoreConfigButton({
       ];
       onEdit({
         ...e,
+        preventDefault: () => e.preventDefault(),
         target: {
           ...e.target,
+          checkValidity: () => e.target.checkValidity(),
+          dataset: { name: config.name },
           value: { ...config, options: { ...config.options, datasets } },
         },
       });
@@ -35,7 +38,7 @@ export default function AddMoreConfigButton({
     <div className="eli-form-control-group d-flex">
       <button
         id={id}
-        className="eli-form-control"
+        className="btn form-btn"
         data-name={config.name}
         onClick={addNewDataset}
       >

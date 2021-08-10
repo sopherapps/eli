@@ -35,6 +35,7 @@ export default function NumberInput({
         data-name={name}
         value={value}
         onChange={onEdit}
+        autoComplete="off"
       />
     </div>
   );
