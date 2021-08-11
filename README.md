@@ -225,3 +225,5 @@ Note: _Each of these steps involves writing some tests of some kind_
 - [ ] Deploy to firebase, netlify or vercel
 - [ ] List the app on SopherApps
 - [ ] Write about the app on SopherApps blog
+- [ ] Make it a downloadable electronjs app or nwjs or any given lighter option
+- [ ] Remove links to external css or font. Download them and include them in the artefact.

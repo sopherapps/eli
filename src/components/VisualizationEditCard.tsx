@@ -1,9 +1,8 @@
 // Component to allow editing a visualization
-import React from "react";
+import React, { useCallback } from "react";
 import whiteArrowDownIcon from "../assets/images/arrow_downward_white.svg";
 import whiteArrowUpIcon from "../assets/images/arrow_upward_white.svg";
 import whiteCloseIcon from "../assets/images/close_white.svg";
-import { useCallback } from "react";
 import { Visualization } from "../data/types";
 import VisualizationForm from "./Form/Specific/VisualizationForm";
 
@@ -106,7 +105,7 @@ export default function VisualizationEditCard({
           </button>
         </div>
       </div>
-      <div className="card-body list-with-images">
+      <div className="card-body">
         <VisualizationForm data={visualization} onEdit={memoizedOnEdit} />
       </div>
     </div>
