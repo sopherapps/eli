@@ -21,26 +21,26 @@ export const TableType: VisualizationType = {
   icon: whiteTableIcon,
   config: [
     {
-      name: "columnField",
-      label: "column field",
+      name: "columnOrder",
+      label: "column order (comma separated)",
       inputType: HTMLInputType.Text,
       required: true,
       options: {},
     },
-    {
-      name: "rowField",
-      label: "row field",
-      inputType: HTMLInputType.Text,
-      required: true,
-      options: {},
-    },
-    {
-      name: "valueField",
-      label: "value field",
-      inputType: HTMLInputType.Text,
-      required: true,
-      options: {},
-    },
+    // {
+    //   name: "rowField",
+    //   label: "row field",
+    //   inputType: HTMLInputType.Text,
+    //   required: true,
+    //   options: {},
+    // },
+    // {
+    //   name: "valueField",
+    //   label: "value field",
+    //   inputType: HTMLInputType.Text,
+    //   required: true,
+    //   options: {},
+    // },
   ],
 };
 

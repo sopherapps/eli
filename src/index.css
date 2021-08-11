@@ -369,6 +369,10 @@ textarea:focus:invalid {
   font-weight: normal;
 }
 
+.error {
+  color: rgb(204, 66, 66);
+}
+
 .visual .card {
   margin-top: 0.25rem;
 }

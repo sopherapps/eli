@@ -67,3 +67,21 @@ export enum HTMLInputType {
   Week,
   Select,
 }
+
+export interface ClientJson {
+  isMultiple: boolean;
+  meta: ClientJsonMeta;
+  data: ClientJsonDataset | { [key: string]: ClientJsonDataset };
+}
+
+export interface ClientJsonMeta {
+  source?: string;
+  primaryFields: string[];
+  separator: string;
+  cron?: string;
+  [key: string]: any;
+}
+
+export interface ClientJsonDataset {
+  [key: string]: { [key: string]: any };
+}
