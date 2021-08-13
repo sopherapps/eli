@@ -5,6 +5,7 @@
 import { EventHandler, useCallback } from "react";
 import { visualizationTypeMap, visualizationTypeList } from "../../../data";
 import { Visualization, VisualizationProp } from "../../../data/types";
+import CheckboxInput from "../General/CheckboxInput";
 import RangeInput from "../General/RangeInput";
 import SelectInput from "../General/SelectInput";
 import URLInput from "../General/URLInput";
@@ -118,6 +119,15 @@ export default function VisualizationForm({
         min={0}
         error={data.errors?.height}
         required={true}
+      />
+      <CheckboxInput
+        name="shouldAppendNewData"
+        id={`${data.id}-shouldAppendNewData`}
+        label="Append new data to old data?"
+        onEdit={onEdit}
+        value={data.shouldAppendNewData}
+        required={true}
+        error={data.errors?.shouldAppendNewData}
       />
       <SelectInput
         name="type"

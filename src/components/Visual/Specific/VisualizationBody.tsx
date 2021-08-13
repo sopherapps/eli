@@ -1,10 +1,10 @@
 /**
  * Module containing the component that conditionaly renders a given visualization
  */
-
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
+import { useRef } from "react";
+import { useLayoutEffect } from "react";
 import { ClientJson, Visualization } from "../../../data/types";
-import useWebsocket from "../../../hooks/useWebsocket";
 import GeneralVisual from "./GeneralVisual";
 
 export default function VisualizationBody({
@@ -12,62 +12,56 @@ export default function VisualizationBody({
 }: {
   visualization: Visualization;
 }) {
-  const dummyClientJson: ClientJson = {
-    isMultiple: false,
-    meta: { primaryFields: [], separator: "" },
-    data: {},
-  };
-  const [clientData, setClientData] = useState(dummyClientJson);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isConnected, setConnected] = useState(false);
+  const historicalData = useRef<ClientJson>();
+  const [clientData, setClientData] = useState<ClientJson>();
+  const [isConnected, setIsConnected] = useState(false);
+  const [error, setError] = useState<Event>();
 
-  const appendData = useCallback(
-    (newData: ClientJson) => {
-      setErrorMessage("");
-      setClientData({
-        ...clientData,
-        ...newData,
-        data: { ...clientData.data, ...newData.data },
-      });
-    },
-    [clientData]
-  );
+  useLayoutEffect(() => {
+    const connection = new WebSocket(visualization.dataSourceUrl);
+    connection.onmessage = (event) => {
+      setIsConnected(true);
+      setError(undefined);
 
-  const reportError = useCallback((event: Event) => {
-    setErrorMessage(event.type);
-    console.error(event);
-  }, []);
+      const parsedData: ClientJson = JSON.parse(event.data);
+      if (visualization.shouldAppendNewData) {
+        historicalData.current = {
+          ...(historicalData || {}),
+          ...parsedData,
+          data: { ...(historicalData.current?.data || {}), ...parsedData.data },
+        };
+        setClientData(historicalData.current);
+      } else {
+        setClientData(parsedData);
+      }
+    };
 
-  const reportConnectionSuccess = useCallback((event: Event) => {
-    setConnected(true);
-  }, []);
+    connection.onerror = (event) => setError(event);
+    connection.onopen = () => setIsConnected(true);
+    connection.onclose = () => setIsConnected(false);
 
-  const reportDisconnection = useCallback((event: Event) => {
-    setConnected(false);
-  }, []);
-
-  useWebsocket(visualization.dataSourceUrl, {
-    onMessage: appendData,
-    onError: reportError,
-    onConnection: reportConnectionSuccess,
-    onDisconnection: reportDisconnection,
-  });
+    return () => connection.close();
+  }, [visualization.dataSourceUrl, visualization.shouldAppendNewData]);
 
   if (!isConnected) {
     return <div>Disconnected</div>;
   }
 
-  if (errorMessage) {
-    return <div>{errorMessage}</div>;
+  if (error) {
+    return <div>{JSON.stringify(error)}</div>;
   }
 
-  return (
-    <GeneralVisual
-      data={clientData}
-      type={visualization.type.name}
-      width={visualization.width}
-      height={visualization.height}
-      config={visualization.type.config}
-    />
-  );
+  if (clientData) {
+    return (
+      <GeneralVisual
+        data={clientData}
+        type={visualization.type.name}
+        width={visualization.width}
+        height={visualization.height}
+        config={visualization.type.config}
+      />
+    );
+  }
+
+  return <div>No data</div>;
 }

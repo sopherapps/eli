@@ -22,6 +22,7 @@ export interface Visualization {
   dataSourceUrl: string;
   width: number;
   height: number;
+  shouldAppendNewData: boolean;
   type: VisualizationType;
   errors: { [key: string]: string };
 }

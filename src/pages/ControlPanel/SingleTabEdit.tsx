@@ -24,6 +24,7 @@ export default function SingleTabEdit() {
       height: 50,
       type: TableType,
       errors: {},
+      shouldAppendNewData: true,
     };
 
     appConfig.updateTab(tab.id, {

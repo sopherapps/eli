@@ -211,8 +211,8 @@ Note: _Each of these steps involves writing some tests of some kind_
 - [x] Add validation, and showing of errors (this might mean saving erroneous data but with an error prop on Visualization with the keys being the keys in instance)
 - [x] Add ability to save configurations as soon as a change is made.
 - [x] Add ability to update the multiple chart datasets when the addMore buttons are clicked (should I just add more fields to the config, while appending the name of the dataset and type?)
-- [ ] Add ability to connect to websocket
-- [ ] Add ability to merge any new message to the preexisting client-style JSON for that visualization
+- [x] Add ability to connect to websocket
+- [x] Add ability to merge any new message to the preexisting client-style JSON for that visualization
 - [ ] Add ability to set the maximum range of the x-axis for charts
 - [ ] Add ability to set the maximum range of the column field for tables
 - [ ] Add ability to set the maximum number of items in list visualization

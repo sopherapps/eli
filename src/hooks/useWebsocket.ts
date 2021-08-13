@@ -2,7 +2,7 @@
  * Module for connecting and listening, and disconnecting from a websocket
  */
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ClientJson } from "../data/types";
 
 export interface WebsocketOptions {
@@ -15,26 +15,37 @@ export interface WebsocketOptions {
 /**
  * Handles the connection, disconnection, and receiving of ClientJson from any websocket URL
  * @param url - the websocket URL to connect to
- * @param options - the websocket options when connecting
- * @returns {WebSocket}
+ * @returns {{connection: WebSocket, isConnected: boolean, error?: Event, message?: ClientJson}}
  */
 export default function useWebsocket(
-  url: string,
-  options: WebsocketOptions
-): WebSocket {
+  url: string
+  // options: WebsocketOptions
+): {
+  connection: WebSocket;
+  isConnected: boolean;
+  error?: Event;
+  message?: ClientJson;
+} {
   const connection = useMemo(() => new WebSocket(url), [url]);
+  const [isConnected, setIsConnected] = useState(false);
+  const [error, setError] = useState<Event>();
+  const [message, setMessage] = useState<ClientJson>();
+
   useEffect(() => {
     connection.onmessage = (event) => {
+      setError(undefined);
       const parsedData: ClientJson = JSON.parse(event.data);
-      options.onMessage(parsedData);
+      setMessage(parsedData);
     };
 
-    connection.onerror = options.onError || null;
-    connection.onopen = options.onConnection || null;
-    connection.onclose = options.onDisconnection || null;
+    connection.onerror = (event) => setError(event);
+    connection.onopen = () => setIsConnected(true);
+    connection.onclose = () => setIsConnected(false);
+
+    // console.log({ connection });
 
     return () => connection.close();
-  }, [connection, options]);
+  }, [connection]);
 
-  return connection;
+  return { connection, isConnected, error, message };
 }
