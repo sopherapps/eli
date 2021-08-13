@@ -21,9 +21,17 @@ export default function UnorderedListVisual({
         listStyleType: configObject.style.value || "inherit",
       }}
     >
-      {recordIds.map((id) => (
-        <li key={id}>{data.data[id][valueField]}</li>
-      ))}
+      {!data.isMultiple
+        ? recordIds.map((id) => <li key={id}>{data.data[id][valueField]}</li>)
+        : recordIds.map((dataset) =>
+            Object.keys(data.data[dataset])
+              .sort()
+              .map((id) => (
+                <li key={`${dataset}-${id}`}>
+                  {data.data[dataset][id][valueField]}
+                </li>
+              ))
+          )}
     </ul>
   );
 }
