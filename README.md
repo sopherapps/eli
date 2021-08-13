@@ -220,11 +220,12 @@ Note: _Each of these steps involves writing some tests of some kind_
 - [x] Add ability to display table visualizations from data from websocket
 - [x] Add style to the visualizations
 - [ ] Add ability to display charts (piecharts, doughnut, bar, stacked bar, line, scatter, mixed, multiline)
-- [ ] Add ability to delete the entire store via a button/menu click
-- [ ] Add ability to download config from localstorage
-- [ ] Add ability to load config from a file via an HTML file input (to allow sharing of configs)
+- [ ] \*Add ability to delete the entire store via a button/menu click
+- [ ] \*Add ability to download config from localstorage
+- [ ] \*Add ability to load config from a file via an HTML file input (to allow sharing of configs)
 - [ ] Deploy to firebase, netlify or vercel
 - [ ] List the app on SopherApps
 - [ ] Write about the app on SopherApps blog
 - [ ] Make it a downloadable electronjs app or nwjs or any given lighter option
 - [ ] Remove links to external css or font. Download them and include them in the artefact.
+- [ ] \*Reduce the interval of the cronjsobs in restie (and in sopherapps_utils to millisecond level)
