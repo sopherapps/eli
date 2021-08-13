@@ -5,7 +5,7 @@
 import React, { useCallback, useState } from "react";
 import { ClientJson, Visualization } from "../../../data/types";
 import useWebsocket from "../../../hooks/useWebsocket";
-import GeneralVisual from "./GeneralVIsual";
+import GeneralVisual from "./GeneralVisual";
 
 export default function VisualizationBody({
   visualization,

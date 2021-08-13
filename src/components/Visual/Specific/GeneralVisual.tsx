@@ -19,7 +19,10 @@ import {
   TextType,
   UnorderedListType,
 } from "../../../data/visualization-types";
+import OrderedListTypeVisual from "../General/OrderedListTypeVisual";
 import TableTypeVisual from "../General/TableTypeVisual";
+import TextTypeVisual from "../General/TextTypeVisual";
+import UnorderedListTypeVisual from "../General/UnorderedListTypeVisual";
 
 export default function GeneralVisual({
   data,
@@ -68,13 +71,34 @@ export default function GeneralVisual({
       );
 
     case TextType.name:
-      return <div>Text</div>;
+      return (
+        <TextTypeVisual
+          width={width}
+          height={height}
+          configObject={configObject}
+          data={data}
+        />
+      );
 
     case OrderedListType.name:
-      return <div>Ordered List</div>;
+      return (
+        <OrderedListTypeVisual
+          height={height}
+          width={width}
+          configObject={configObject}
+          data={data}
+        />
+      );
 
     case UnorderedListType.name:
-      return <div>Unorderd list</div>;
+      return (
+        <UnorderedListTypeVisual
+          height={height}
+          width={width}
+          configObject={configObject}
+          data={data}
+        />
+      );
 
     case ScatterChartType.name:
       return <div>Scatter chart</div>;
