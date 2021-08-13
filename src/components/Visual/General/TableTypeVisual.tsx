@@ -30,7 +30,7 @@ export default function TableTypeVisual({
   }
 
   return (
-    <div style={{ height, width }}>
+    <div className="data-ui" style={{ height, width }}>
       <table>
         <thead>
           <tr>

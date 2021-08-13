@@ -20,6 +20,7 @@ export default function OrderedListVisual({
   const valueField = configObject.valueField.value;
   return (
     <ol
+      className="data-ui"
       style={{
         height,
         width,

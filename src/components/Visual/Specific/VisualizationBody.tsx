@@ -3,6 +3,7 @@
  */
 import React, { useState } from "react";
 import { useRef } from "react";
+import { useEffect } from "react";
 import { useLayoutEffect } from "react";
 import { ClientJson, Visualization } from "../../../data/types";
 import GeneralVisual from "./GeneralVisual";
@@ -12,10 +13,29 @@ export default function VisualizationBody({
 }: {
   visualization: Visualization;
 }) {
-  const historicalData = useRef<ClientJson>();
+  const historicalData = useRef<{ [key: number]: ClientJson }>({});
   const [clientData, setClientData] = useState<ClientJson>();
   const [isConnected, setIsConnected] = useState(false);
   const [error, setError] = useState<Event>();
+
+  useEffect(() => {
+    if (visualization.shouldAppendNewData) {
+      const intervalHandle = setInterval(() => {
+        const lastValidTimestamp =
+          new Date().getTime() - (visualization.ttlInSeconds || 3) * 1000; // default to 50 minutes
+
+        for (let key in historicalData.current) {
+          const timestamp = parseInt(key);
+
+          if (timestamp < lastValidTimestamp) {
+            delete historicalData.current[timestamp];
+          }
+        }
+      }, 1000);
+
+      return () => clearInterval(intervalHandle);
+    }
+  });
 
   useLayoutEffect(() => {
     const connection = new WebSocket(visualization.dataSourceUrl);
@@ -25,12 +45,40 @@ export default function VisualizationBody({
 
       const parsedData: ClientJson = JSON.parse(event.data);
       if (visualization.shouldAppendNewData) {
-        historicalData.current = {
-          ...(historicalData || {}),
-          ...parsedData,
-          data: { ...(historicalData.current?.data || {}), ...parsedData.data },
+        historicalData.current[new Date().getTime()] = parsedData;
+        console.log({ parsedData });
+        let obj: ClientJson = {
+          isMultiple: false,
+          meta: { separator: "", primaryFields: [] },
+          data: {},
         };
-        setClientData(historicalData.current);
+
+        if (parsedData.isMultiple) {
+          for (let key in historicalData.current) {
+            const message = historicalData.current[key];
+            console.log({ message });
+            obj = { ...obj, ...message, data: { ...obj.data } };
+
+            for (let dataset in message.data) {
+              obj.data[dataset] = {
+                ...(obj.data[dataset] || {}),
+                ...message.data[dataset],
+              };
+            }
+          }
+        } else {
+          for (let key in historicalData.current) {
+            const message = historicalData.current[key];
+            obj = {
+              ...obj,
+              ...message,
+              data: { ...obj.data, ...message.data },
+            };
+          }
+        }
+
+        console.log({ obj });
+        setClientData(obj);
       } else {
         setClientData(parsedData);
       }

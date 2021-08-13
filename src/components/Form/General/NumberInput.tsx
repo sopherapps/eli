@@ -18,10 +18,10 @@ export default function NumberInput({
   id: string;
   name: string;
   label: string;
-  min: number;
-  max: number;
+  min?: number;
+  max?: number;
   onEdit: EventHandler<any>;
-  value: string;
+  value: number;
   required?: boolean;
   error: string | undefined;
 }) {

@@ -18,8 +18,10 @@ export default function TextTypeVisual({
 }) {
   const recordIds = useMemo(() => Object.keys(data.data).sort(), [data.data]);
   const valueField = configObject.valueField.value;
+
   return (
     <div
+      className="data-ui"
       style={{
         height,
         width,
@@ -29,9 +31,26 @@ export default function TextTypeVisual({
         fontStyle: configObject.italic.value ? "italic" : "normal",
       }}
     >
-      {recordIds.map((id) => (
-        <span key={id}>{data.data[id][valueField]}</span>
-      ))}
+      {!data.isMultiple &&
+        recordIds.map((id) => (
+          <>
+            <span key={id}>{data.data[id][valueField]}</span>
+            <br />
+          </>
+        ))}
+      {data.isMultiple &&
+        recordIds.map((dataset) =>
+          Object.keys(data.data[dataset])
+            .sort()
+            .map((id) => (
+              <>
+                <span key={`${dataset}-${id}`}>
+                  <em>{dataset}:</em> {data.data[dataset][id][valueField]}
+                </span>
+                <br />
+              </>
+            ))
+        )}
     </div>
   );
 }

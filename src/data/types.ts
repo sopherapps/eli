@@ -23,6 +23,7 @@ export interface Visualization {
   width: number;
   height: number;
   shouldAppendNewData: boolean;
+  ttlInSeconds?: number;
   type: VisualizationType;
   errors: { [key: string]: string };
 }

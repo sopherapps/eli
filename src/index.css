@@ -377,6 +377,10 @@ textarea:focus:invalid {
   margin-top: 0.25rem;
 }
 
+.data-ui {
+  overflow: scroll;
+}
+
 /* Dark theme */
 .app.dark {
   background-color: #1a1c1d;

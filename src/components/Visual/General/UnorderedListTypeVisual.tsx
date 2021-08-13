@@ -20,6 +20,7 @@ export default function UnorderedListVisual({
   const valueField = configObject.valueField.value;
   return (
     <ul
+      className="data-ui"
       style={{
         height,
         width,

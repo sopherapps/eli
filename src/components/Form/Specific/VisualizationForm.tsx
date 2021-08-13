@@ -6,6 +6,7 @@ import { EventHandler, useCallback } from "react";
 import { visualizationTypeMap, visualizationTypeList } from "../../../data";
 import { Visualization, VisualizationProp } from "../../../data/types";
 import CheckboxInput from "../General/CheckboxInput";
+import NumberInput from "../General/NumberInput";
 import RangeInput from "../General/RangeInput";
 import SelectInput from "../General/SelectInput";
 import URLInput from "../General/URLInput";
@@ -129,6 +130,18 @@ export default function VisualizationForm({
         required={true}
         error={data.errors?.shouldAppendNewData}
       />
+      {data.shouldAppendNewData && (
+        <NumberInput
+          name="ttlInSeconds"
+          id={`${data.id}-ttlInSeconds`}
+          label="Lifespan of each Datapoint in seconds"
+          onEdit={onEdit}
+          value={data.ttlInSeconds || 3600}
+          min={1}
+          error={data.errors?.ttlInSeconds}
+          required={data.shouldAppendNewData}
+        />
+      )}
       <SelectInput
         name="type"
         id={`${data.id}-type`}
