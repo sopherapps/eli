@@ -7,13 +7,9 @@ import { ClientJson } from "../../../data/types";
 
 export default function TableTypeVisual({
   data,
-  height,
-  width,
   columnOrderString,
 }: {
   data: ClientJson;
-  height: number;
-  width: number;
   columnOrderString: string;
 }) {
   const columnOrder = useMemo(
@@ -30,7 +26,7 @@ export default function TableTypeVisual({
   }
 
   return (
-    <div className="data-ui" style={{ height, width }}>
+    <div className="data-ui">
       <table>
         <thead>
           <tr>

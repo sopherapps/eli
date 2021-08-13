@@ -24,7 +24,7 @@ export default function TabPage() {
           <img src={editIconWhite} alt="Edit" />
         </Link>
       </section>
-      <section className="scrollview">
+      <section className="scrollview d-flex flex-wrap">
         {tab.order.map((id, index) => (
           <VisualizationUiCard
             visualization={tab.visualizations[id]}

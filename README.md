@@ -218,6 +218,7 @@ Note: _Each of these steps involves writing some tests of some kind_
 - [x] Add ability to set the maximum number of items in list visualization (just set the ttl of each message)
 - [x] Add ability to display plain text visualization from data from websocket
 - [x] Add ability to display table visualizations from data from websocket
+- [x] Add style to the visualizations
 - [ ] Add ability to display charts (piecharts, doughnut, bar, stacked bar, line, scatter, mixed, multiline)
 - [ ] Add ability to delete the entire store via a button/menu click
 - [ ] Add ability to download config from localstorage

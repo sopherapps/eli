@@ -27,14 +27,10 @@ import UnorderedListTypeVisual from "../General/UnorderedListTypeVisual";
 export default function GeneralVisual({
   data,
   type,
-  width,
-  height,
   config,
 }: {
   data: ClientJson;
   type: string;
-  width: number;
-  height: number;
   config: VisualizationProp[];
 }) {
   /*
@@ -64,40 +60,19 @@ export default function GeneralVisual({
       return (
         <TableTypeVisual
           data={data}
-          height={height}
-          width={width}
           columnOrderString={configObject.columnOrder.value}
         />
       );
 
     case TextType.name:
-      return (
-        <TextTypeVisual
-          width={width}
-          height={height}
-          configObject={configObject}
-          data={data}
-        />
-      );
+      return <TextTypeVisual configObject={configObject} data={data} />;
 
     case OrderedListType.name:
-      return (
-        <OrderedListTypeVisual
-          height={height}
-          width={width}
-          configObject={configObject}
-          data={data}
-        />
-      );
+      return <OrderedListTypeVisual configObject={configObject} data={data} />;
 
     case UnorderedListType.name:
       return (
-        <UnorderedListTypeVisual
-          height={height}
-          width={width}
-          configObject={configObject}
-          data={data}
-        />
+        <UnorderedListTypeVisual configObject={configObject} data={data} />
       );
 
     case ScatterChartType.name:

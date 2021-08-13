@@ -6,13 +6,9 @@ import { useMemo } from "react";
 import { ClientJson, VisualizationProp } from "../../../data/types";
 
 export default function TextTypeVisual({
-  height,
-  width,
   configObject,
   data,
 }: {
-  height: number;
-  width: number;
   configObject: { [key: string]: VisualizationProp };
   data: ClientJson;
 }) {
@@ -23,8 +19,6 @@ export default function TextTypeVisual({
     <div
       className="data-ui"
       style={{
-        height,
-        width,
         fontSize: configObject.fontSize.value,
         textAlign: configObject.alignment.value,
         fontWeight: configObject.bold.value ? "bold" : "normal",

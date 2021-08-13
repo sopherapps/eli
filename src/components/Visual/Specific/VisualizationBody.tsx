@@ -104,8 +104,6 @@ export default function VisualizationBody({
       <GeneralVisual
         data={clientData}
         type={visualization.type.name}
-        width={visualization.width}
-        height={visualization.height}
         config={visualization.type.config}
       />
     );

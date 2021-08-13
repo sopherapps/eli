@@ -9,7 +9,13 @@ export default function VisualizationUiCard({
   visualization: Visualization;
 }) {
   return (
-    <div className="visual">
+    <div
+      className="visual"
+      style={{
+        height: `${visualization.height}%`,
+        width: `${visualization.width}%`,
+      }}
+    >
       <div className="card-header">
         <h5>{visualization.title}</h5>
       </div>

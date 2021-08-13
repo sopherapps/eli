@@ -6,13 +6,9 @@ import { useMemo } from "react";
 import { ClientJson, VisualizationProp } from "../../../data/types";
 
 export default function UnorderedListVisual({
-  height,
-  width,
   configObject,
   data,
 }: {
-  height: number;
-  width: number;
   configObject: { [key: string]: VisualizationProp };
   data: ClientJson;
 }) {
@@ -22,8 +18,6 @@ export default function UnorderedListVisual({
     <ul
       className="data-ui"
       style={{
-        height,
-        width,
         listStyleType: configObject.style.value || "inherit",
       }}
     >
