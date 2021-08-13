@@ -213,11 +213,11 @@ Note: _Each of these steps involves writing some tests of some kind_
 - [x] Add ability to update the multiple chart datasets when the addMore buttons are clicked (should I just add more fields to the config, while appending the name of the dataset and type?)
 - [x] Add ability to connect to websocket
 - [x] Add ability to merge any new message to the preexisting client-style JSON for that visualization
-- [ ] Add ability to set the maximum range of the x-axis for charts
-- [ ] Add ability to set the maximum range of the column field for tables
-- [ ] Add ability to set the maximum number of items in list visualization
-- [ ] Add ability to display plain text visualization from data from websocket
-- [ ] Add ability to display table visualizations from data from websocket
+- [x] Add ability to set the maximum range of the x-axis for charts (just set the ttl of each message)
+- [x] Add ability to set the maximum range of the column field for tables (just set the ttl of each message)
+- [x] Add ability to set the maximum number of items in list visualization (just set the ttl of each message)
+- [x] Add ability to display plain text visualization from data from websocket
+- [x] Add ability to display table visualizations from data from websocket
 - [ ] Add ability to display charts (piecharts, doughnut, bar, stacked bar, line, scatter, mixed, multiline)
 - [ ] Add ability to delete the entire store via a button/menu click
 - [ ] Add ability to download config from localstorage
