@@ -7,7 +7,7 @@ import { Bar } from "react-chartjs-2";
 import { ClientJson, VisualizationProp } from "../../../data/types";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
 
-interface BarDatasetConfig {
+export interface BarDatasetConfig {
   label: string;
   data: { x: string; y: number }[];
   borderColor: string;

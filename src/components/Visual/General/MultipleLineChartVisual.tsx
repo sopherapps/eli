@@ -7,7 +7,7 @@ import { Line } from "react-chartjs-2";
 import { ClientJson, VisualizationProp } from "../../../data/types";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
 
-interface LineDatasetConfig {
+export interface LineDatasetConfig {
   label: string;
   data: { x: string; y: number }[];
   borderColor: string;
