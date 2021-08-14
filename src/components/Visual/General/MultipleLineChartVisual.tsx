@@ -3,18 +3,20 @@
  */
 
 import { useMemo } from "react";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import { ClientJson, VisualizationProp } from "../../../data/types";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
 
-interface BarDatasetConfig {
+interface LineDatasetConfig {
   label: string;
   data: { x: string; y: number }[];
   borderColor: string;
   backgroundColor: string;
+  fill: boolean;
+  borderDash?: number[];
 }
 
-export default function MultipleBarChartVisual({
+export default function MultipleLineChartVisual({
   data,
   configObject,
   datasetConfigs,
@@ -56,14 +58,19 @@ export default function MultipleBarChartVisual({
 
   const chartData = useMemo(() => {
     const labels: string[] = [];
-    const datasets: BarDatasetConfig[] = [];
+    const datasets: LineDatasetConfig[] = [];
 
     for (let dataset in data.data) {
-      const datasetConfig: BarDatasetConfig = {
+      const datasetConfig: LineDatasetConfig = {
         label: dataset,
+        fill: !!datasetConfigs[dataset]?.areaUnderTheLineColor?.value,
         data: [],
         borderColor: datasetConfigs[dataset]?.color?.value || "#fff",
         backgroundColor: datasetConfigs[dataset]?.color?.value || "#fff",
+        borderDash:
+          datasetConfigs[dataset]?.chartStyle?.value === "dotted"
+            ? [5, 5]
+            : undefined,
       };
 
       for (let record of Object.values(data.data[dataset])) {
@@ -87,7 +94,7 @@ export default function MultipleBarChartVisual({
       {errorMessage ? (
         <div className="error">{errorMessage}.</div>
       ) : (
-        <Bar
+        <Line
           data={chartData}
           width={width * windowWidth}
           height={height * windowHeight}

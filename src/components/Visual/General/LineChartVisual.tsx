@@ -1,13 +1,13 @@
 /**
- * Moduel cotnaing the visual for bar charts
+ * Moduel cotnaing the visual for line charts
  */
 
 import { useMemo } from "react";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import { ClientJson, VisualizationProp } from "../../../data/types";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
 
-export default function BarChartVisual({
+export default function LineChartVisual({
   data,
   configObject,
   height,
@@ -23,14 +23,10 @@ export default function BarChartVisual({
 
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
 
-  const errorMessage = useMemo(() => {
-    if (data.isMultiple) {
-      return "Multiple datasets not supported here.";
-    } else if (configObject.chartStyle.value === "stacked") {
-      return "Stacked Charts are only available in the multiple bar chart.";
-    }
-    return "";
-  }, [data.isMultiple, configObject.chartStyle.value]);
+  const errorMessage = useMemo(
+    () => (data.isMultiple ? "Multiple datasets not supported here." : ""),
+    [data.isMultiple]
+  );
 
   const chartOptions = useMemo(
     () => ({
@@ -57,12 +53,17 @@ export default function BarChartVisual({
         {
           label: configObject.label.value,
           data: records,
+          fill: !!configObject.areaUnderTheLineColor.value,
           backgroundColor: configObject.color.value || "#fff",
           borderColor: configObject.color.value || "#fff",
+          borderDash:
+            configObject.chartStyle.value === "dotted" ? [5, 5] : undefined,
         },
       ],
     };
   }, [
+    configObject.areaUnderTheLineColor.value,
+    configObject.chartStyle.value,
     configObject.color.value,
     configObject.label.value,
     data.data,
@@ -75,7 +76,7 @@ export default function BarChartVisual({
       {errorMessage ? (
         <div className="error">{errorMessage}.</div>
       ) : (
-        <Bar
+        <Line
           data={chartData}
           width={width * windowWidth}
           height={height * windowHeight}

@@ -27,6 +27,8 @@ import UnorderedListTypeVisual from "../General/UnorderedListTypeVisual";
 import ScatterVisual from "../General/ScatterVisual";
 import BarChartVisual from "../General/BarChartVisual";
 import MultipleBarChartVisual from "../General/MultipleBarChartVisual";
+import LineChartVisual from "../General/LineChartVisual";
+import MultipleLineChartVisual from "../General/MultipleLineChartVisual";
 
 export default function GeneralVisual({
   data,
@@ -142,10 +144,25 @@ export default function GeneralVisual({
       );
 
     case LineChartType.name:
-      return <div>Line chart</div>;
+      return (
+        <LineChartVisual
+          data={data}
+          configObject={configObject}
+          height={height}
+          width={width}
+        />
+      );
 
     case MultipleLineChartType.name:
-      return <div>Multiple line chart</div>;
+      return (
+        <MultipleLineChartVisual
+          data={data}
+          configObject={configObject}
+          height={height}
+          width={width}
+          datasetConfigs={datasetConfigs}
+        />
+      );
 
     case MixedChartType.name:
       return <div>Mixed chart</div>;

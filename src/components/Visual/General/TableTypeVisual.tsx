@@ -18,11 +18,7 @@ export default function TableTypeVisual({
   );
 
   if (data.isMultiple) {
-    return (
-      <span className="error">
-        Data has multiple datasets, which are not supported for the table type
-      </span>
-    );
+    return <span className="error">Multiple datasets not supported here.</span>;
   }
 
   return (
