@@ -27,20 +27,6 @@ export const TableType: VisualizationType = {
       required: true,
       options: {},
     },
-    // {
-    //   name: "rowField",
-    //   label: "row field",
-    //   inputType: HTMLInputType.Text,
-    //   required: true,
-    //   options: {},
-    // },
-    // {
-    //   name: "valueField",
-    //   label: "value field",
-    //   inputType: HTMLInputType.Text,
-    //   required: true,
-    //   options: {},
-    // },
   ],
 };
 

@@ -24,6 +24,7 @@ import TableTypeVisual from "../General/TableTypeVisual";
 import TextTypeVisual from "../General/TextTypeVisual";
 import UnorderedListTypeVisual from "../General/UnorderedListTypeVisual";
 import ScatterVisual from "../General/ScatterVisual";
+import BarChartVisual from "../General/BarChartVisual";
 
 export default function GeneralVisual({
   data,
@@ -91,7 +92,14 @@ export default function GeneralVisual({
       );
 
     case BarChartType.name:
-      return <div>Bar chart</div>;
+      return (
+        <BarChartVisual
+          data={data}
+          configObject={configObject}
+          height={height}
+          width={width}
+        />
+      );
 
     case MultipleBarChartType.name:
       return <div>Multiple bar chart</div>;
@@ -112,6 +120,6 @@ export default function GeneralVisual({
       return <div>Donut chart</div>;
 
     default:
-      return <div>Visualization type not supported</div>;
+      return <div className="error">Visualization type not supported</div>;
   }
 }
