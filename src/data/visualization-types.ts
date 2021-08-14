@@ -16,6 +16,8 @@ import whiteTableIcon from "../assets/images/table_chart_white.svg";
 import whiteMultipleBarChartIcon from "../assets/images/addchart_white.svg";
 import { VisualizationType, HTMLInputType } from "./types";
 
+export const datasetConfigSeparator = "_%&*Yu_";
+
 export const TableType: VisualizationType = {
   name: "table",
   icon: whiteTableIcon,
@@ -148,35 +150,35 @@ export const MultipleBarChartType: VisualizationType = {
         id: `${time.getTime()}-add-dt`,
         configs: [
           {
-            name: `${time.getTime()}-add-dt-name`,
+            name: `${time.getTime()}-add-dt${datasetConfigSeparator}name`,
             label: "name",
             inputType: HTMLInputType.Text,
             required: true,
             options: {},
           },
           {
-            name: `${time.getTime()}-add-dt-label`,
+            name: `${time.getTime()}-add-dt${datasetConfigSeparator}label`,
             label: "label",
             inputType: HTMLInputType.Text,
             required: true,
             options: {},
           },
           {
-            name: `${time.getTime()}-add-dt-color`,
+            name: `${time.getTime()}-add-dt${datasetConfigSeparator}color`,
             label: "color",
             inputType: HTMLInputType.Color,
             required: true,
             options: {},
           },
           {
-            name: `${time.getTime()}-add-dt-xField`,
+            name: `${time.getTime()}-add-dt${datasetConfigSeparator}xField`,
             label: "x-axis field",
             inputType: HTMLInputType.Text,
             required: true,
             options: {},
           },
           {
-            name: `${time.getTime()}-add-dt-yField`,
+            name: `${time.getTime()}-add-dt${datasetConfigSeparator}yField`,
             label: "y-axis field",
             inputType: HTMLInputType.Text,
             required: true,
@@ -249,42 +251,42 @@ export const MultipleLineChartType: VisualizationType = {
         id: `${time.getTime()}-add-ln-dt`,
         configs: [
           {
-            name: `${time.getTime()}-add-ln-dt-name`,
+            name: `${time.getTime()}-add-ln-dt${datasetConfigSeparator}name`,
             label: "name",
             inputType: HTMLInputType.Text,
             required: true,
             options: {},
           },
           {
-            name: `${time.getTime()}-add-ln-dt-label`,
+            name: `${time.getTime()}-add-ln-dt${datasetConfigSeparator}label`,
             label: "label",
             inputType: HTMLInputType.Text,
             required: true,
             options: {},
           },
           {
-            name: `${time.getTime()}-add-ln-dt-color`,
+            name: `${time.getTime()}-add-ln-dt${datasetConfigSeparator}color`,
             label: "color",
             inputType: HTMLInputType.Color,
             required: true,
             options: {},
           },
           {
-            name: `${time.getTime()}-add-ln-dt-xField`,
+            name: `${time.getTime()}-add-ln-dt${datasetConfigSeparator}xField`,
             label: "x-axis field",
             inputType: HTMLInputType.Text,
             required: true,
             options: {},
           },
           {
-            name: `${time.getTime()}-add-ln-dt-yField`,
+            name: `${time.getTime()}-add-ln-dt${datasetConfigSeparator}yField`,
             label: "y-axis field",
             inputType: HTMLInputType.Text,
             required: true,
             options: {},
           },
           {
-            name: `${time.getTime()}-add-ln-dt-chartStyle`,
+            name: `${time.getTime()}-add-ln-dt${datasetConfigSeparator}chartStyle`,
             label: "chart style",
             inputType: HTMLInputType.Select,
             options: {
@@ -293,7 +295,7 @@ export const MultipleLineChartType: VisualizationType = {
             },
           },
           {
-            name: `${time.getTime()}-add-ln-dt-areaUnderTheLineColor`,
+            name: `${time.getTime()}-add-ln-dt${datasetConfigSeparator}areaUnderTheLineColor`,
             label: "color of area under line",
             inputType: HTMLInputType.Color,
             options: {},
@@ -334,35 +336,35 @@ export const MixedChartType: VisualizationType = {
         id: `${time.getTime()}-add-bar-dt`,
         configs: [
           {
-            name: `${time.getTime()}-add-bar-dt-name`,
+            name: `${time.getTime()}-add-bar-dt${datasetConfigSeparator}name`,
             label: "name",
             inputType: HTMLInputType.Text,
             required: true,
             options: {},
           },
           {
-            name: `${time.getTime()}-add-bar-dt-label`,
+            name: `${time.getTime()}-add-bar-dt${datasetConfigSeparator}label`,
             label: "label",
             inputType: HTMLInputType.Text,
             required: true,
             options: {},
           },
           {
-            name: `${time.getTime()}-add-bar-dt-color`,
+            name: `${time.getTime()}-add-bar-dt${datasetConfigSeparator}color`,
             label: "color",
             inputType: HTMLInputType.Color,
             required: true,
             options: {},
           },
           {
-            name: `${time.getTime()}-add-bar-dt-xField`,
+            name: `${time.getTime()}-add-bar-dt${datasetConfigSeparator}xField`,
             label: "x-axis field",
             inputType: HTMLInputType.Text,
             required: true,
             options: {},
           },
           {
-            name: `${time.getTime()}-add-bar-dt-yField`,
+            name: `${time.getTime()}-add-bar-dt${datasetConfigSeparator}yField`,
             label: "y-axis field",
             inputType: HTMLInputType.Text,
             required: true,
@@ -377,42 +379,42 @@ export const MixedChartType: VisualizationType = {
         id: `${time.getTime()}-add-line-dt`,
         configs: [
           {
-            name: `${time.getTime()}-add-line-dt-name`,
+            name: `${time.getTime()}-add-line-dt${datasetConfigSeparator}name`,
             label: "name",
             inputType: HTMLInputType.Text,
             required: true,
             options: {},
           },
           {
-            name: `${time.getTime()}-add-line-dt-label`,
+            name: `${time.getTime()}-add-line-dt${datasetConfigSeparator}label`,
             label: "label",
             inputType: HTMLInputType.Text,
             required: true,
             options: {},
           },
           {
-            name: `${time.getTime()}-add-line-dt-color`,
+            name: `${time.getTime()}-add-line-dt${datasetConfigSeparator}color`,
             label: "color",
             inputType: HTMLInputType.Color,
             required: true,
             options: {},
           },
           {
-            name: `${time.getTime()}-add-line-dt-xField`,
+            name: `${time.getTime()}-add-line-dt${datasetConfigSeparator}xField`,
             label: "x-axis field",
             inputType: HTMLInputType.Text,
             required: true,
             options: {},
           },
           {
-            name: `${time.getTime()}-add-line-dt-yField`,
+            name: `${time.getTime()}-add-line-dt${datasetConfigSeparator}yField`,
             label: "y-axis field",
             inputType: HTMLInputType.Text,
             required: true,
             options: {},
           },
           {
-            name: `${time.getTime()}-add-line-dt-chartStyle`,
+            name: `${time.getTime()}-add-line-dt${datasetConfigSeparator}chartStyle`,
             label: "chart style",
             inputType: HTMLInputType.Select,
             options: {
@@ -421,7 +423,7 @@ export const MixedChartType: VisualizationType = {
             },
           },
           {
-            name: `${time.getTime()}-add-line-dt-areaUnderTheLineColor`,
+            name: `${time.getTime()}-add-line-dt${datasetConfigSeparator}areaUnderTheLineColor`,
             label: "color of area under line",
             inputType: HTMLInputType.Color,
             options: {},

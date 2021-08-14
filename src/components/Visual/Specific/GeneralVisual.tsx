@@ -7,6 +7,7 @@ import { useMemo } from "react";
 import { ClientJson, VisualizationProp } from "../../../data/types";
 import {
   BarChartType,
+  datasetConfigSeparator,
   DonutChartType,
   LineChartType,
   MixedChartType,
@@ -25,6 +26,7 @@ import TextTypeVisual from "../General/TextTypeVisual";
 import UnorderedListTypeVisual from "../General/UnorderedListTypeVisual";
 import ScatterVisual from "../General/ScatterVisual";
 import BarChartVisual from "../General/BarChartVisual";
+import MultipleBarChartVisual from "../General/MultipleBarChartVisual";
 
 export default function GeneralVisual({
   data,
@@ -32,12 +34,14 @@ export default function GeneralVisual({
   config,
   height,
   width,
+  datasetIds = [],
 }: {
   data: ClientJson;
   type: string;
   config: VisualizationProp[];
   height: number;
   width: number;
+  datasetIds?: string[];
 }) {
   /*
      [TableType.name]: TableType,
@@ -60,6 +64,31 @@ export default function GeneralVisual({
     }
     return obj;
   }, [config]);
+
+  const datasetConfigs = useMemo(() => {
+    const obj: { [key: string]: { [key: string]: VisualizationProp } } = {};
+    const datasetNameIdMap: { [key: string]: string } = {};
+
+    // construct the dataset configs but using the old timestamped dataset ids
+    for (let item of config) {
+      const [datasetId, configName] = item.name.split(datasetConfigSeparator);
+      if (datasetIds.includes(datasetId)) {
+        if (configName === "name") {
+          datasetNameIdMap[datasetId] = configName;
+        } else {
+          obj[datasetId] = obj[datasetId] || {};
+          obj[datasetId][configName] = { ...item };
+        }
+      }
+    }
+
+    // put the appropriate names for the configurations
+    for (let key in obj) {
+      obj[datasetNameIdMap[key]] = { ...obj[key] };
+      delete obj[key];
+    }
+    return obj;
+  }, [config, datasetIds]);
 
   switch (type) {
     case TableType.name:
@@ -102,7 +131,15 @@ export default function GeneralVisual({
       );
 
     case MultipleBarChartType.name:
-      return <div>Multiple bar chart</div>;
+      return (
+        <MultipleBarChartVisual
+          data={data}
+          configObject={configObject}
+          height={height}
+          width={width}
+          datasetConfigs={datasetConfigs}
+        />
+      );
 
     case LineChartType.name:
       return <div>Line chart</div>;

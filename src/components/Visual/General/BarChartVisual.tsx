@@ -1,5 +1,5 @@
 /**
- * Moduel cotnaing the visual for scatter diagrams
+ * Moduel cotnaing the visual for bar charts
  */
 
 import { useMemo } from "react";
@@ -37,11 +37,6 @@ export default function BarChartVisual({
       indexAxis: configObject.orientation.value === "horizontal" ? "y" : "x",
       responsive: true,
       maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
     }),
     [configObject.orientation.value]
   );
