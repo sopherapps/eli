@@ -467,6 +467,30 @@ export const PieChartType: VisualizationType = {
       options: {},
     },
   ],
+  addMoreConfigsButtons: [
+    {
+      label: "set color",
+      datasetConfigGenerator: (time: Date) => ({
+        id: `${time.getTime()}-add-color`,
+        configs: [
+          {
+            name: `${time.getTime()}-add-color${datasetConfigSeparator}label`,
+            label: "label",
+            inputType: HTMLInputType.Text,
+            required: true,
+            options: {},
+          },
+          {
+            name: `${time.getTime()}-add-color${datasetConfigSeparator}color`,
+            label: "name",
+            inputType: HTMLInputType.Text,
+            required: true,
+            options: {},
+          },
+        ],
+      }),
+    },
+  ],
 };
 
 export const DonutChartType: VisualizationType = {
@@ -486,6 +510,30 @@ export const DonutChartType: VisualizationType = {
       inputType: HTMLInputType.Text,
       required: true,
       options: {},
+    },
+  ],
+  addMoreConfigsButtons: [
+    {
+      label: "set color",
+      datasetConfigGenerator: (time: Date) => ({
+        id: `${time.getTime()}-add-color`,
+        configs: [
+          {
+            name: `${time.getTime()}-add-color${datasetConfigSeparator}label`,
+            label: "label",
+            inputType: HTMLInputType.Text,
+            required: true,
+            options: {},
+          },
+          {
+            name: `${time.getTime()}-add-color${datasetConfigSeparator}color`,
+            label: "name",
+            inputType: HTMLInputType.Text,
+            required: true,
+            options: {},
+          },
+        ],
+      }),
     },
   ],
 };
