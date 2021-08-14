@@ -336,6 +336,13 @@ export const MixedChartType: VisualizationType = {
         id: `${time.getTime()}-add-bar-dt`,
         configs: [
           {
+            name: `${time.getTime()}-add-bar-dt${datasetConfigSeparator}type`,
+            label: "type",
+            inputType: HTMLInputType.Hidden,
+            options: {},
+            value: "bar",
+          },
+          {
             name: `${time.getTime()}-add-bar-dt${datasetConfigSeparator}name`,
             label: "name",
             inputType: HTMLInputType.Text,
@@ -378,6 +385,13 @@ export const MixedChartType: VisualizationType = {
       datasetConfigGenerator: (time: Date) => ({
         id: `${time.getTime()}-add-line-dt`,
         configs: [
+          {
+            name: `${time.getTime()}-add-bar-dt${datasetConfigSeparator}type`,
+            label: "type",
+            inputType: HTMLInputType.Hidden,
+            options: {},
+            value: "line",
+          },
           {
             name: `${time.getTime()}-add-line-dt${datasetConfigSeparator}name`,
             label: "name",

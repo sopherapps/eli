@@ -7,7 +7,7 @@ import { Line } from "react-chartjs-2";
 import { ClientJson, VisualizationProp } from "../../../data/types";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
 
-export interface LineDatasetConfig {
+interface LineDatasetConfig {
   label: string;
   data: { x: string; y: number }[];
   borderColor: string;
@@ -29,9 +29,6 @@ export default function MultipleLineChartVisual({
   configObject: { [key: string]: VisualizationProp };
   datasetConfigs: { [key: string]: { [key: string]: VisualizationProp } };
 }) {
-  const xField = configObject.xField.value;
-  const yField = configObject.yField.value;
-
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
 
   const errorMessage = useMemo(
@@ -39,22 +36,10 @@ export default function MultipleLineChartVisual({
     [data.isMultiple]
   );
 
-  const chartOptions = useMemo(
-    () => ({
-      indexAxis: configObject.orientation.value === "horizontal" ? "y" : "x",
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        x: {
-          stacked: configObject.chartStyle.value === "stacked",
-        },
-        y: {
-          stacked: configObject.chartStyle.value === "stacked",
-        },
-      },
-    }),
-    [configObject.chartStyle.value, configObject.orientation.value]
-  );
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+  };
 
   const chartData = useMemo(() => {
     const labels: string[] = [];
@@ -66,12 +51,17 @@ export default function MultipleLineChartVisual({
         fill: !!datasetConfigs[dataset]?.areaUnderTheLineColor?.value,
         data: [],
         borderColor: datasetConfigs[dataset]?.color?.value || "#fff",
-        backgroundColor: datasetConfigs[dataset]?.color?.value || "#fff",
+        backgroundColor:
+          datasetConfigs[dataset]?.areaUnderTheLineColor?.value ||
+          datasetConfigs[dataset]?.color?.value ||
+          "#fff",
         borderDash:
           datasetConfigs[dataset]?.chartStyle?.value === "dotted"
             ? [5, 5]
             : undefined,
       };
+      const xField = datasetConfigs[dataset]?.xField.value;
+      const yField = datasetConfigs[dataset]?.yField.value;
 
       for (let record of Object.values(data.data[dataset])) {
         const label = `${record[xField]}`;
@@ -87,7 +77,7 @@ export default function MultipleLineChartVisual({
       labels,
       datasets,
     };
-  }, [data.data, datasetConfigs, xField, yField]);
+  }, [data.data, datasetConfigs]);
 
   return (
     <>

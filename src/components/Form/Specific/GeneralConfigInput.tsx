@@ -9,6 +9,7 @@ import CheckboxInput from "../General/CheckboxInput";
 import ColorInput from "../General/ColorInput";
 import DateInput from "../General/DateInput";
 import EmailInput from "../General/EmailInput";
+import HiddenInput from "../General/HiddenInput";
 import MonthInput from "../General/MonthInput";
 import NumberInput from "../General/NumberInput";
 import RangeInput from "../General/RangeInput";
@@ -137,6 +138,9 @@ export default function GeneralConfigInput({
           required={config.required}
         />
       );
+
+    case HTMLInputType.Hidden:
+      return <HiddenInput id={id} name={config.name} value={config.value} />;
 
     case HTMLInputType.Text:
       return (

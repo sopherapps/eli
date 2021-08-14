@@ -54,7 +54,10 @@ export default function LineChartVisual({
           label: configObject.label.value,
           data: records,
           fill: !!configObject.areaUnderTheLineColor.value,
-          backgroundColor: configObject.color.value || "#fff",
+          backgroundColor:
+            configObject.areaUnderTheLineColor?.value ||
+            configObject.color.value ||
+            "#fff",
           borderColor: configObject.color.value || "#fff",
           borderDash:
             configObject.chartStyle.value === "dotted" ? [5, 5] : undefined,

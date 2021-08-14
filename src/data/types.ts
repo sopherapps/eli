@@ -68,6 +68,7 @@ export enum HTMLInputType {
   Time,
   Week,
   Select,
+  Hidden,
 }
 
 export interface ClientJson {

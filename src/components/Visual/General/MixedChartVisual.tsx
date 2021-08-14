@@ -7,14 +7,17 @@ import { Bar } from "react-chartjs-2";
 import { ClientJson, VisualizationProp } from "../../../data/types";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
 
-interface BarDatasetConfig {
+interface MixedDatasetConfig {
+  type: string;
   label: string;
   data: { x: string; y: number }[];
   borderColor: string;
   backgroundColor: string;
+  fill?: boolean;
+  borderDash?: number[];
 }
 
-export default function MultipleBarChartVisual({
+export default function MixedChartVisual({
   data,
   configObject,
   datasetConfigs,
@@ -41,29 +44,44 @@ export default function MultipleBarChartVisual({
       maintainAspectRatio: false,
       scales: {
         x: {
-          stacked: configObject.chartStyle.value === "stacked",
+          stacked: configObject.barChartStyle.value === "stacked",
         },
         y: {
-          stacked: configObject.chartStyle.value === "stacked",
+          stacked: configObject.barChartStyle.value === "stacked",
         },
       },
     }),
-    [configObject.chartStyle.value, configObject.orientation.value]
+    [configObject.barChartStyle.value, configObject.orientation.value]
   );
 
   const chartData = useMemo(() => {
     const labels: string[] = [];
-    const datasets: BarDatasetConfig[] = [];
+    const datasets: MixedDatasetConfig[] = [];
 
     for (let dataset in data.data) {
-      const datasetConfig: BarDatasetConfig = {
+      const xField = datasetConfigs[dataset]?.xField.value;
+      const yField = datasetConfigs[dataset]?.yField.value;
+      const type = datasetConfigs[dataset]?.type.value;
+
+      const datasetConfig: MixedDatasetConfig = {
+        type,
         label: dataset,
         data: [],
         borderColor: datasetConfigs[dataset]?.color?.value || "#fff",
-        backgroundColor: datasetConfigs[dataset]?.color?.value || "#fff",
+        backgroundColor:
+          datasetConfigs[dataset]?.areaUnderTheLineColor?.value ||
+          datasetConfigs[dataset]?.color?.value ||
+          "#fff",
       };
-      const xField = datasetConfigs[dataset]?.xField.value;
-      const yField = datasetConfigs[dataset]?.yField.value;
+
+      if (type === "line") {
+        datasetConfig.fill =
+          !!datasetConfigs[dataset]?.areaUnderTheLineColor?.value;
+        datasetConfig.borderDash =
+          datasetConfigs[dataset]?.chartStyle?.value === "dotted"
+            ? [5, 5]
+            : undefined;
+      }
 
       for (let record of Object.values(data.data[dataset])) {
         const label = `${record[xField]}`;

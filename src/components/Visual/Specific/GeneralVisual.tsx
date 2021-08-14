@@ -29,6 +29,7 @@ import BarChartVisual from "../General/BarChartVisual";
 import MultipleBarChartVisual from "../General/MultipleBarChartVisual";
 import LineChartVisual from "../General/LineChartVisual";
 import MultipleLineChartVisual from "../General/MultipleLineChartVisual";
+import MixedChartVisual from "../General/MixedChartVisual";
 
 export default function GeneralVisual({
   data,
@@ -165,7 +166,15 @@ export default function GeneralVisual({
       );
 
     case MixedChartType.name:
-      return <div>Mixed chart</div>;
+      return (
+        <MixedChartVisual
+          data={data}
+          configObject={configObject}
+          height={height}
+          width={width}
+          datasetConfigs={datasetConfigs}
+        />
+      );
 
     case PieChartType.name:
       return <div>Pie chart</div>;
