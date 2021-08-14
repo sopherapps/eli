@@ -1,13 +1,13 @@
 /**
- * Moduel cotnaing the visual for pie charts
+ * Moduel cotnaing the visual for doughnut charts
  */
 
 import { useMemo } from "react";
-import { Pie } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 import { ClientJson, VisualizationProp } from "../../../data/types";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
 
-export default function PieChartVisual({
+export default function DoughtnutChartVisual({
   data,
   configObject,
   height,
@@ -70,9 +70,9 @@ export default function PieChartVisual({
   return (
     <>
       {errorMessage ? (
-        <div className="error">{errorMessage}.</div>
+        <div className="error">{errorMessage}</div>
       ) : (
-        <Pie
+        <Doughnut
           data={chartData}
           width={width * windowWidth}
           height={height * windowHeight}

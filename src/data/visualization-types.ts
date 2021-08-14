@@ -493,8 +493,8 @@ export const PieChartType: VisualizationType = {
   ],
 };
 
-export const DonutChartType: VisualizationType = {
-  name: "donut-chart",
+export const DoughnutChartType: VisualizationType = {
+  name: "doughnut-chart",
   icon: whiteDonutChartIcon,
   config: [
     {

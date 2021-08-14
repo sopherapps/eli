@@ -8,7 +8,7 @@ import { ClientJson, VisualizationProp } from "../../../data/types";
 import {
   BarChartType,
   datasetConfigSeparator,
-  DonutChartType,
+  DoughnutChartType,
   LineChartType,
   MixedChartType,
   MultipleBarChartType,
@@ -31,6 +31,7 @@ import LineChartVisual from "../General/LineChartVisual";
 import MultipleLineChartVisual from "../General/MultipleLineChartVisual";
 import MixedChartVisual from "../General/MixedChartVisual";
 import PieChartVisual from "../General/PieChartVisual";
+import DoughnutChartVisual from "../General/DoughnutChartVisual";
 
 export default function GeneralVisual({
   data,
@@ -47,20 +48,6 @@ export default function GeneralVisual({
   width: number;
   datasetIds?: string[];
 }) {
-  /*
-     [TableType.name]: TableType,
-  [ScatterChartType.name]: ScatterChartType,
-  [BarChartType.name]: BarChartType,
-  [MultipleBarChartType.name]: MultipleBarChartType,
-  [LineChartType.name]: LineChartType,
-  [MultipleLineChartType.name]: MultipleLineChartType,
-  [MixedChartType.name]: MixedChartType,
-  [PieChartType.name]: PieChartType,
-  [DonutChartType.name]: DonutChartType,
-  [TextType.name]: TextType,
-  [OrderedListType.name]: OrderedListType,
-  [UnorderedListType.name]: UnorderedListType,
-    */
   const configObject = useMemo(() => {
     const obj: { [key: string]: VisualizationProp } = {};
     for (let item of config) {
@@ -188,8 +175,16 @@ export default function GeneralVisual({
         />
       );
 
-    case DonutChartType.name:
-      return <div>Donut chart</div>;
+    case DoughnutChartType.name:
+      return (
+        <DoughnutChartVisual
+          data={data}
+          configObject={configObject}
+          height={height}
+          width={width}
+          datasetConfigs={datasetConfigs}
+        />
+      );
 
     default:
       return <div className="error">Visualization type not supported</div>;

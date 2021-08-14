@@ -1,5 +1,5 @@
 /**
- * Moduel cotnaing the visual for bar charts with multiple datasets
+ * Moduel cotnaing the visual for line charts with multiple datasets
  */
 
 import { useMemo } from "react";
