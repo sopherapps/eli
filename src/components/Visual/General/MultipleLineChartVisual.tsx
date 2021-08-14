@@ -1,5 +1,5 @@
 /**
- * Moduel cotnaing the visual for line charts with multiple datasets
+ * Model containing the visual for line charts with multiple datasets
  */
 
 import { useMemo } from "react";
