@@ -1,7 +1,7 @@
 /**
  * Module containing the component that conditionaly renders a given visualization
  */
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
 import { useLayoutEffect } from "react";
@@ -17,6 +17,17 @@ export default function VisualizationBody({
   const [clientData, setClientData] = useState<ClientJson>();
   const [isConnected, setIsConnected] = useState(false);
   const [error, setError] = useState<Event>();
+
+  const allErrors = useMemo(() => {
+    const mainErrors = Object.values(visualization.errors).filter(
+      (value) => value !== ""
+    );
+    const configErrors = visualization.type.config
+      .map((value) => value.error)
+      .filter((value) => value !== "");
+
+    return [...mainErrors, configErrors];
+  }, [visualization.errors, visualization.type.config]);
 
   useEffect(() => {
     if (visualization.shouldAppendNewData) {
@@ -91,12 +102,25 @@ export default function VisualizationBody({
     return () => connection.close();
   }, [visualization.dataSourceUrl, visualization.shouldAppendNewData]);
 
+  if (allErrors.length > 0) {
+    return (
+      <div>
+        <h6>Errors in configuration</h6>
+        {allErrors.map((value, index) => (
+          <p key={`${value}-${index}`} className="error">
+            {value}
+          </p>
+        ))}
+      </div>
+    );
+  }
+
   if (!isConnected) {
     return <div>Disconnected</div>;
   }
 
   if (error) {
-    return <div>{JSON.stringify(error)}</div>;
+    return <div className="error">{JSON.stringify(error)}</div>;
   }
 
   if (clientData) {
@@ -105,6 +129,8 @@ export default function VisualizationBody({
         data={clientData}
         type={visualization.type.name}
         config={visualization.type.config}
+        height={visualization.height}
+        width={visualization.width}
       />
     );
   }

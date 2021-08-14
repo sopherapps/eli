@@ -23,15 +23,20 @@ import OrderedListTypeVisual from "../General/OrderedListTypeVisual";
 import TableTypeVisual from "../General/TableTypeVisual";
 import TextTypeVisual from "../General/TextTypeVisual";
 import UnorderedListTypeVisual from "../General/UnorderedListTypeVisual";
+import ScatterVisual from "../General/ScatterVisual";
 
 export default function GeneralVisual({
   data,
   type,
   config,
+  height,
+  width,
 }: {
   data: ClientJson;
   type: string;
   config: VisualizationProp[];
+  height: number;
+  width: number;
 }) {
   /*
      [TableType.name]: TableType,
@@ -76,7 +81,14 @@ export default function GeneralVisual({
       );
 
     case ScatterChartType.name:
-      return <div>Scatter chart</div>;
+      return (
+        <ScatterVisual
+          data={data}
+          configObject={configObject}
+          height={height}
+          width={width}
+        />
+      );
 
     case BarChartType.name:
       return <div>Bar chart</div>;

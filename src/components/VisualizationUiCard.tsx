@@ -12,8 +12,8 @@ export default function VisualizationUiCard({
     <div
       className="visual"
       style={{
-        height: `${visualization.height}%`,
-        width: `${visualization.width}%`,
+        height: `${visualization.height}vh`,
+        width: `${visualization.width}vw`,
       }}
     >
       <div className="card-header">
