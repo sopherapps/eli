@@ -161,35 +161,34 @@ The design is based on [Google Keep](https://keep.google.com/)
 
 ### Features
 
-- [ ] A user can select any tab from the `Tabs` bar at the bottom of the tabs screen
-- [ ] If no tabs have been created yet, the user should be shown the home screen
-- [ ] A user can go to the control panel by clicking the `Gear` icon in the top bar
-- [ ] A user can create any number of tabs, each tab having any number of analytics of any kind.
+- [x] A user can select any tab from the `Tabs` bar at the bottom of the tabs screen
+- [x] If no tabs have been created yet, the user should be shown the home screen
+- [x] A user can go to the control panel by clicking the `Gear` icon in the top bar
+- [x] A user can create any number of tabs, each tab having any number of analytics of any kind.
       This is done in the `Control Panel` by clicking the `+` button at the top right.
-- [ ] A user can view all available tabs on the initial page of the control panel (no pagination as the data is local)
-- [ ] A user can edit any tab by clicking the `pen` icon button in that tab's edit card
-- [ ] A user can navigate backwards in the Control Panel when viewing the settings of one tab.
+- [x] A user can view all available tabs on the initial page of the control panel (no pagination as the data is local)
+- [x] A user can edit any tab by clicking the `pen` icon button in that tab's edit card
+- [x] A user can navigate backwards in the Control Panel when viewing the settings of one tab.
       Backwards would take them to the list of all tabs
-- [ ] A user can delete any tab from the initial screen of the control panel.
+- [x] A user can delete any tab from the initial screen of the control panel.
       This is done by clicking the `x` button in the card of that tab.
-- [ ] A user can add any analytic of given Data Source URL which must be a websocket URL.
+- [x] A user can add any analytic of given Data Source URL which must be a websocket URL.
       If it is a PubSubQ URL, the auth data if any should be put in the query paramters.
-- [ ] A user can choose any analytic type for that given analytic, including chart, table, text etc.
+- [x] A user can choose any analytic type for that given analytic, including chart, table, text etc.
       The appropriate configuration for each given canlytic type will be availed to the user to tweak.
-- [ ] A user can rearrange the order of the analytics in a given tab.
+- [x] A user can rearrange the order of the analytics in a given tab.
       This is done by clicking the up or down arrow keys in the card for that analytic.
-- [ ] A user can set the title of each tab. Each title is unique to avoid ambiguity when navigating.
-- [ ] A user can set the title of a given analytic in any tab. These don't have to be unique.
-- [ ] A user can delete any analytic from a given tab by clicking the `x` button in the card of that analytic
-- [ ] A user can set the width of a given analytic to be a given percentage of the full width.
-- [ ] A user can set the height of a given analytic to be a given percentage of the full height.
-- [ ] Analytics on a given tab are all in one flex container with ability to wrap-around
-- [ ] Changes made to an analytic are saved automatically every 3 seconds
-- [ ] Configurations saved by the user are saved in a JSON file every 3 seconds when the control panel is open.
-      In case there are no changes, the JSON file is not touched.
-- [ ] At startup, these configurations are loaded from the file.
+- [x] A user can set the title of each tab. Each title is unique to avoid ambiguity when navigating.
+- [x] A user can set the title of a given analytic in any tab. These don't have to be unique.
+- [x] A user can delete any analytic from a given tab by clicking the `x` button in the card of that analytic
+- [x] A user can set the width of a given analytic to be a given percentage of the full width.
+- [x] A user can set the height of a given analytic to be a given percentage of the full height.
+- [x] Analytics on a given tab are all in one flex container with ability to wrap-around
+- [x] Changes made to an analytic are saved automatically on edit
+- [x] Configurations saved by the user are saved in a localstorage.
+- [x] At startup, these configurations are loaded from the the localstorage.
 - [ ] \*A user can toggle the theme between dark and light by clicking the moon/sun icon in the top bar.
-- [ ] Any number of tabs can be open at the same time. The tabs appear just below the top bar.
+- [x] Any number of tabs can be open at the same time. The tabs appear just below the top bar.
       If the tabs are too many, they will have arrow buttons to enable scrolling left and right.
 
 Note: \* Is a nice-to-have feature. We will start with the Dark theme
