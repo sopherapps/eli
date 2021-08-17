@@ -42,9 +42,9 @@ export default function ScatterVisual({
   return (
     <Scatter
       data={chartData}
-      width={width * windowWidth}
-      height={height * windowHeight}
-      options={{ maintainAspectRatio: false }}
+      width={(width / 100) * windowWidth}
+      height={(height / 100) * windowHeight}
+      options={{ maintainAspectRatio: false, animations: false }}
     />
   );
 }

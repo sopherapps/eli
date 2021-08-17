@@ -16,17 +16,19 @@ export default function VisualizationBody({
   const historicalData = useRef<{ [key: number]: ClientJson }>({});
   const [clientData, setClientData] = useState<ClientJson>();
   const [isConnected, setIsConnected] = useState(false);
+  const [shouldReconnect, setShouldReconnect] = useState(true);
   const [error, setError] = useState<Event>();
 
   const allErrors = useMemo(() => {
+    const emptyValues = ["", undefined, null];
     const mainErrors = Object.values(visualization.errors).filter(
-      (value) => value !== ""
+      (value) => !emptyValues.includes(value)
     );
     const configErrors = visualization.type.config
       .map((value) => value.error)
-      .filter((value) => value !== "");
+      .filter((value) => !emptyValues.includes(value));
 
-    return [...mainErrors, configErrors];
+    return [...mainErrors, ...configErrors];
   }, [visualization.errors, visualization.type.config]);
 
   useEffect(() => {
@@ -49,15 +51,15 @@ export default function VisualizationBody({
   });
 
   useLayoutEffect(() => {
-    const connection = new WebSocket(visualization.dataSourceUrl);
-    connection.onmessage = (event) => {
+    let connection = new WebSocket(visualization.dataSourceUrl);
+    let restartIntervalHandle: number;
+    const onMessageHandler = (event: MessageEvent) => {
       setIsConnected(true);
       setError(undefined);
 
       const parsedData: ClientJson = JSON.parse(event.data);
       if (visualization.shouldAppendNewData) {
         historicalData.current[new Date().getTime()] = parsedData;
-        console.log({ parsedData });
         let obj: ClientJson = {
           isMultiple: false,
           meta: { separator: "", primaryFields: [] },
@@ -67,7 +69,6 @@ export default function VisualizationBody({
         if (parsedData.isMultiple) {
           for (let key in historicalData.current) {
             const message = historicalData.current[key];
-            console.log({ message });
             obj = { ...obj, ...message, data: { ...obj.data } };
 
             for (let dataset in message.data) {
@@ -88,19 +89,50 @@ export default function VisualizationBody({
           }
         }
 
-        console.log({ obj });
         setClientData(obj);
       } else {
         setClientData(parsedData);
       }
     };
 
-    connection.onerror = (event) => setError(event);
-    connection.onopen = () => setIsConnected(true);
-    connection.onclose = () => setIsConnected(false);
+    const onErrorHandler = (event: Event) => setError(event);
+    const onOpenHandler = () => {
+      setIsConnected(true);
+      clearInterval(restartIntervalHandle);
+    };
+    const onCloseHandler = () => {
+      setIsConnected(false);
+      if (shouldReconnect) {
+        clearInterval(restartIntervalHandle);
 
-    return () => connection.close();
-  }, [visualization.dataSourceUrl, visualization.shouldAppendNewData]);
+        restartIntervalHandle = window.setInterval(() => {
+          if (!connection || connection.readyState === WebSocket.CLOSED) {
+            console.log("attempting reconnection...");
+            connection = new WebSocket(visualization.dataSourceUrl);
+            initializeConnection(connection);
+          }
+        }, 60000);
+      }
+    };
+
+    const initializeConnection = (websocket: WebSocket) => {
+      connection.onmessage = onMessageHandler;
+      connection.onerror = onErrorHandler;
+      connection.onopen = onOpenHandler;
+      connection.onclose = onCloseHandler;
+    };
+
+    initializeConnection(connection);
+
+    return () => {
+      setShouldReconnect(false);
+      connection.close();
+    };
+  }, [
+    shouldReconnect,
+    visualization.dataSourceUrl,
+    visualization.shouldAppendNewData,
+  ]);
 
   if (allErrors.length > 0) {
     return (

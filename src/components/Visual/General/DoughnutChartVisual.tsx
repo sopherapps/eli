@@ -33,6 +33,7 @@ export default function DoughtnutChartVisual({
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
+    animations: false,
   };
 
   const chartData = useMemo(() => {
@@ -74,8 +75,8 @@ export default function DoughtnutChartVisual({
       ) : (
         <Doughnut
           data={chartData}
-          width={width * windowWidth}
-          height={height * windowHeight}
+          width={(width / 100) * windowWidth}
+          height={(height / 100) * windowHeight}
           options={chartOptions}
         />
       )}

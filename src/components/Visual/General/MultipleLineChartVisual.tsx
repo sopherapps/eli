@@ -39,6 +39,7 @@ export default function MultipleLineChartVisual({
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
+    animations: false,
   };
 
   const chartData = useMemo(() => {
@@ -86,8 +87,8 @@ export default function MultipleLineChartVisual({
       ) : (
         <Line
           data={chartData}
-          width={width * windowWidth}
-          height={height * windowHeight}
+          width={(width / 100) * windowWidth}
+          height={(height / 100) * windowHeight}
           options={chartOptions}
         />
       )}

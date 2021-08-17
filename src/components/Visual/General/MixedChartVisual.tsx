@@ -42,6 +42,7 @@ export default function MixedChartVisual({
       indexAxis: configObject.orientation.value === "horizontal" ? "y" : "x",
       responsive: true,
       maintainAspectRatio: false,
+      animations: false,
       scales: {
         x: {
           stacked: configObject.barChartStyle.value === "stacked",
@@ -106,8 +107,8 @@ export default function MixedChartVisual({
       ) : (
         <Bar
           data={chartData}
-          width={width * windowWidth}
-          height={height * windowHeight}
+          width={(width / 100) * windowWidth}
+          height={(height / 100) * windowHeight}
           options={chartOptions}
         />
       )}

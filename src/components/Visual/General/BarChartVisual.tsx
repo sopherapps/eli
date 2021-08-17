@@ -37,6 +37,7 @@ export default function BarChartVisual({
       indexAxis: configObject.orientation.value === "horizontal" ? "y" : "x",
       responsive: true,
       maintainAspectRatio: false,
+      animations: false,
     }),
     [configObject.orientation.value]
   );
@@ -77,8 +78,8 @@ export default function BarChartVisual({
       ) : (
         <Bar
           data={chartData}
-          width={width * windowWidth}
-          height={height * windowHeight}
+          width={(width / 100) * windowWidth}
+          height={(height / 100) * windowHeight}
           options={chartOptions}
         />
       )}
