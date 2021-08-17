@@ -6,26 +6,32 @@ import { useMemo } from "react";
 import { Line } from "react-chartjs-2";
 import { ClientJson, VisualizationProp } from "../../../data/types";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
+import sortByField from "../../../utils/sort-records";
 
 export default function LineChartVisual({
   data,
   configObject,
   height,
   width,
+  sortBy,
 }: {
   data: ClientJson;
   height: number;
   width: number;
+  sortBy: string;
   configObject: { [key: string]: VisualizationProp };
 }) {
-  const xField = configObject.xField.value;
-  const yField = configObject.yField.value;
-
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
 
+  const [sortedRecords, sortError] = useMemo(
+    () => sortByField(sortBy, data.data),
+    [sortBy, data.data]
+  );
+
   const errorMessage = useMemo(
-    () => (data.isMultiple ? "Multiple datasets not supported here." : ""),
-    [data.isMultiple]
+    () =>
+      data.isMultiple ? "Multiple datasets not supported here." : sortError,
+    [data.isMultiple, sortError]
   );
 
   const chartOptions = useMemo(
@@ -41,8 +47,10 @@ export default function LineChartVisual({
   const chartData = useMemo(() => {
     const labels: string[] = [];
     const records: { x: string; y: number }[] = [];
+    const xField = configObject.xField.value;
+    const yField = configObject.yField.value;
 
-    for (let record of Object.values(data.data)) {
+    for (let record of sortedRecords) {
       const label = `${record[xField]}`;
       labels.push(label);
       records.push({ x: label, y: record[yField] });
@@ -70,9 +78,9 @@ export default function LineChartVisual({
     configObject.chartStyle.value,
     configObject.color.value,
     configObject.label.value,
-    data.data,
-    xField,
-    yField,
+    configObject.xField.value,
+    configObject.yField.value,
+    sortedRecords,
   ]);
 
   return (

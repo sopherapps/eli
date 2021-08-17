@@ -33,7 +33,7 @@ export default function VisualizationBody({
 
   useEffect(() => {
     if (visualization.shouldAppendNewData) {
-      const intervalHandle = setInterval(() => {
+      const cleanStaleData = () => {
         const lastValidTimestamp =
           new Date().getTime() - (visualization.ttlInSeconds || 3) * 1000; // default to 50 minutes
 
@@ -44,7 +44,9 @@ export default function VisualizationBody({
             delete historicalData.current[timestamp];
           }
         }
-      }, 1000);
+      };
+
+      const intervalHandle = setInterval(cleanStaleData, 1000);
 
       return () => clearInterval(intervalHandle);
     }
@@ -67,6 +69,7 @@ export default function VisualizationBody({
         };
 
         if (parsedData.isMultiple) {
+          // FIXME: Extract function from this
           for (let key in historicalData.current) {
             const message = historicalData.current[key];
             obj = { ...obj, ...message, data: { ...obj.data } };
@@ -79,6 +82,7 @@ export default function VisualizationBody({
             }
           }
         } else {
+          // FIXME: Extract function from this
           for (let key in historicalData.current) {
             const message = historicalData.current[key];
             obj = {
@@ -163,6 +167,7 @@ export default function VisualizationBody({
         config={visualization.type.config}
         height={visualization.height}
         width={visualization.width}
+        orderBy={visualization.orderBy}
       />
     );
   }

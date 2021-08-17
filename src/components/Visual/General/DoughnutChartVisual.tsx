@@ -6,6 +6,7 @@ import { useMemo } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { ClientJson, VisualizationProp } from "../../../data/types";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
+import sortByField from "../../../utils/sort-records";
 
 export default function DoughtnutChartVisual({
   data,
@@ -13,21 +14,26 @@ export default function DoughtnutChartVisual({
   height,
   width,
   datasetConfigs,
+  sortBy,
 }: {
   data: ClientJson;
   height: number;
   width: number;
+  sortBy: string;
   configObject: { [key: string]: VisualizationProp };
   datasetConfigs: { [key: string]: { [key: string]: VisualizationProp } };
 }) {
-  const labelField = configObject.labelField.value;
-  const valueField = configObject.valueField.value;
-
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
 
+  const [sortedRecords, sortError] = useMemo(
+    () => sortByField(sortBy, data.data),
+    [sortBy, data.data]
+  );
+
   const errorMessage = useMemo(
-    () => (data.isMultiple ? "Multiple datasets not supported here." : ""),
-    [data.isMultiple]
+    () =>
+      data.isMultiple ? "Multiple datasets not supported here." : sortError,
+    [data.isMultiple, sortError]
   );
 
   const chartOptions = {
@@ -40,8 +46,10 @@ export default function DoughtnutChartVisual({
     const labels: string[] = [];
     const records: number[] = [];
     const backgroundColors: string[] = [];
+    const labelField = configObject.labelField.value;
+    const valueField = configObject.valueField.value;
 
-    for (let record of Object.values(data.data)) {
+    for (let record of sortedRecords) {
       const label = `${record[labelField]}`;
       const color = datasetConfigs[label]?.color.value || "#fff";
       labels.push(label);
@@ -62,10 +70,10 @@ export default function DoughtnutChartVisual({
     };
   }, [
     configObject.label.value,
-    data.data,
+    configObject.labelField.value,
+    configObject.valueField.value,
     datasetConfigs,
-    labelField,
-    valueField,
+    sortedRecords,
   ]);
 
   return (

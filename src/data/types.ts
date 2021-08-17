@@ -22,6 +22,7 @@ export interface Visualization {
   dataSourceUrl: string;
   width: number;
   height: number;
+  orderBy: string;
   shouldAppendNewData: boolean;
   ttlInSeconds?: number;
   type: VisualizationType;

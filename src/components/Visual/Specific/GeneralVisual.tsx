@@ -39,6 +39,7 @@ export default function GeneralVisual({
   config,
   height,
   width,
+  orderBy,
   datasetIds = [],
 }: {
   data: ClientJson;
@@ -46,6 +47,7 @@ export default function GeneralVisual({
   config: VisualizationProp[];
   height: number;
   width: number;
+  orderBy: string;
   datasetIds?: string[];
 }) {
   const configObject = useMemo(() => {
@@ -86,25 +88,43 @@ export default function GeneralVisual({
       return (
         <TableTypeVisual
           data={data}
+          sortBy={orderBy}
           columnOrderString={configObject.columnOrder.value}
         />
       );
 
     case TextType.name:
-      return <TextTypeVisual configObject={configObject} data={data} />;
+      return (
+        <TextTypeVisual
+          sortBy={orderBy}
+          configObject={configObject}
+          data={data}
+        />
+      );
 
     case OrderedListType.name:
-      return <OrderedListTypeVisual configObject={configObject} data={data} />;
+      return (
+        <OrderedListTypeVisual
+          sortBy={orderBy}
+          configObject={configObject}
+          data={data}
+        />
+      );
 
     case UnorderedListType.name:
       return (
-        <UnorderedListTypeVisual configObject={configObject} data={data} />
+        <UnorderedListTypeVisual
+          sortBy={orderBy}
+          configObject={configObject}
+          data={data}
+        />
       );
 
     case ScatterChartType.name:
       return (
         <ScatterVisual
           data={data}
+          sortBy={orderBy}
           configObject={configObject}
           height={height}
           width={width}
@@ -114,6 +134,7 @@ export default function GeneralVisual({
     case BarChartType.name:
       return (
         <BarChartVisual
+          sortBy={orderBy}
           data={data}
           configObject={configObject}
           height={height}
@@ -124,6 +145,7 @@ export default function GeneralVisual({
     case MultipleBarChartType.name:
       return (
         <MultipleBarChartVisual
+          sortBy={orderBy}
           data={data}
           configObject={configObject}
           height={height}
@@ -135,6 +157,7 @@ export default function GeneralVisual({
     case LineChartType.name:
       return (
         <LineChartVisual
+          sortBy={orderBy}
           data={data}
           configObject={configObject}
           height={height}
@@ -145,6 +168,7 @@ export default function GeneralVisual({
     case MultipleLineChartType.name:
       return (
         <MultipleLineChartVisual
+          sortBy={orderBy}
           data={data}
           configObject={configObject}
           height={height}
@@ -156,6 +180,7 @@ export default function GeneralVisual({
     case MixedChartType.name:
       return (
         <MixedChartVisual
+          sortBy={orderBy}
           data={data}
           configObject={configObject}
           height={height}
@@ -167,6 +192,7 @@ export default function GeneralVisual({
     case PieChartType.name:
       return (
         <PieChartVisual
+          sortBy={orderBy}
           data={data}
           configObject={configObject}
           height={height}
@@ -178,6 +204,7 @@ export default function GeneralVisual({
     case DoughnutChartType.name:
       return (
         <DoughnutChartVisual
+          sortBy={orderBy}
           data={data}
           configObject={configObject}
           height={height}

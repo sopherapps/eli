@@ -4,16 +4,42 @@
 
 import { useMemo } from "react";
 import { ClientJson, VisualizationProp } from "../../../data/types";
+import sortByField from "../../../utils/sort-records";
 
 export default function UnorderedListVisual({
   configObject,
   data,
+  sortBy,
 }: {
   configObject: { [key: string]: VisualizationProp };
   data: ClientJson;
+  sortBy: string;
 }) {
-  const recordIds = useMemo(() => Object.keys(data.data).sort(), [data.data]);
   const valueField = configObject.valueField.value;
+  const { primaryFields, separator } = data.meta;
+
+  const [sortedRecords, errorMessage] = useMemo(() => {
+    const datasets: { [key: string]: { [key: string]: any }[] } = {};
+    let errorValue = "";
+
+    if (data.isMultiple) {
+      for (let datasetName in data.data) {
+        [datasets[datasetName], errorValue] = sortByField(
+          sortBy,
+          data.data[datasetName]
+        );
+
+        if (errorValue) {
+          break;
+        }
+      }
+    } else {
+      [datasets[""], errorValue] = sortByField(sortBy, data.data);
+    }
+
+    return [datasets, errorValue];
+  }, [data.data, data.isMultiple, sortBy]);
+
   return (
     <ul
       className="data-ui"
@@ -21,17 +47,26 @@ export default function UnorderedListVisual({
         listStyleType: configObject.style.value || "inherit",
       }}
     >
-      {!data.isMultiple
-        ? recordIds.map((id) => <li key={id}>{data.data[id][valueField]}</li>)
-        : recordIds.map((dataset) =>
-            Object.keys(data.data[dataset])
-              .sort()
-              .map((id) => (
-                <li key={`${dataset}-${id}`}>
-                  {data.data[dataset][id][valueField]}
-                </li>
-              ))
-          )}
+      {errorMessage ? (
+        <span className="error">{errorMessage}</span>
+      ) : (
+        Object.keys(sortedRecords)
+          .sort()
+          .map((dataset) =>
+            Object.values(sortedRecords[dataset]).map((record) => (
+              <li
+                key={`${dataset}-${primaryFields
+                  .map((field) => record[field])
+                  .join(separator)}`}
+              >
+                <strong>
+                  <em>{dataset}</em>
+                </strong>{" "}
+                {record[valueField]}
+              </li>
+            ))
+          )
+      )}
     </ul>
   );
 }

@@ -9,6 +9,7 @@ import CheckboxInput from "../General/CheckboxInput";
 import NumberInput from "../General/NumberInput";
 import RangeInput from "../General/RangeInput";
 import SelectInput from "../General/SelectInput";
+import TextInput from "../General/TextInput";
 import URLInput from "../General/URLInput";
 import AddMoreConfigButton from "./AddMoreConfigButton";
 import GeneralConfigInput from "./GeneralConfigInput";
@@ -120,6 +121,16 @@ export default function VisualizationForm({
         min={0}
         error={data.errors?.height}
         required={true}
+      />
+      <TextInput
+        name="orderBy"
+        id={`${data.id}-orderBy`}
+        label="Sort by (descending is negative)"
+        onEdit={onEdit}
+        value={data.orderBy}
+        error={data.errors?.orderBy}
+        required={true}
+        pattern="/(-)?(.+)/"
       />
       <CheckboxInput
         name="shouldAppendNewData"

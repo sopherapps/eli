@@ -12,6 +12,7 @@ export default function TextInput({
   value,
   error,
   required,
+  pattern,
 }: {
   id: string;
   name: string;
@@ -20,6 +21,7 @@ export default function TextInput({
   value: string;
   error: string | undefined;
   required?: boolean;
+  pattern?: string;
 }) {
   return (
     <div className="eli-form-control-group d-flex">
@@ -37,6 +39,7 @@ export default function TextInput({
           onChange={onEdit}
           autoComplete="off"
           required={required}
+          pattern={pattern}
         />
         {error && <small className="form-error">{error}</small>}
       </div>
