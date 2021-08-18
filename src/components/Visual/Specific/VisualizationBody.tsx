@@ -2,9 +2,14 @@
  * Module containing the component that conditionaly renders a given visualization
  */
 import React, { useMemo, useState } from "react";
-import { useRef } from "react";
 import { useEffect } from "react";
 import { useLayoutEffect } from "react";
+import { extractErrors } from "../../../data/errors";
+import {
+  getCurrentDataFromStore,
+  removeStaleData,
+  updateStore,
+} from "../../../data/store";
 import { ClientJson, Visualization } from "../../../data/types";
 import GeneralVisual from "./GeneralVisual";
 
@@ -13,44 +18,38 @@ export default function VisualizationBody({
 }: {
   visualization: Visualization;
 }) {
-  const historicalData = useRef<{ [key: number]: ClientJson }>({});
-  const [clientData, setClientData] = useState<ClientJson>();
+  const [currentData, setCurrentData] = useState<ClientJson>();
   const [isConnected, setIsConnected] = useState(false);
-  const [shouldReconnect, setShouldReconnect] = useState(true);
   const [error, setError] = useState<Event>();
 
-  const allErrors = useMemo(() => {
-    const emptyValues = ["", undefined, null];
-    const mainErrors = Object.values(visualization.errors).filter(
-      (value) => !emptyValues.includes(value)
-    );
-    const configErrors = visualization.type.config
-      .map((value) => value.error)
-      .filter((value) => !emptyValues.includes(value));
+  const allErrors = useMemo(
+    () => extractErrors(visualization),
+    [visualization]
+  );
 
-    return [...mainErrors, ...configErrors];
-  }, [visualization.errors, visualization.type.config]);
+  const errorMessage = useMemo(() => {
+    if (!isConnected) {
+      return "Disconnected";
+    } else if (allErrors.length > 0) {
+      return allErrors.join(", ");
+    } else if (error) {
+      return JSON.stringify(error);
+    } else if (!currentData) {
+      return "No Data";
+    }
+    return "";
+  }, [allErrors, currentData, error, isConnected]);
 
   useEffect(() => {
     if (visualization.shouldAppendNewData) {
-      const cleanStaleData = () => {
-        const lastValidTimestamp =
-          new Date().getTime() - (visualization.ttlInSeconds || 3) * 1000; // default to 50 minutes
-
-        for (let key in historicalData.current) {
-          const timestamp = parseInt(key);
-
-          if (timestamp < lastValidTimestamp) {
-            delete historicalData.current[timestamp];
-          }
-        }
-      };
-
-      const intervalHandle = setInterval(cleanStaleData, 1000);
+      const intervalHandle = setInterval(
+        () => removeStaleData(visualization),
+        1000
+      );
 
       return () => clearInterval(intervalHandle);
     }
-  });
+  }, [visualization]);
 
   useLayoutEffect(() => {
     let connection = new WebSocket(visualization.dataSourceUrl);
@@ -60,63 +59,31 @@ export default function VisualizationBody({
       setError(undefined);
 
       const parsedData: ClientJson = JSON.parse(event.data);
-      if (visualization.shouldAppendNewData) {
-        historicalData.current[new Date().getTime()] = parsedData;
-        let obj: ClientJson = {
-          isMultiple: false,
-          meta: { separator: "", primaryFields: [] },
-          data: {},
-        };
+      updateStore(visualization, parsedData);
 
-        if (parsedData.isMultiple) {
-          // FIXME: Extract function from this
-          for (let key in historicalData.current) {
-            const message = historicalData.current[key];
-            obj = { ...obj, ...message, data: { ...obj.data } };
-
-            for (let dataset in message.data) {
-              obj.data[dataset] = {
-                ...(obj.data[dataset] || {}),
-                ...message.data[dataset],
-              };
-            }
-          }
-        } else {
-          // FIXME: Extract function from this
-          for (let key in historicalData.current) {
-            const message = historicalData.current[key];
-            obj = {
-              ...obj,
-              ...message,
-              data: { ...obj.data, ...message.data },
-            };
-          }
-        }
-
-        setClientData(obj);
-      } else {
-        setClientData(parsedData);
-      }
+      setCurrentData(
+        getCurrentDataFromStore(visualization, parsedData.isMultiple)
+      );
     };
 
     const onErrorHandler = (event: Event) => setError(event);
+
     const onOpenHandler = () => {
       setIsConnected(true);
       clearInterval(restartIntervalHandle);
     };
+
     const onCloseHandler = () => {
       setIsConnected(false);
-      if (shouldReconnect) {
-        clearInterval(restartIntervalHandle);
+      clearInterval(restartIntervalHandle);
 
-        restartIntervalHandle = window.setInterval(() => {
-          if (!connection || connection.readyState === WebSocket.CLOSED) {
-            console.log("attempting reconnection...");
-            connection = new WebSocket(visualization.dataSourceUrl);
-            initializeConnection(connection);
-          }
-        }, 60000);
-      }
+      restartIntervalHandle = window.setInterval(() => {
+        if (!connection || connection.readyState === WebSocket.CLOSED) {
+          console.log("attempting reconnection...");
+          connection = new WebSocket(visualization.dataSourceUrl);
+          initializeConnection(connection);
+        }
+      }, 60000);
     };
 
     const initializeConnection = (websocket: WebSocket) => {
@@ -129,48 +96,25 @@ export default function VisualizationBody({
     initializeConnection(connection);
 
     return () => {
-      setShouldReconnect(false);
+      connection.onclose = null;
       connection.close();
     };
-  }, [
-    shouldReconnect,
-    visualization.dataSourceUrl,
-    visualization.shouldAppendNewData,
-  ]);
+  }, [visualization]);
 
-  if (allErrors.length > 0) {
-    return (
-      <div>
-        <h6>Errors in configuration</h6>
-        {allErrors.map((value, index) => (
-          <p key={`${value}-${index}`} className="error">
-            {value}
-          </p>
-        ))}
-      </div>
-    );
-  }
-
-  if (!isConnected) {
-    return <div>Disconnected</div>;
-  }
-
-  if (error) {
-    return <div className="error">{JSON.stringify(error)}</div>;
-  }
-
-  if (clientData) {
-    return (
-      <GeneralVisual
-        data={clientData}
-        type={visualization.type.name}
-        config={visualization.type.config}
-        height={visualization.height}
-        width={visualization.width}
-        orderBy={visualization.orderBy}
-      />
-    );
-  }
-
-  return <div>No data</div>;
+  return (
+    <>
+      {errorMessage || !currentData ? (
+        <div className="error">{errorMessage}</div>
+      ) : (
+        <GeneralVisual
+          data={currentData}
+          type={visualization.type.name}
+          config={visualization.type.config}
+          height={visualization.height}
+          width={visualization.width}
+          orderBy={visualization.orderBy}
+        />
+      )}
+    </>
+  );
 }

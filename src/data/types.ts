@@ -89,3 +89,7 @@ export interface ClientJsonMeta {
 export interface ClientJsonDataset {
   [key: string]: { [key: string]: any };
 }
+
+export interface StoredData {
+  [key: number]: ClientJson;
+}
