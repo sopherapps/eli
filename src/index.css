@@ -79,6 +79,10 @@
   height: 80vh;
 }
 
+.full-width {
+  width: 100%;
+}
+
 /* logo */
 .logo {
   font-family: "Qwigley";
