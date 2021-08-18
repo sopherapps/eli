@@ -1,6 +1,9 @@
 /**
  * Module contains utility functions to sort by a given field where '-' is descending
  */
+import orderBy from "lodash.orderby";
+
+type Many<T> = T | Array<T>;
 
 /**
  * Sorts the data by the field provided, in ascending order by default, or descending order
@@ -10,23 +13,26 @@
  * @returns {[{key:string}: any], string}
  */
 export default function sortByField(
-  field: string,
+  sortString: string,
   data: { [key: string]: { [key: string]: any } }
 ): [{ [key: string]: any }[], string] {
-  const sortMatches = field.match(/(-)?(.+)/);
-  if (sortMatches) {
-    const sortMultiplier = sortMatches[1] ? -1 : 1;
-    const sortField = sortMatches[2];
-    return [
-      Object.values(data).sort(
-        (a, b) => sortMultiplier * (a[sortField] - b[sortField])
-      ),
-      "",
-    ];
+  const sortStringPatches = sortString.split(",");
+  const fields: string[] = [];
+  const orders: Many<boolean | "asc" | "desc"> = [];
+
+  for (let patch of sortStringPatches) {
+    const sortMatches = patch.match(/(-)?(.+)/);
+    if (sortMatches) {
+      const order = sortMatches[1] ? "desc" : "asc";
+      fields.push(sortMatches[2]);
+      orders.push(order);
+    } else {
+      return [
+        [],
+        `'${patch}' is not of right pattern [-]<field name> e.g. '-quantity of produce' or 'vol'`,
+      ];
+    }
   }
 
-  return [
-    Object.values(data),
-    `the sort by field '${field}' is not of the expected pattern (optional negative + words e.g. '-quantity of food')`,
-  ];
+  return [orderBy(data, fields, orders), ""];
 }

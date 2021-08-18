@@ -125,12 +125,12 @@ export default function VisualizationForm({
       <TextInput
         name="orderBy"
         id={`${data.id}-orderBy`}
-        label="Sort by (descending is negative)"
+        label="Sort by (comma separated. descending is negative)"
         onEdit={onEdit}
         value={data.orderBy}
         error={data.errors?.orderBy}
         required={true}
-        pattern="/(-)?(.+)/"
+        pattern="^-?[\w -]+(,-?[\w -]+)*$"
       />
       <CheckboxInput
         name="shouldAppendNewData"
