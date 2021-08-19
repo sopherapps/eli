@@ -113,6 +113,7 @@ export default function VisualizationBody({
           height={visualization.height}
           width={visualization.width}
           orderBy={visualization.orderBy}
+          datasetIds={visualization.type.datasetIds}
         />
       )}
     </>

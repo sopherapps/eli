@@ -48,7 +48,7 @@ export default function GeneralVisual({
   height: number;
   width: number;
   orderBy: string;
-  datasetIds?: string[];
+  datasetIds: string[] | undefined;
 }) {
   const configObject = useMemo(() => {
     const obj: { [key: string]: VisualizationProp } = {};
@@ -65,9 +65,10 @@ export default function GeneralVisual({
     // construct the dataset configs but using the old timestamped dataset ids
     for (let item of config) {
       const [datasetId, configName] = item.name.split(datasetConfigSeparator);
+
       if (datasetIds.includes(datasetId)) {
         if (configName === "name") {
-          datasetNameIdMap[datasetId] = configName;
+          datasetNameIdMap[datasetId] = item.value;
         } else {
           obj[datasetId] = obj[datasetId] || {};
           obj[datasetId][configName] = { ...item };

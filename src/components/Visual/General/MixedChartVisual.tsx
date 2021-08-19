@@ -78,7 +78,7 @@ export default function MixedChartVisual({
   const chartData = useMemo(() => {
     const labels: string[] = [];
     const datasets: MixedDatasetConfig[] = [];
-    const datasetNames = Object.keys(sortedRecords).sort();
+    const datasetNames = Object.keys(datasetConfigs).sort();
 
     for (let dataset of datasetNames) {
       const xField = datasetConfigs[dataset]?.xField.value;
@@ -105,7 +105,7 @@ export default function MixedChartVisual({
             : undefined;
       }
 
-      for (let record of sortedRecords[dataset]) {
+      for (let record of sortedRecords[dataset] || []) {
         const label = `${record[xField]}`;
         if (!labels.includes(label)) {
           labels.push(label);

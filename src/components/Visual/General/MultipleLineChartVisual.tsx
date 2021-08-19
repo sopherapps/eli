@@ -60,12 +60,17 @@ export default function MultipleLineChartVisual({
     responsive: true,
     maintainAspectRatio: false,
     animations: false,
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
   };
 
   const chartData = useMemo(() => {
     const labels: string[] = [];
     const datasets: LineDatasetConfig[] = [];
-    const datasetNames = Object.keys(sortedRecords).sort();
+    const datasetNames = Object.keys(datasetConfigs).sort();
 
     for (let dataset of datasetNames) {
       const datasetConfig: LineDatasetConfig = {
@@ -85,7 +90,7 @@ export default function MultipleLineChartVisual({
       const xField = datasetConfigs[dataset]?.xField.value;
       const yField = datasetConfigs[dataset]?.yField.value;
 
-      for (let record of sortedRecords[dataset]) {
+      for (let record of sortedRecords[dataset] || []) {
         const label = `${record[xField]}`;
         if (!labels.includes(label)) {
           labels.push(label);

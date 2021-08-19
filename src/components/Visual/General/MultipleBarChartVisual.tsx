@@ -75,7 +75,7 @@ export default function MultipleBarChartVisual({
   const chartData = useMemo(() => {
     const labels: string[] = [];
     const datasets: BarDatasetConfig[] = [];
-    const datasetNames = Object.keys(sortedRecords).sort();
+    const datasetNames = Object.keys(datasetConfigs).sort();
 
     for (let dataset of datasetNames) {
       const datasetConfig: BarDatasetConfig = {
@@ -87,7 +87,7 @@ export default function MultipleBarChartVisual({
       const xField = datasetConfigs[dataset]?.xField.value;
       const yField = datasetConfigs[dataset]?.yField.value;
 
-      for (let record of sortedRecords[dataset]) {
+      for (let record of sortedRecords[dataset] || []) {
         const label = `${record[xField]}`;
         if (!labels.includes(label)) {
           labels.push(label);
