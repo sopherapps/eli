@@ -83,7 +83,7 @@ export default function VisualizationBody({
           connection = new WebSocket(visualization.dataSourceUrl);
           initializeConnection(connection);
         }
-      }, 60000);
+      }, 2000);
     };
 
     const initializeConnection = (websocket: WebSocket) => {
