@@ -163,13 +163,15 @@ export default function VisualizationForm({
         error={data.errors?.type}
         required={true}
       />
-      {data.type?.addMoreConfigsButtons?.map((btnConfig, index) => (
-        <AddMoreConfigButton
-          btnConfig={btnConfig}
-          key={`${btnConfig.label}-${index}`}
-          updateConfigSet={addMoreConfigs}
-        />
-      ))}
+      {visualizationTypeMap[data.type.name].addMoreConfigsButtons?.map(
+        (btnConfig, index) => (
+          <AddMoreConfigButton
+            btnConfig={btnConfig}
+            key={`${btnConfig.label}-${index}`}
+            updateConfigSet={addMoreConfigs}
+          />
+        )
+      )}
       {data.type?.config.map((prop) => (
         <GeneralConfigInput
           key={`${data.id}-config-${prop.name}`}

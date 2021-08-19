@@ -13,13 +13,13 @@ export default function AddMoreConfigButton({
     configs: VisualizationProp[];
     id: string;
   }) => void;
-  btnConfig: AddMoreConfigsProp;
+  btnConfig?: AddMoreConfigsProp;
 }) {
   const addNewConfigs = useCallback(
     (e) => {
       e.preventDefault();
-      const output = btnConfig.datasetConfigGenerator(new Date());
-      updateConfigSet(output);
+      const output = btnConfig?.datasetConfigGenerator(new Date());
+      output && updateConfigSet(output);
     },
     [btnConfig, updateConfigSet]
   );
@@ -27,7 +27,7 @@ export default function AddMoreConfigButton({
   return (
     <div className="eli-form-control-group d-flex">
       <button className="btn form-btn" onClick={addNewConfigs}>
-        {btnConfig.label}
+        {btnConfig?.label || "Unexpected Error"}
       </button>
     </div>
   );
