@@ -5,6 +5,26 @@ import { useParams, Link } from "react-router-dom";
 import { UserAppConfigContext } from "../context";
 import editIconWhite from "../assets/images/edit_white.svg";
 import VisualizationUiCard from "../components/VisualizationUiCard";
+import { defaults } from "react-chartjs-2";
+import merge from "lodash.merge";
+
+merge(defaults, {
+  animation: false,
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      position: "right",
+      align: "start",
+      labels: {
+        font: {
+          size: 9,
+        },
+        boxWidth: 20,
+      },
+    },
+  },
+});
 
 export default function TabPage() {
   // @ts-ignore

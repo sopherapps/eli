@@ -40,9 +40,6 @@ export default function BarChartVisual({
   const chartOptions = useMemo(
     () => ({
       indexAxis: configObject.orientation.value === "horizontal" ? "y" : "x",
-      responsive: true,
-      maintainAspectRatio: false,
-      animations: false,
     }),
     [configObject.orientation.value]
   );

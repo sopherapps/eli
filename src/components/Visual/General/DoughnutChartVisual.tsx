@@ -36,11 +36,7 @@ export default function DoughtnutChartVisual({
     [data.isMultiple, sortError]
   );
 
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    animations: false,
-  };
+  const chartOptions = {};
 
   const chartData = useMemo(() => {
     const labels: string[] = [];

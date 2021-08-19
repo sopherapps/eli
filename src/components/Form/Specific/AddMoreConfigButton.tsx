@@ -25,7 +25,7 @@ export default function AddMoreConfigButton({
   );
 
   return (
-    <div className="eli-form-control-group d-flex">
+    <div className="eli-form-control-group d-flex justify-end">
       <button className="btn form-btn" onClick={addNewConfigs}>
         {btnConfig?.label || "Unexpected Error"}
       </button>

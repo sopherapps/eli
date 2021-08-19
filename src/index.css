@@ -43,6 +43,10 @@
   justify-content: center;
 }
 
+.justify-end {
+  justify-content: flex-end;
+}
+
 .align-center {
   align-items: center;
 }
@@ -173,6 +177,7 @@
   outline: none;
   vertical-align: middle;
   background-color: inherit;
+  text-decoration: none;
 }
 
 .btn:hover,
@@ -219,6 +224,7 @@
 
 .cta p {
   font-size: 1.05rem;
+  margin-bottom: 1.5rem;
 }
 
 /* Page banner */
@@ -308,6 +314,8 @@
 .dark .form-btn {
   color: #dbd8d3;
   background-color: #202124;
+  padding: 0.5rem 2rem;
+  border-radius: 2rem;
 }
 
 .dark .form-btn:hover {

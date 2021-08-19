@@ -66,7 +66,7 @@ export default function ScatterVisual({
           data={chartData}
           width={(width / 100) * windowWidth}
           height={(height / 100) * windowHeight}
-          options={{ maintainAspectRatio: false, animations: false }}
+          options={{}}
         />
       )}
     </>

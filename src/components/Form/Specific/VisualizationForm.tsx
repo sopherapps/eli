@@ -163,6 +163,14 @@ export default function VisualizationForm({
         error={data.errors?.type}
         required={true}
       />
+      {data.type?.config.map((prop) => (
+        <GeneralConfigInput
+          key={`${data.id}-config-${prop.name}`}
+          config={prop}
+          id={`${data.id}-config-${prop.name}`}
+          onEdit={updateConfigFields}
+        />
+      ))}
       {visualizationTypeMap[data.type.name].addMoreConfigsButtons?.map(
         (btnConfig, index) => (
           <AddMoreConfigButton
@@ -172,14 +180,6 @@ export default function VisualizationForm({
           />
         )
       )}
-      {data.type?.config.map((prop) => (
-        <GeneralConfigInput
-          key={`${data.id}-config-${prop.name}`}
-          config={prop}
-          id={`${data.id}-config-${prop.name}`}
-          onEdit={updateConfigFields}
-        />
-      ))}
     </>
   );
 }

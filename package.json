@@ -11,6 +11,7 @@
     "@types/react": "^17.0.15",
     "@types/react-dom": "^17.0.9",
     "chart.js": "^3.5.0",
+    "lodash.merge": "^4.6.2",
     "lodash.orderby": "^4.6.0",
     "react": "^17.0.2",
     "react-chartjs-2": "^3.0.4",
@@ -46,6 +47,7 @@
   },
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.6",
+    "@types/lodash.merge": "^4.6.6",
     "@types/lodash.orderby": "^4.6.6",
     "@types/react-router-dom": "^5.1.8",
     "@types/react-test-renderer": "^17.0.1",

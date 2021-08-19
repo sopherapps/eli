@@ -57,9 +57,6 @@ export default function MultipleBarChartVisual({
   const chartOptions = useMemo(
     () => ({
       indexAxis: configObject.orientation.value === "horizontal" ? "y" : "x",
-      responsive: true,
-      maintainAspectRatio: false,
-      animations: false,
       scales: {
         x: {
           stacked: configObject.chartStyle.value === "stacked",

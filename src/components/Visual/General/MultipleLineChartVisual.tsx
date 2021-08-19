@@ -57,9 +57,6 @@ export default function MultipleLineChartVisual({
   }, [data.data, data.isMultiple, sortBy]);
 
   const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    animations: false,
     scales: {
       y: {
         beginAtZero: true,
