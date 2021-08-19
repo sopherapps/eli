@@ -218,11 +218,11 @@ Note: _Each of these steps involves writing some tests of some kind_
 - [x] Add ability to display plain text visualization from data from websocket
 - [x] Add ability to display table visualizations from data from websocket
 - [x] Add style to the visualizations
-- [ ] Add ability to display charts (piecharts, doughnut, bar, stacked bar, line, scatter, mixed, multiline)
+- [x] Add ability to display charts (piecharts, doughnut, bar, stacked bar, line, scatter, mixed, multiline)
 - [ ] \*Add ability to delete the entire store via a button/menu click
 - [ ] \*Add ability to download config from localstorage
 - [ ] \*Add ability to load config from a file via an HTML file input (to allow sharing of configs)
-- [ ] Deploy to firebase, netlify or vercel
+- [x] Deploy to firebase, netlify or vercel. [Deployed it to Digital ocean at [eli.sopherapps.com](https://eli.sopherapps.com)]
 - [ ] List the app on SopherApps
 - [ ] Write about the app on SopherApps blog
 - [ ] Make it a downloadable electronjs app or nwjs or any given lighter option, or a PWA
