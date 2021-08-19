@@ -120,7 +120,7 @@ Do note that it can technically connect to any websocket URL as long as the data
   npm start
   ```
 
-## How to Deploy
+## How to Deploy on Ubuntu server
 
 - Clone the repo and enter its root directory
 
@@ -131,9 +131,42 @@ Do note that it can technically connect to any websocket URL as long as the data
 
 - Ensure you have node > 10 installed. If not download it from [here](https://nodejs.org/)
 
-- You will need to enable client side routing for firebase
+- Make the [deploy.sh](./deploy.sh) script executable
 
-- TODO
+  ```sh
+  sudo chmod +x deploy.sh
+  ```
+
+- Ensure you already have the server set up, and you know the `user`, the `ip` address and the `folder`
+  where the app is to go. Make sure you are using ssh certificates. Make sure that folder is already created.
+  You can create a new ubuntu server droplet off my [referral link](https://m.do.co/c/c70b5b4f78ba).
+
+- Run the deploy script
+
+```sh
+./deploy.sh -u <server user> -i <the server ip> -f <folder path relative to user\'s root>
+```
+
+- Ssh into your server and enter the folder where the app is to be located.
+
+```sh
+ssh user@ip_address
+```
+
+- Install the `unzip` package
+
+```sh
+sudo apt install unzip
+```
+
+- Unzip the `eli.zip` file there and then delete it.
+
+```sh
+unzip eli.zip && rm eli.zip
+```
+
+- Setup nginx. You can follow the [Digital ocean instructions](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04).
+- Create a virtualhost to serve the single page application. You can follow these [instructions](https://www.honlsoft.com/blog/2019-05-14-nginx-spa).
 
 ## Design
 
