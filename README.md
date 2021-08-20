@@ -262,3 +262,8 @@ Note: _Each of these steps involves writing some tests of some kind_
 - [ ] Remove links to external css or font. Download them and include them in the artefact.
 - [ ] \*Reduce the interval of the cronjsobs in restie (and in sopherapps_utils to millisecond level)
 - [ ] \*Ask if the labels of charts should be sorted, in case the data comes unsorted.
+
+### Testing
+
+- Testing requires the use of [mock-socket](https://www.npmjs.com/package/mock-socket) to mock the websocket connections.
+- [React Testing Library](https://testing-library.com/), plus its [jest-dom extension](https://github.com/testing-library/jest-dom) and [user-event extension](https://github.com/testing-library/user-event) are very instrumental in the integration tests of the pages. It turns out that the [DOM testing library](https://testing-library.com/docs/dom-testing-library/intro) has many wrappers for major JavaScript frameworks including [Vuejs](https://testing-library.com/docs/vue-testing-library/intro)
