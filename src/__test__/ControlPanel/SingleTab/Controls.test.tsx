@@ -5,3 +5,4 @@ import App from "../../../App";
 test("Upward arrow on each visualization card should move the card upwards, even in its tab", async () => {});
 test("Downward arrow on each visualization card should move the card downwards, even in its tab", async () => {});
 test("x icon on each visualization card should remove the visualization, even in its tab", async () => {});
+test("should return you to the control panel when the back arrow button is clicked", () => {});
