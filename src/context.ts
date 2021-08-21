@@ -1,9 +1,6 @@
 import React from "react";
+import { tabsKey, tabOrderKey } from "./config";
 import { UserAppConfig, Tab } from "./data/types";
-
-const localStorageAppConfigKey = "eli:AppConfig";
-const tabsKey = `${localStorageAppConfigKey}:tabs`;
-const tabOrderKey = `${localStorageAppConfigKey}:tabOrder`;
 
 export enum Theme {
   Dark,
