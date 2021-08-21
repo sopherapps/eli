@@ -3,7 +3,6 @@
  */
 import { render, screen } from "@testing-library/react";
 import App from "../App";
-import { tabOrderKey, tabsKey } from "../config";
 import { addMockTabs } from "../utils/prefill-storage";
 
 test("App should render home screen by default", async () => {
