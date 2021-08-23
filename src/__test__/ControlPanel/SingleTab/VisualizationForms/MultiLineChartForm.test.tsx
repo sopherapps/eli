@@ -145,6 +145,31 @@ test("should add new set of config inputs when 'add dataset' button is clicked",
   }
 });
 
+test("should ask for name of dataset or show error if not provided", async () => {
+  const invalidInputs = [""];
+  const validInputs = ["foo bar-yeah_8"];
+  const addDatasetButton = screen.getByText(/add dataset/i);
+  userEvent.click(addDatasetButton);
+
+  const input = screen.getByLabelText(/name/i);
+
+  expect(input).toBeInTheDocument();
+  expect(input).toBeRequired();
+  expect(input).toHaveAttribute("type", "text");
+
+  for (let invalidInput of invalidInputs) {
+    userEvent.clear(input);
+    userEvent.type(input, invalidInput);
+    expect(input).toBeInvalid();
+  }
+
+  for (let validInput of validInputs) {
+    userEvent.clear(input);
+    userEvent.type(input, validInput);
+    expect(input).toBeValid();
+  }
+});
+
 test("should ask for label field or show error if not provided", async () => {
   const invalidInputs = [""];
   const validInputs = ["foo bar-yeah_8"];
