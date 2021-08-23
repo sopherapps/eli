@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "../../../../App";
 import {
@@ -161,7 +161,39 @@ test("should ask for label or show error if not provided", async () => {
   }
 });
 
-test("should ask for color or show error if not provided", async () => {});
+test("should ask for color or show error if not provided", async () => {
+  const colorsViaText = ["#674646", "#ffffff", "#000000"];
+  const colorViaColorInput = ["#cdf675", "#cccccc", "#555555"];
+  const colorTextInput = screen.getByLabelText(/color/i);
+  expect(colorTextInput).toBeInTheDocument();
+  // @ts-ignore
+  expect(colorTextInput.required).toBe(true);
+  expect(colorTextInput).toHaveAttribute("type", "text");
+
+  const colorInput = colorTextInput.nextSibling;
+  // @ts-ignore
+  expect(colorInput.required).toBe(true);
+  expect(colorInput).toHaveAttribute("type", "color");
+
+  for (let color of colorsViaText) {
+    userEvent.clear(colorTextInput);
+    userEvent.type(colorTextInput, color);
+    const changedColorTextInput = await screen.findByLabelText(/color/i);
+    // @ts-ignore
+    expect(changedColorTextInput.value).toBe(color);
+    // @ts-ignore
+    expect(changedColorTextInput.nextSibling.value).toBe(color);
+  }
+
+  for (let color of colorViaColorInput) {
+    fireEvent.change(colorTextInput, { target: { value: color } });
+    const changedColorTextInput = await screen.findByLabelText(/color/i);
+    // @ts-ignore
+    expect(changedColorTextInput.value).toBe(color);
+    // @ts-ignore
+    expect(changedColorTextInput.nextSibling.value).toBe(color);
+  }
+});
 
 test("should ask for x Axis field or show error if not provided", async () => {});
 
