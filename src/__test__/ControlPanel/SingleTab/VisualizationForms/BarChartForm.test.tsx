@@ -8,18 +8,21 @@ import {
   createVisualizations,
 } from "../../../../utils/test-utils";
 
-test("should ask for Source Url or show error if not provided", async () => {
+beforeEach(async () => {
   const visualName = "first";
-  const invalidUrls = ["http://google.com", "https://google.com", "random", ""];
-  const validUrls = ["ws://hi", "wss://yeah"];
   render(<App />);
   await goToControlPanel();
   await createNewTab("first tab");
   goToTabEditScreen(0);
   await createVisualizations([visualName]);
+});
 
+test("should ask for Source Url or show error if not provided", async () => {
+  const invalidUrls = ["http://google.com", "https://google.com", "random", ""];
+  const validUrls = ["ws://hi", "wss://yeah"];
   const dataSourceUrlInput = screen.getByLabelText(/Data Source URL/i);
   expect(dataSourceUrlInput).toBeInTheDocument();
+  expect(dataSourceUrlInput).toHaveAttribute("type", "url");
 
   for (let invalidUrl of invalidUrls) {
     userEvent.clear(dataSourceUrlInput);
@@ -42,7 +45,14 @@ test("should ask for Source Url or show error if not provided", async () => {
   }
 });
 
-test("should ask for height or show error if not provided", async () => {});
+test("should ask for height or show error if not provided", async () => {
+  const heightInput = screen.getByLabelText(/Height \(% of screen\)/i);
+  expect(heightInput).toBeInTheDocument();
+  expect(heightInput).toHaveAttribute("required", "");
+  expect(heightInput).toHaveAttribute("type", "range");
+  expect(heightInput).toHaveAttribute("min", "0");
+  expect(heightInput).toHaveAttribute("max", "100");
+});
 
 test("should ask for width or show error if not provided", async () => {});
 
