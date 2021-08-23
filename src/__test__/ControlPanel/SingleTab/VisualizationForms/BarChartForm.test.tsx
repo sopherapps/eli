@@ -195,7 +195,33 @@ test("should ask for color or show error if not provided", async () => {
   }
 });
 
-test("should ask for x Axis field or show error if not provided", async () => {});
+test("should ask for x Axis field or show error if not provided", async () => {
+  const invalidInputs = [""];
+  const validInputs = ["foo bar-yeah_8"];
+  const inputElement = screen.getByLabelText(/x-axis field/i);
+  expect(inputElement).toBeInTheDocument();
+  // @ts-ignore
+  expect(inputElement.required).toBe(true);
+  expect(inputElement).toHaveAttribute("type", "text");
+
+  for (let invalidInput of invalidInputs) {
+    userEvent.clear(inputElement);
+    userEvent.type(inputElement, invalidInput);
+    // @ts-ignore
+    expect(inputElement.checkValidity()).toBe(false);
+    // @ts-ignore
+    expect(inputElement.validationMessage).toBe("Constraints not satisfied");
+  }
+
+  for (let validInput of validInputs) {
+    userEvent.clear(inputElement);
+    userEvent.type(inputElement, validInput);
+    // @ts-ignore
+    expect(inputElement.checkValidity()).toBe(true);
+    // @ts-ignore
+    expect(inputElement.validationMessage).toBe("");
+  }
+});
 
 test("should ask for y Axis field or show error if not provided", async () => {});
 
