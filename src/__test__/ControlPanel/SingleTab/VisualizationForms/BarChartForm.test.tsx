@@ -45,7 +45,7 @@ test("should ask for Source Url or show error if not provided", async () => {
   }
 });
 
-test("should ask for height or show error if not provided", async () => {
+test("should ask for height", async () => {
   const heightInput = screen.getByLabelText(/Height \(% of screen\)/i);
   expect(heightInput).toBeInTheDocument();
   expect(heightInput).toHaveAttribute("required", "");
@@ -54,7 +54,14 @@ test("should ask for height or show error if not provided", async () => {
   expect(heightInput).toHaveAttribute("max", "100");
 });
 
-test("should ask for width or show error if not provided", async () => {});
+test("should ask for width", async () => {
+  const widthInput = screen.getByLabelText(/Width \(% of screen\)/i);
+  expect(widthInput).toBeInTheDocument();
+  expect(widthInput).toHaveAttribute("required", "");
+  expect(widthInput).toHaveAttribute("type", "range");
+  expect(widthInput).toHaveAttribute("min", "0");
+  expect(widthInput).toHaveAttribute("max", "100");
+});
 
 test("should ask for orderBy fields or show error if not provided", async () => {});
 
