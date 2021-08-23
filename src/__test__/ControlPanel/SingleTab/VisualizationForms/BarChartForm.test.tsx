@@ -15,6 +15,8 @@ beforeEach(async () => {
   await createNewTab("first tab");
   goToTabEditScreen(0);
   await createVisualizations([visualName]);
+  const visualizationTypeSelect = screen.getByLabelText(/Visualization Type/i);
+  userEvent.selectOptions(visualizationTypeSelect, ["bar-chart"]);
 });
 
 test("should ask for Source Url or show error if not provided", async () => {
@@ -63,7 +65,31 @@ test("should ask for width", async () => {
   expect(widthInput).toHaveAttribute("max", "100");
 });
 
-test("should ask for orderBy fields or show error if not provided", async () => {});
+test("should ask for sortBy fields or show error if not provided", async () => {
+  const invalidInputs = [",,", "", "foo,"];
+  const validInputs = ["foo", "foo,-bar,care for you,hallelujah,-woo-hoo good"];
+  const sortByInput = screen.getByLabelText(/Sort by/i);
+  expect(sortByInput).toBeInTheDocument();
+  expect(sortByInput).toHaveAttribute("type", "text");
+
+  for (let invalidInput of invalidInputs) {
+    userEvent.clear(sortByInput);
+    userEvent.type(sortByInput, invalidInput);
+    // @ts-ignore
+    expect(sortByInput.checkValidity()).toBe(false);
+    // @ts-ignore
+    expect(sortByInput.validationMessage).toBe("Constraints not satisfied");
+  }
+
+  for (let validInput of validInputs) {
+    userEvent.clear(sortByInput);
+    userEvent.type(sortByInput, validInput);
+    // @ts-ignore
+    expect(sortByInput.checkValidity()).toBe(true);
+    // @ts-ignore
+    expect(sortByInput.validationMessage).toBe("");
+  }
+});
 
 test("should ask for whether to append data, defaulting to true", async () => {});
 
