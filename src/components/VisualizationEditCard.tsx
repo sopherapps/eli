@@ -72,6 +72,7 @@ export default function VisualizationEditCard({
           className="editable-text"
           spellCheck={true}
           onChange={memoizedOnEdit}
+          data-testid="title"
           data-name="title"
           value={visualization.title || ""}
         />

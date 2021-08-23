@@ -5,6 +5,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "../../App";
+import { goToControlPanel, addTabsTopToBottom } from "../../utils/test-utils";
 
 test("Home page CTA button should redirect to control panel multiple tabs screen", async () => {
   render(<App />);
@@ -70,27 +71,3 @@ test("edit icon on each tab card should open the single tab edit screen for tab"
     ).toBeInTheDocument();
   }
 });
-
-/**
- * Utility to go to the control panel after rendering app
- */
-async function goToControlPanel() {
-  const controlPanelMenuItem = screen.getByAltText(/^control panel$/i);
-  userEvent.click(controlPanelMenuItem);
-  await screen.findByText(/TABS/i);
-}
-
-/**
- * Adds tabs to the app on the multitab control panel page
- * @param tabs - list of tabs to add in order from top to bottom
- */
-async function addTabsTopToBottom(tabs: string[]) {
-  const plusButton = screen.getByAltText(/Create New Tab/i);
-
-  for (let tabName of tabs.slice().reverse()) {
-    userEvent.click(plusButton);
-    const newTabInput = await screen.findByDisplayValue(/New Tab/i);
-    userEvent.clear(newTabInput);
-    userEvent.type(newTabInput, tabName);
-  }
-}
