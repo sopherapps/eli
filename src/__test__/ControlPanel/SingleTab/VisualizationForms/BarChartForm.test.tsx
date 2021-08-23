@@ -1,8 +1,46 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "../../../../App";
+import {
+  goToControlPanel,
+  createNewTab,
+  goToTabEditScreen,
+  createVisualizations,
+} from "../../../../utils/test-utils";
 
-test("should ask for Source Url or show error if not provided", async () => {});
+test("should ask for Source Url or show error if not provided", async () => {
+  const visualName = "first";
+  const invalidUrls = ["http://google.com", "https://google.com", "random", ""];
+  const validUrls = ["ws://hi", "wss://yeah"];
+  render(<App />);
+  await goToControlPanel();
+  await createNewTab("first tab");
+  goToTabEditScreen(0);
+  await createVisualizations([visualName]);
+
+  const dataSourceUrlInput = screen.getByLabelText(/Data Source URL/i);
+  expect(dataSourceUrlInput).toBeInTheDocument();
+
+  for (let invalidUrl of invalidUrls) {
+    userEvent.clear(dataSourceUrlInput);
+    userEvent.type(dataSourceUrlInput, invalidUrl);
+    // @ts-ignore
+    expect(dataSourceUrlInput.checkValidity()).toBe(false);
+    // @ts-ignore
+    expect(dataSourceUrlInput.validationMessage).toBe(
+      "Constraints not satisfied"
+    );
+  }
+
+  for (let validUrl of validUrls) {
+    userEvent.clear(dataSourceUrlInput);
+    userEvent.type(dataSourceUrlInput, validUrl);
+    // @ts-ignore
+    expect(dataSourceUrlInput.checkValidity()).toBe(true);
+    // @ts-ignore
+    expect(dataSourceUrlInput.validationMessage).toBe("");
+  }
+});
 
 test("should ask for height or show error if not provided", async () => {});
 
