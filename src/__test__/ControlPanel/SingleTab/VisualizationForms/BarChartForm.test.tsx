@@ -229,4 +229,16 @@ test("should ask for chart style, defaulting to 'normal'", async () => {
   expect(changedChartStyleInput).toHaveDisplayValue(newValue);
 });
 
-test("should ask for orientation, defaulting to 'vertical'", async () => {});
+test("should ask for orientation, defaulting to 'vertical'", async () => {
+  const labelPattern = /orientation/i;
+  const newValue = "horizontal";
+  const input = screen.getByLabelText(labelPattern);
+  expect(input).toBeInTheDocument();
+  expect(input).not.toBeRequired();
+  expect(input).toHaveDisplayValue("vertical");
+
+  userEvent.selectOptions(input, [newValue]);
+  const changedinput = await screen.findByLabelText(labelPattern);
+
+  expect(changedinput).toHaveDisplayValue(newValue);
+});

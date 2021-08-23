@@ -114,7 +114,7 @@ export const BarChartType: VisualizationType = {
       inputType: HTMLInputType.Select,
       options: {
         options: ["horizontal", "vertical"],
-        default: "horizontal",
+        default: "vertical",
       },
     },
   ],
@@ -139,7 +139,7 @@ export const MultipleBarChartType: VisualizationType = {
       inputType: HTMLInputType.Select,
       options: {
         options: ["horizontal", "vertical"],
-        default: "horizontal",
+        default: "vertical",
       },
     },
   ],
@@ -325,7 +325,7 @@ export const MixedChartType: VisualizationType = {
       inputType: HTMLInputType.Select,
       options: {
         options: ["horizontal", "vertical"],
-        default: "horizontal",
+        default: "vertical",
       },
     },
   ],
