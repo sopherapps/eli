@@ -20,7 +20,7 @@ beforeEach(async () => {
   goToTabEditScreen(0);
   await createVisualizations([visualName]);
   const visualizationTypeSelect = screen.getByLabelText(/Visualization Type/i);
-  userEvent.selectOptions(visualizationTypeSelect, ["ordered-list"]);
+  userEvent.selectOptions(visualizationTypeSelect, ["unordered-list"]);
 });
 
 test("should ask for Source Url or show error if not provided", async () => {
@@ -145,7 +145,7 @@ test("should ask for value field or show error if not provided", async () => {
   }
 });
 
-test("should ask for style, defaulting to undefined", async () => {
+test("should ask for style", async () => {
   const labelPattern = /style/i;
   const newValue = "upper-roman";
   const styleInput = screen.getByLabelText(labelPattern);
