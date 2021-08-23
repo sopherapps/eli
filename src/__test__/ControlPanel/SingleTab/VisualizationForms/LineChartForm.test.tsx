@@ -233,7 +233,7 @@ test("should ask for chart style, defaulting to 'normal'", async () => {
   expect(changedChartStyleInput).toHaveDisplayValue(newValue);
 });
 
-test("should ask for color of area under the line, defaulting to 'vertical'", async () => {
+test("should ask for color of area under the line", async () => {
   const labelPattern = /color of area under line/i;
   const colorsViaText = ["#674646", "#ffffff", "#000000"];
   const colorViaColorInput = ["#cdf675", "#cccccc", "#555555"];
