@@ -113,7 +113,25 @@ test("should ask for whether to append data, defaulting to on", async () => {
 });
 
 // FIXME: I will need to test that the data is actually clipped after the given lifespan
-test("should ask for lifespan of data if append data is true, defaulting to 3600", async () => {});
+test("should ask for lifespan of data only if append data is true", async () => {
+  const lifeSpanLabelPattern = /Lifespan of each Datapoint in seconds/i;
+  const lifeSpanInput = screen.getByLabelText(lifeSpanLabelPattern);
+  expect(lifeSpanInput).toBeInTheDocument();
+  // @ts-ignore
+  expect(lifeSpanInput.required).toBe(true);
+  expect(lifeSpanInput).toHaveAttribute("type", "number");
+  expect(lifeSpanInput).toHaveAttribute("min", "1");
+
+  const appendDataLabelPattern = /Append new data to old data/i;
+  const appendDataInput = screen.getByLabelText(appendDataLabelPattern);
+  userEvent.click(appendDataInput);
+  const clickedAppendDataInput = await screen.findByLabelText(
+    appendDataLabelPattern
+  );
+  // @ts-ignore
+  expect(clickedAppendDataInput.checked).toBe(false);
+  expect(screen.queryByLabelText(lifeSpanLabelPattern)).toBeNull();
+});
 
 test("should ask for label or show error if not provided", async () => {});
 
