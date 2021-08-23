@@ -24,6 +24,8 @@ test("should ask for Source Url or show error if not provided", async () => {
   const validUrls = ["ws://hi", "wss://yeah"];
   const dataSourceUrlInput = screen.getByLabelText(/Data Source URL/i);
   expect(dataSourceUrlInput).toBeInTheDocument();
+  // @ts-ignore
+  expect(dataSourceUrlInput.required).toBe(true);
   expect(dataSourceUrlInput).toHaveAttribute("type", "url");
 
   for (let invalidUrl of invalidUrls) {
@@ -50,7 +52,8 @@ test("should ask for Source Url or show error if not provided", async () => {
 test("should ask for height", async () => {
   const heightInput = screen.getByLabelText(/Height \(% of screen\)/i);
   expect(heightInput).toBeInTheDocument();
-  expect(heightInput).toHaveAttribute("required", "");
+  // @ts-ignore
+  expect(heightInput.required).toBe(true);
   expect(heightInput).toHaveAttribute("type", "range");
   expect(heightInput).toHaveAttribute("min", "0");
   expect(heightInput).toHaveAttribute("max", "100");
@@ -59,7 +62,8 @@ test("should ask for height", async () => {
 test("should ask for width", async () => {
   const widthInput = screen.getByLabelText(/Width \(% of screen\)/i);
   expect(widthInput).toBeInTheDocument();
-  expect(widthInput).toHaveAttribute("required", "");
+  // @ts-ignore
+  expect(widthInput.required).toBe(true);
   expect(widthInput).toHaveAttribute("type", "range");
   expect(widthInput).toHaveAttribute("min", "0");
   expect(widthInput).toHaveAttribute("max", "100");
@@ -70,6 +74,8 @@ test("should ask for sortBy fields or show error if not provided", async () => {
   const validInputs = ["foo", "foo,-bar,care for you,hallelujah,-woo-hoo good"];
   const sortByInput = screen.getByLabelText(/Sort by/i);
   expect(sortByInput).toBeInTheDocument();
+  // @ts-ignore
+  expect(sortByInput.required).toBe(true);
   expect(sortByInput).toHaveAttribute("type", "text");
 
   for (let invalidInput of invalidInputs) {
@@ -91,7 +97,20 @@ test("should ask for sortBy fields or show error if not provided", async () => {
   }
 });
 
-test("should ask for whether to append data, defaulting to true", async () => {});
+test("should ask for whether to append data, defaulting to on", async () => {
+  const labelPattern = /Append new data to old data/i;
+  const appendDataInput = screen.getByLabelText(labelPattern);
+  expect(appendDataInput).toBeInTheDocument();
+  // @ts-ignore
+  expect(appendDataInput.required).toBe(true);
+  expect(appendDataInput).toHaveAttribute("type", "checkbox");
+  // @ts-ignore
+  expect(appendDataInput.checked).toBe(true);
+  userEvent.click(appendDataInput);
+  const clickedAppendDataInput = await screen.findByLabelText(labelPattern);
+  // @ts-ignore
+  expect(clickedAppendDataInput.checked).toBe(false);
+});
 
 // FIXME: I will need to test that the data is actually clipped after the given lifespan
 test("should ask for lifespan of data if append data is true, defaulting to 3600", async () => {});
