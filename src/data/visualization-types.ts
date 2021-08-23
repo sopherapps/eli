@@ -27,7 +27,9 @@ export const TableType: VisualizationType = {
       label: "column order (comma separated)",
       inputType: HTMLInputType.Text,
       required: true,
-      options: {},
+      options: {
+        pattern: "^[\\w -]+(,[\\w -]+)*$",
+      },
     },
   ],
 };

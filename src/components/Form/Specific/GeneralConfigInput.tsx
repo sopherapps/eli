@@ -152,6 +152,7 @@ export default function GeneralConfigInput({
           value={config.value ?? config.options?.default}
           error={config.error}
           required={config.required}
+          pattern={config.options?.pattern}
         />
       );
 
