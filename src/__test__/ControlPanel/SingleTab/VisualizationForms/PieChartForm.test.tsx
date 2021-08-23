@@ -1,5 +1,5 @@
 /**
- * Module to test the piechart
+ * Module to test the piechart form
  */
 
 import { render, screen } from "@testing-library/react";
