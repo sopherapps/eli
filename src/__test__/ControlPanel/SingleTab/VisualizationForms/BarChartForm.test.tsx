@@ -24,34 +24,26 @@ test("should ask for Source Url or show error if not provided", async () => {
   const validUrls = ["ws://hi", "wss://yeah"];
   const dataSourceUrlInput = screen.getByLabelText(/Data Source URL/i);
   expect(dataSourceUrlInput).toBeInTheDocument();
-  // @ts-ignore
-  expect(dataSourceUrlInput.required).toBe(true);
+  expect(dataSourceUrlInput).toBeRequired();
   expect(dataSourceUrlInput).toHaveAttribute("type", "url");
 
   for (let invalidUrl of invalidUrls) {
     userEvent.clear(dataSourceUrlInput);
     userEvent.type(dataSourceUrlInput, invalidUrl);
-    // @ts-ignore
-    expect(dataSourceUrlInput.checkValidity()).toBe(false);
-    // @ts-ignore
-    expect(dataSourceUrlInput.validationMessage).toBe(
-      "Constraints not satisfied"
-    );
+    expect(dataSourceUrlInput).toBeInvalid();
   }
 
   for (let validUrl of validUrls) {
     userEvent.clear(dataSourceUrlInput);
     userEvent.type(dataSourceUrlInput, validUrl);
-    // @ts-ignore
-    expect(dataSourceUrlInput.checkValidity()).toBe(true);
-    // @ts-ignore
-    expect(dataSourceUrlInput.validationMessage).toBe("");
+    expect(dataSourceUrlInput).toBeValid();
   }
 });
 
 test("should ask for height", async () => {
   const heightInput = screen.getByLabelText(/Height \(% of screen\)/i);
   expect(heightInput).toBeInTheDocument();
+  // toBeRequired does not seem to work well with range inputs
   // @ts-ignore
   expect(heightInput.required).toBe(true);
   expect(heightInput).toHaveAttribute("type", "range");
@@ -62,6 +54,7 @@ test("should ask for height", async () => {
 test("should ask for width", async () => {
   const widthInput = screen.getByLabelText(/Width \(% of screen\)/i);
   expect(widthInput).toBeInTheDocument();
+  // toBeRequired does not seem to work well with range inputs
   // @ts-ignore
   expect(widthInput.required).toBe(true);
   expect(widthInput).toHaveAttribute("type", "range");
@@ -74,26 +67,19 @@ test("should ask for sortBy fields or show error if not provided", async () => {
   const validInputs = ["foo", "foo,-bar,care for you,hallelujah,-woo-hoo good"];
   const sortByInput = screen.getByLabelText(/Sort by/i);
   expect(sortByInput).toBeInTheDocument();
-  // @ts-ignore
-  expect(sortByInput.required).toBe(true);
+  expect(sortByInput).toBeRequired();
   expect(sortByInput).toHaveAttribute("type", "text");
 
   for (let invalidInput of invalidInputs) {
     userEvent.clear(sortByInput);
     userEvent.type(sortByInput, invalidInput);
-    // @ts-ignore
-    expect(sortByInput.checkValidity()).toBe(false);
-    // @ts-ignore
-    expect(sortByInput.validationMessage).toBe("Constraints not satisfied");
+    expect(sortByInput).toBeInvalid();
   }
 
   for (let validInput of validInputs) {
     userEvent.clear(sortByInput);
     userEvent.type(sortByInput, validInput);
-    // @ts-ignore
-    expect(sortByInput.checkValidity()).toBe(true);
-    // @ts-ignore
-    expect(sortByInput.validationMessage).toBe("");
+    expect(sortByInput).toBeValid();
   }
 });
 
@@ -101,35 +87,35 @@ test("should ask for whether to append data, defaulting to on", async () => {
   const labelPattern = /Append new data to old data/i;
   const appendDataInput = screen.getByLabelText(labelPattern);
   expect(appendDataInput).toBeInTheDocument();
-  // @ts-ignore
-  expect(appendDataInput.required).toBe(true);
+
+  expect(appendDataInput).toBeRequired();
   expect(appendDataInput).toHaveAttribute("type", "checkbox");
-  // @ts-ignore
-  expect(appendDataInput.checked).toBe(true);
+  expect(appendDataInput).toBeChecked();
+
   userEvent.click(appendDataInput);
   const clickedAppendDataInput = await screen.findByLabelText(labelPattern);
-  // @ts-ignore
-  expect(clickedAppendDataInput.checked).toBe(false);
+
+  expect(clickedAppendDataInput).not.toBeChecked();
 });
 
 // FIXME: I will need to test that the data is actually clipped after the given lifespan
 test("should ask for lifespan of data only if append data is true", async () => {
   const lifeSpanLabelPattern = /Lifespan of each Datapoint in seconds/i;
+  const appendDataLabelPattern = /Append new data to old data/i;
   const lifeSpanInput = screen.getByLabelText(lifeSpanLabelPattern);
+
   expect(lifeSpanInput).toBeInTheDocument();
-  // @ts-ignore
-  expect(lifeSpanInput.required).toBe(true);
+  expect(lifeSpanInput).toBeRequired();
   expect(lifeSpanInput).toHaveAttribute("type", "number");
   expect(lifeSpanInput).toHaveAttribute("min", "1");
 
-  const appendDataLabelPattern = /Append new data to old data/i;
   const appendDataInput = screen.getByLabelText(appendDataLabelPattern);
   userEvent.click(appendDataInput);
   const clickedAppendDataInput = await screen.findByLabelText(
     appendDataLabelPattern
   );
-  // @ts-ignore
-  expect(clickedAppendDataInput.checked).toBe(false);
+
+  expect(clickedAppendDataInput).not.toBeChecked();
   expect(screen.queryByLabelText(lifeSpanLabelPattern)).toBeNull();
 });
 
@@ -137,27 +123,21 @@ test("should ask for label or show error if not provided", async () => {
   const invalidInputs = [""];
   const validInputs = ["foo bar-yeah_8"];
   const labelInput = screen.getByLabelText(/label/i);
+
   expect(labelInput).toBeInTheDocument();
-  // @ts-ignore
-  expect(labelInput.required).toBe(true);
+  expect(labelInput).toBeRequired();
   expect(labelInput).toHaveAttribute("type", "text");
 
   for (let invalidInput of invalidInputs) {
     userEvent.clear(labelInput);
     userEvent.type(labelInput, invalidInput);
-    // @ts-ignore
-    expect(labelInput.checkValidity()).toBe(false);
-    // @ts-ignore
-    expect(labelInput.validationMessage).toBe("Constraints not satisfied");
+    expect(labelInput).toBeInvalid();
   }
 
   for (let validInput of validInputs) {
     userEvent.clear(labelInput);
     userEvent.type(labelInput, validInput);
-    // @ts-ignore
-    expect(labelInput.checkValidity()).toBe(true);
-    // @ts-ignore
-    expect(labelInput.validationMessage).toBe("");
+    expect(labelInput).toBeValid();
   }
 });
 
@@ -166,11 +146,11 @@ test("should ask for color or show error if not provided", async () => {
   const colorViaColorInput = ["#cdf675", "#cccccc", "#555555"];
   const colorTextInput = screen.getByLabelText(/color/i);
   expect(colorTextInput).toBeInTheDocument();
-  // @ts-ignore
-  expect(colorTextInput.required).toBe(true);
+  expect(colorTextInput).toBeRequired();
   expect(colorTextInput).toHaveAttribute("type", "text");
 
   const colorInput = colorTextInput.nextSibling;
+  // toBeRequired does not seem to work well with color inputs
   // @ts-ignore
   expect(colorInput.required).toBe(true);
   expect(colorInput).toHaveAttribute("type", "color");
@@ -179,19 +159,15 @@ test("should ask for color or show error if not provided", async () => {
     userEvent.clear(colorTextInput);
     userEvent.type(colorTextInput, color);
     const changedColorTextInput = await screen.findByLabelText(/color/i);
-    // @ts-ignore
-    expect(changedColorTextInput.value).toBe(color);
-    // @ts-ignore
-    expect(changedColorTextInput.nextSibling.value).toBe(color);
+    expect(changedColorTextInput).toHaveDisplayValue(color);
+    expect(changedColorTextInput?.nextSibling).toHaveDisplayValue(color);
   }
 
   for (let color of colorViaColorInput) {
     fireEvent.change(colorTextInput, { target: { value: color } });
     const changedColorTextInput = await screen.findByLabelText(/color/i);
-    // @ts-ignore
-    expect(changedColorTextInput.value).toBe(color);
-    // @ts-ignore
-    expect(changedColorTextInput.nextSibling.value).toBe(color);
+    expect(changedColorTextInput).toHaveDisplayValue(color);
+    expect(changedColorTextInput?.nextSibling).toHaveDisplayValue(color);
   }
 });
 
@@ -200,26 +176,20 @@ test("should ask for x Axis field or show error if not provided", async () => {
   const validInputs = ["foo bar-yeah_8"];
   const inputElement = screen.getByLabelText(/x-axis field/i);
   expect(inputElement).toBeInTheDocument();
-  // @ts-ignore
-  expect(inputElement.required).toBe(true);
+
+  expect(inputElement).toBeRequired();
   expect(inputElement).toHaveAttribute("type", "text");
 
   for (let invalidInput of invalidInputs) {
     userEvent.clear(inputElement);
     userEvent.type(inputElement, invalidInput);
-    // @ts-ignore
-    expect(inputElement.checkValidity()).toBe(false);
-    // @ts-ignore
-    expect(inputElement.validationMessage).toBe("Constraints not satisfied");
+    expect(inputElement).toBeInvalid();
   }
 
   for (let validInput of validInputs) {
     userEvent.clear(inputElement);
     userEvent.type(inputElement, validInput);
-    // @ts-ignore
-    expect(inputElement.checkValidity()).toBe(true);
-    // @ts-ignore
-    expect(inputElement.validationMessage).toBe("");
+    expect(inputElement).toBeValid();
   }
 });
 
@@ -227,30 +197,36 @@ test("should ask for y Axis field or show error if not provided", async () => {
   const invalidInputs = [""];
   const validInputs = ["foo bar-yeah_8"];
   const inputElement = screen.getByLabelText(/y-axis field/i);
+
   expect(inputElement).toBeInTheDocument();
-  // @ts-ignore
-  expect(inputElement.required).toBe(true);
+  expect(inputElement).toBeRequired();
   expect(inputElement).toHaveAttribute("type", "text");
 
   for (let invalidInput of invalidInputs) {
     userEvent.clear(inputElement);
     userEvent.type(inputElement, invalidInput);
-    // @ts-ignore
-    expect(inputElement.checkValidity()).toBe(false);
-    // @ts-ignore
-    expect(inputElement.validationMessage).toBe("Constraints not satisfied");
+    expect(inputElement).toBeInvalid();
   }
 
   for (let validInput of validInputs) {
     userEvent.clear(inputElement);
     userEvent.type(inputElement, validInput);
-    // @ts-ignore
-    expect(inputElement.checkValidity()).toBe(true);
-    // @ts-ignore
-    expect(inputElement.validationMessage).toBe("");
+    expect(inputElement).toBeValid();
   }
 });
 
-test("should ask for chart style, defaulting to 'normal'", async () => {});
+test("should ask for chart style, defaulting to 'normal'", async () => {
+  const labelPattern = /chart style/i;
+  const newValue = "stacked";
+  const chartStyleInput = screen.getByLabelText(labelPattern);
+  expect(chartStyleInput).toBeInTheDocument();
+  expect(chartStyleInput).not.toBeRequired();
+  expect(chartStyleInput).toHaveDisplayValue("normal");
+
+  userEvent.selectOptions(chartStyleInput, [newValue]);
+  const changedChartStyleInput = await screen.findByLabelText(labelPattern);
+
+  expect(changedChartStyleInput).toHaveDisplayValue(newValue);
+});
 
 test("should ask for orientation, defaulting to 'vertical'", async () => {});
