@@ -133,7 +133,33 @@ test("should ask for lifespan of data only if append data is true", async () => 
   expect(screen.queryByLabelText(lifeSpanLabelPattern)).toBeNull();
 });
 
-test("should ask for label or show error if not provided", async () => {});
+test("should ask for label or show error if not provided", async () => {
+  const invalidInputs = [""];
+  const validInputs = ["foo bar-yeah_8"];
+  const labelInput = screen.getByLabelText(/label/i);
+  expect(labelInput).toBeInTheDocument();
+  // @ts-ignore
+  expect(labelInput.required).toBe(true);
+  expect(labelInput).toHaveAttribute("type", "text");
+
+  for (let invalidInput of invalidInputs) {
+    userEvent.clear(labelInput);
+    userEvent.type(labelInput, invalidInput);
+    // @ts-ignore
+    expect(labelInput.checkValidity()).toBe(false);
+    // @ts-ignore
+    expect(labelInput.validationMessage).toBe("Constraints not satisfied");
+  }
+
+  for (let validInput of validInputs) {
+    userEvent.clear(labelInput);
+    userEvent.type(labelInput, validInput);
+    // @ts-ignore
+    expect(labelInput.checkValidity()).toBe(true);
+    // @ts-ignore
+    expect(labelInput.validationMessage).toBe("");
+  }
+});
 
 test("should ask for color or show error if not provided", async () => {});
 
