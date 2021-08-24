@@ -28,10 +28,10 @@ export default function VisualizationBody({
   );
 
   const errorMessage = useMemo(() => {
-    if (!isConnected) {
-      return "Disconnected";
-    } else if (allErrors.length > 0) {
+    if (allErrors.length > 0) {
       return allErrors.join(", ");
+    } else if (!isConnected) {
+      return "Disconnected";
     } else if (error) {
       return JSON.stringify(error);
     } else if (!currentData) {
@@ -41,6 +41,10 @@ export default function VisualizationBody({
   }, [allErrors, currentData, error, isConnected]);
 
   useEffect(() => {
+    if (allErrors.length > 0) {
+      return;
+    }
+
     if (visualization.shouldAppendNewData) {
       const intervalHandle = setInterval(
         () => removeStaleData(visualization),
@@ -49,9 +53,13 @@ export default function VisualizationBody({
 
       return () => clearInterval(intervalHandle);
     }
-  }, [visualization]);
+  }, [visualization, allErrors]);
 
   useLayoutEffect(() => {
+    if (allErrors.length > 0) {
+      return;
+    }
+
     let connection = new WebSocket(visualization.dataSourceUrl);
     let restartIntervalHandle: number;
     const onMessageHandler = (event: MessageEvent) => {
@@ -99,7 +107,7 @@ export default function VisualizationBody({
       connection.onclose = null;
       connection.close();
     };
-  }, [visualization]);
+  }, [visualization, allErrors]);
 
   return (
     <>

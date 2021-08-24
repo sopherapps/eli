@@ -11,9 +11,9 @@ import { Visualization } from "./types";
  */
 export function extractErrors(visualization: Visualization): string[] {
   const emptyValues = ["", undefined, null];
-  const mainErrors: string[] = Object.values(visualization.errors).filter(
-    (value) => !emptyValues.includes(value)
-  );
+  const mainErrors: string[] = Object.keys(visualization.errors)
+    .filter((key) => !emptyValues.includes(visualization.errors[key]))
+    .map((key) => `${key}: ${visualization.errors[key]}`);
 
   // @ts-ignore
   const configErrors: string[] = visualization.type.config

@@ -9,6 +9,8 @@ import { useCallback } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import { Tab, Visualization } from "../data/types";
 
+const lastSlashRegex = new RegExp("/$");
+
 export default function TabEditCard({ tab }: { tab: Tab }) {
   const appConfig = useContext(UserAppConfigContext);
   const { url } = useRouteMatch();
@@ -45,7 +47,10 @@ export default function TabEditCard({ tab }: { tab: Tab }) {
           value={tab.title || ""}
         />
         <div className="card-control d-flex justify-space-between">
-          <Link className="btn" to={`${url}/tabs/${tab.id}`}>
+          <Link
+            className="btn"
+            to={`${url.replace(lastSlashRegex, "")}/tabs/${tab.id}`}
+          >
             <img src={whiteEditIcon} alt="edit" />
           </Link>
           <button className="btn">
