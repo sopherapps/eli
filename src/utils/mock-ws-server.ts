@@ -26,13 +26,15 @@ export default function createWebSocketMockServer(
     const data: ClientJson[] = JSON.parse(`${dataAsString.trim()}`);
     let index = 0;
 
-    const intervalHandle = setInterval(() => {
-      socket.send(JSON.stringify(data[index++ % data.length]));
-    }, intervalInMillseconds);
+    if (data.length > 0) {
+      const intervalHandle = setInterval(() => {
+        socket.send(JSON.stringify(data[index++ % data.length]));
+      }, intervalInMillseconds);
 
-    socket.on("close", () => {
-      clearInterval(intervalHandle);
-    });
+      socket.on("close", () => {
+        clearInterval(intervalHandle);
+      });
+    }
   });
 
   return server;

@@ -16,21 +16,14 @@ let emptyResponseServer: Server;
 const tabName = "the tab";
 const visual = "the visualization";
 const emptyResponseServerUrl = "ws://empty-response.com";
-
 const emptyResponseJsonPath = resolve("src/assets/json/empty-response.json");
 
-beforeEach(async () => {
+beforeEach(() => {
   emptyResponseServer = createWebSocketMockServer(
     emptyResponseServerUrl,
     100,
     emptyResponseJsonPath
   );
-
-  render(<App />);
-  await goToControlPanel();
-  await createNewTab(tabName);
-  goToTabEditScreen(0);
-  await createVisualizations([visual]);
 });
 
 afterEach(() => {
@@ -43,7 +36,13 @@ test("should show 'no data' if no data is received", async () => {
   expect(await screen.findByText(/no data/i)).toBeInTheDocument();
 });
 
-// test("should show 'disconnected' if websocket server disconnects", async () => {});
+test("should show 'disconnected' if websocket server disconnects", async () => {
+  await setUpMockBarChart(emptyResponseServerUrl);
+  await goToTab(tabName);
+  emptyResponseServer.close();
+
+  expect(await screen.findByText(/Disconnected/i)).toBeInTheDocument();
+});
 
 // test("should show configuration errors if wrongly configured", async () => {});
 
@@ -62,8 +61,14 @@ test("should show 'no data' if no data is received", async () => {
  * @param dataSourceUrl - the mock webscoket URL from which data is to be got
  */
 async function setUpMockBarChart(dataSourceUrl: string) {
+  render(<App />);
+  await goToControlPanel();
+  await createNewTab(tabName);
+  goToTabEditScreen(0);
+  await createVisualizations([visual]);
+
   // set the data source URL
-  const dataSourceUrlInput = screen.getByLabelText(/Data Source URL/i);
+  const dataSourceUrlInput = await screen.findByLabelText(/Data Source URL/i);
   userEvent.clear(dataSourceUrlInput);
   userEvent.type(dataSourceUrlInput, dataSourceUrl);
 
