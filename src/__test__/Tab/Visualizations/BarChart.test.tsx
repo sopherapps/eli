@@ -18,12 +18,22 @@ const visual = "the visualization";
 const emptyResponseServerUrl = "ws://empty-response.com";
 const emptyResponseJsonPath = resolve("src/assets/json/empty-response.json");
 
-beforeEach(() => {
+beforeEach(async () => {
   emptyResponseServer = createWebSocketMockServer(
     emptyResponseServerUrl,
     100,
     emptyResponseJsonPath
   );
+  render(<App />);
+  await goToControlPanel();
+  await createNewTab(tabName);
+  goToTabEditScreen(0);
+  await createVisualizations([visual]);
+
+  const visualizationTypeInput = await screen.findByLabelText(
+    /Visualization Type/i
+  );
+  userEvent.selectOptions(visualizationTypeInput, ["bar-chart"]);
 });
 
 afterEach(() => {
@@ -44,7 +54,22 @@ test("should show 'disconnected' if websocket server disconnects", async () => {
   expect(await screen.findByText(/Disconnected/i)).toBeInTheDocument();
 });
 
-// test("should show configuration errors if wrongly configured", async () => {});
+test("should show configuration errors if wrongly configured", async () => {
+  await goToTab(tabName);
+  const expectedErrorMessages = [
+    /'Data Source URL' is not a valid websocket URL/,
+    /'Sort by' should be a comma separated list of fields, with descending fields having a '-' suffix/,
+    /'Lifespan of each Datapoint in seconds' should be set if 'Append new data to old data' is true/,
+    /'label' is required/,
+    /'color' is required/,
+    /'x-axis field' is required/,
+    /'y-axis field' is required/,
+  ];
+
+  for (let msg of expectedErrorMessages) {
+    expect(screen.getByText(msg)).toBeInTheDocument();
+  }
+});
 
 // test("should show vertical bar chart when orientation is 'vertical'", async () => {});
 
@@ -61,12 +86,6 @@ test("should show 'disconnected' if websocket server disconnects", async () => {
  * @param dataSourceUrl - the mock webscoket URL from which data is to be got
  */
 async function setUpMockBarChart(dataSourceUrl: string) {
-  render(<App />);
-  await goToControlPanel();
-  await createNewTab(tabName);
-  goToTabEditScreen(0);
-  await createVisualizations([visual]);
-
   // set the data source URL
   const dataSourceUrlInput = await screen.findByLabelText(/Data Source URL/i);
   userEvent.clear(dataSourceUrlInput);
@@ -81,12 +100,6 @@ async function setUpMockBarChart(dataSourceUrl: string) {
   const lifeSpanInput = await screen.findByLabelText(/^Lifespan/i);
   userEvent.clear(lifeSpanInput);
   userEvent.type(lifeSpanInput, "7200");
-
-  // set the visualization type
-  const visualizationTypeInput = await screen.findByLabelText(
-    /Visualization Type/i
-  );
-  userEvent.selectOptions(visualizationTypeInput, ["bar-chart"]);
 
   // set the label
   const labelInput = await screen.findByLabelText(/^label/i);

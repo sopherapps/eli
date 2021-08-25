@@ -31,12 +31,12 @@ export default function VisualizationEditCard({
       const prop = e.target?.dataset.name;
       const value = e.target?.value;
       const error = e.target?.validationMessage;
-      const errors = validate(visualization);
+      const newVisualization = { ...visualization, [prop]: value };
+      const errors = validate(newVisualization);
 
       onEdit(visualization.id, {
-        ...visualization,
+        ...newVisualization,
         errors: { ...errors, [prop]: error },
-        [prop]: value,
       });
     },
     [visualization, onEdit]
