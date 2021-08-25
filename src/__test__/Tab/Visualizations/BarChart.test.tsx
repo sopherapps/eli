@@ -13,16 +13,37 @@ import {
 } from "../../../utils/test-utils";
 
 let emptyResponseServer: Server;
+let singleDatasetServer: Server;
+let multipleDatasetServer: Server;
+
 const tabName = "the tab";
 const visual = "the visualization";
 const emptyResponseServerUrl = "ws://empty-response.com";
+const singleDatasetServerUrl = "ws://single-dataset-response.com";
+const multipleDatasetServerUrl = "ws://multiple-dataset-response.com";
 const emptyResponseJsonPath = resolve("src/assets/json/empty-response.json");
+const singleDatasetResponseJsonPath = resolve(
+  "src/assets/json/single-dataset-response.json"
+);
+const multipleDatasetResponseJsonPath = resolve(
+  "src/assets/json/multiple-dataset-response.json"
+);
 
 beforeEach(async () => {
   emptyResponseServer = createWebSocketMockServer(
     emptyResponseServerUrl,
     100,
     emptyResponseJsonPath
+  );
+  singleDatasetServer = createWebSocketMockServer(
+    singleDatasetServerUrl,
+    100,
+    singleDatasetResponseJsonPath
+  );
+  multipleDatasetServer = createWebSocketMockServer(
+    multipleDatasetServerUrl,
+    100,
+    multipleDatasetResponseJsonPath
   );
   render(<App />);
   await goToControlPanel();
@@ -38,6 +59,8 @@ beforeEach(async () => {
 
 afterEach(() => {
   emptyResponseServer && emptyResponseServer.close();
+  singleDatasetServer && singleDatasetServer.close();
+  multipleDatasetServer && multipleDatasetServer.close();
 });
 
 test("should show 'no data' if no data is received", async () => {
@@ -71,15 +94,28 @@ test("should show configuration errors if wrongly configured", async () => {
   }
 });
 
-// test("should show vertical bar chart when orientation is 'vertical'", async () => {});
+test("should show error if data is isMultiple", async () => {
+  await setUpMockBarChart(multipleDatasetServerUrl);
+  await goToTab(tabName);
+  expect(
+    await screen.findByText(/Multiple datasets not supported here/i)
+  ).toBeInTheDocument();
+});
 
-// test("should show horizontal bar chart when orientation is 'horizontal'", async () => {});
+test("should show error if chart style is set to 'stacked'", async () => {
+  await setUpMockBarChart(singleDatasetServerUrl);
 
-// test("should show error if chart style is set to 'stacked'", async () => {});
+  const chartStyleSelect = await screen.findByLabelText(/chart style/i);
+  userEvent.selectOptions(chartStyleSelect, ["stacked"]);
 
-// test("should show error if data is isMultiple", async () => {});
+  await goToTab(tabName);
 
-// test("should show chart with all the expected data", async () => {});
+  expect(
+    await screen.findByText(
+      /Stacked Charts are only available in the multiple bar chart/i
+    )
+  ).toBeInTheDocument();
+});
 
 /**
  * Sets up the bar chart mock visualization
