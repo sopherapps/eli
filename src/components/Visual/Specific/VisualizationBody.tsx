@@ -27,17 +27,17 @@ export default function VisualizationBody({
     [visualization]
   );
 
-  const errorMessage = useMemo(() => {
+  const errorMessages: string[] = useMemo(() => {
     if (allErrors.length > 0) {
-      return allErrors.join(", ");
+      return allErrors;
     } else if (!isConnected) {
-      return "Disconnected";
+      return ["Disconnected"];
     } else if (error) {
-      return JSON.stringify(error);
+      return [JSON.stringify(error)];
     } else if (!currentData) {
-      return "No Data";
+      return ["No Data"];
     }
-    return "";
+    return [];
   }, [allErrors, currentData, error, isConnected]);
 
   useEffect(() => {
@@ -111,8 +111,12 @@ export default function VisualizationBody({
 
   return (
     <>
-      {errorMessage || !currentData ? (
-        <div className="error">{errorMessage}</div>
+      {errorMessages.length > 0 || !currentData ? (
+        <ul className="error">
+          {errorMessages.map((msg, i) => (
+            <li key={i}>{msg}</li>
+          ))}
+        </ul>
       ) : (
         <GeneralVisual
           data={currentData}

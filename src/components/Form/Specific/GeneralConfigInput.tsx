@@ -24,10 +24,12 @@ export default function GeneralConfigInput({
   config,
   id,
   onEdit,
+  error,
 }: {
   config: VisualizationProp;
   id: string;
   onEdit: EventHandler<any>;
+  error: string | undefined;
 }) {
   switch (config.inputType) {
     case HTMLInputType.Checkbox:
@@ -38,7 +40,7 @@ export default function GeneralConfigInput({
           label={config.label}
           value={config.value ?? config.options?.default}
           onEdit={onEdit}
-          error={config.error}
+          error={error || config.error}
           required={config.required}
         />
       );
@@ -51,7 +53,7 @@ export default function GeneralConfigInput({
           name={config.name}
           onEdit={onEdit}
           value={config.value ?? config.options?.default}
-          error={config.error}
+          error={error || config.error}
           required={config.required}
         />
       );
@@ -64,7 +66,7 @@ export default function GeneralConfigInput({
           label={config.label}
           onEdit={onEdit}
           value={config.value ?? config.options?.default}
-          error={config.error}
+          error={error || config.error}
           required={config.required}
         />
       );
@@ -77,7 +79,7 @@ export default function GeneralConfigInput({
           label={config.label}
           onEdit={onEdit}
           value={config.value ?? config.options?.default}
-          error={config.error}
+          error={error || config.error}
           required={config.required}
         />
       );
@@ -90,7 +92,7 @@ export default function GeneralConfigInput({
           name={config.name}
           onEdit={onEdit}
           value={config.value ?? config.options?.default}
-          error={config.error}
+          error={error || config.error}
           required={config.required}
         />
       );
@@ -105,7 +107,7 @@ export default function GeneralConfigInput({
           value={config.value ?? config.options?.default}
           min={config.options.min}
           max={config.options.max}
-          error={config.error}
+          error={error || config.error}
           required={config.required}
         />
       );
@@ -120,7 +122,7 @@ export default function GeneralConfigInput({
           value={config.value ?? config.options?.default}
           min={config.options.min}
           max={config.options.max}
-          error={config.error}
+          error={error || config.error}
           required={config.required}
         />
       );
@@ -134,7 +136,7 @@ export default function GeneralConfigInput({
           onEdit={onEdit}
           value={config.value ?? config.options?.default}
           options={config.options.options}
-          error={config.error}
+          error={error || config.error}
           required={config.required}
         />
       );
@@ -150,7 +152,7 @@ export default function GeneralConfigInput({
           name={config.name}
           onEdit={onEdit}
           value={config.value ?? config.options?.default}
-          error={config.error}
+          error={error || config.error}
           required={config.required}
           pattern={config.options?.pattern}
         />
@@ -164,7 +166,7 @@ export default function GeneralConfigInput({
           name={config.name}
           onEdit={onEdit}
           value={config.value ?? config.options?.default}
-          error={config.error}
+          error={error || config.error}
           required={config.required}
         />
       );
@@ -178,7 +180,7 @@ export default function GeneralConfigInput({
           onEdit={onEdit}
           value={config.value ?? config.options?.default}
           step={config.options.step}
-          error={config.error}
+          error={error || config.error}
           required={config.required}
         />
       );
@@ -191,7 +193,7 @@ export default function GeneralConfigInput({
           name={config.name}
           onEdit={onEdit}
           value={config.value ?? config.options?.default}
-          error={config.error}
+          error={error || config.error}
           required={config.required}
           pattern={config.options?.pattern}
         />
@@ -205,7 +207,7 @@ export default function GeneralConfigInput({
           name={config.name}
           onEdit={onEdit}
           value={config.value ?? config.options?.default}
-          error={config.error}
+          error={error || config.error}
           required={config.required}
         />
       );

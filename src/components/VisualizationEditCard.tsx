@@ -3,6 +3,7 @@ import React, { useCallback } from "react";
 import whiteArrowDownIcon from "../assets/images/arrow_downward_white.svg";
 import whiteArrowUpIcon from "../assets/images/arrow_upward_white.svg";
 import whiteCloseIcon from "../assets/images/close_white.svg";
+import { validate } from "../data/errors";
 import { Visualization } from "../data/types";
 import VisualizationForm from "./Form/Specific/VisualizationForm";
 
@@ -30,10 +31,11 @@ export default function VisualizationEditCard({
       const prop = e.target?.dataset.name;
       const value = e.target?.value;
       const error = e.target?.validationMessage;
+      const errors = validate(visualization);
 
       onEdit(visualization.id, {
         ...visualization,
-        errors: { ...visualization.errors, [prop]: error },
+        errors: { ...errors, [prop]: error },
         [prop]: value,
       });
     },

@@ -8,6 +8,7 @@ import VisualizationEditCard from "../../components/VisualizationEditCard";
 import { useCallback } from "react";
 import { Visualization } from "../../data/types";
 import { TableType } from "../../data/visualization-types";
+import { validate } from "../../data/errors";
 
 export default function SingleTabEdit() {
   // @ts-ignore
@@ -27,6 +28,8 @@ export default function SingleTabEdit() {
       orderBy: "",
       shouldAppendNewData: true,
     };
+
+    newVisual.errors = validate(newVisual);
 
     appConfig.updateTab(tab.id, {
       ...tab,

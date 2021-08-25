@@ -168,6 +168,7 @@ export default function VisualizationForm({
           key={`${data.id}-config-${prop.name}`}
           config={prop}
           id={`${data.id}-config-${prop.name}`}
+          error={data.errors[`config.${prop.name}`]}
           onEdit={updateConfigFields}
         />
       ))}
