@@ -11,13 +11,14 @@ export default function VisualizationUiCard({
   return (
     <div
       className="visual"
+      data-testid="visualization-ui-card"
       style={{
         height: `${visualization.height}vh`,
         width: `${visualization.width}%`,
       }}
     >
       <div className="card-header">
-        <h5>{visualization.title}</h5>
+        <h5 data-testid="visualization-heading">{visualization.title}</h5>
       </div>
       <div className="card">
         <div className="card-body list-with-images">

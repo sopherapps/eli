@@ -8,6 +8,7 @@ import {
 import {
   createNewTab,
   createVisualizations,
+  getAllCreatedVisualsTopToBottom,
   goToControlPanel,
   goToTabEditScreen,
 } from "../../../utils/test-utils";
@@ -104,13 +105,3 @@ test("should return you to the control panel when the back arrow button is click
 
   expect(await screen.findByText(/TABS/i)).toBeInTheDocument();
 });
-
-/**
- * Gets the titles of the created visualizations in order top to bottom on the single tab screen
- * @returns {Promise<string[]>}
- */
-async function getAllCreatedVisualsTopToBottom(): Promise<string[]> {
-  const createdVisuals = await screen.findAllByTestId("title");
-  // @ts-ignore
-  return createdVisuals.map((input) => input.value);
-}
