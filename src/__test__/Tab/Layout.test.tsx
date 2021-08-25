@@ -1,5 +1,4 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import App from "../../App";
 import {
   goToControlPanel,
@@ -7,6 +6,7 @@ import {
   goToTabEditScreen,
   createVisualizations,
   getAllCreatedVisualsTopToBottom,
+  goToTab,
 } from "../../utils/test-utils";
 
 /**
@@ -21,10 +21,8 @@ test("should show all the visualizations in order", async () => {
   goToTabEditScreen(0);
   await createVisualizations(visuals);
 
-  const tabMenuItem = screen.getByText(tabName);
-  userEvent.click(tabMenuItem);
+  await goToTab(tabName);
 
-  await screen.findByText(/^Visualizations$/i);
   const visualizationHeadings = screen
     .getAllByTestId("visualization-heading")
     .map((elem) => elem.innerHTML);
@@ -58,10 +56,8 @@ test("should show all the visualizations with appropriate style width", async ()
     expectedWidths.push(`${Math.min(Math.max(0, value), 100)}%`);
   }
 
-  const tabMenuItem = screen.getByText(tabName);
-  userEvent.click(tabMenuItem);
+  await goToTab(tabName);
 
-  await screen.findByText(/^Visualizations$/i);
   const visualWidths = screen
     .getAllByTestId("visualization-ui-card")
     .map((elem) => elem.style.width);
@@ -95,10 +91,8 @@ test("should show all the visualizations with appropriate style height", async (
     expectedHeights.push(`${Math.min(Math.max(0, value), 100)}vh`);
   }
 
-  const tabMenuItem = screen.getByText(tabName);
-  userEvent.click(tabMenuItem);
+  await goToTab(tabName);
 
-  await screen.findByText(/^Visualizations$/i);
   const visualHeights = screen
     .getAllByTestId("visualization-ui-card")
     .map((elem) => elem.style.height);

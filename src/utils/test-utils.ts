@@ -77,3 +77,13 @@ export async function getAllCreatedVisualsTopToBottom(): Promise<string[]> {
   // @ts-ignore
   return createdVisuals.map((input) => input.value);
 }
+
+/**
+ * Opens a given tab by clicking its menu item in the tabbar
+ * @param tabName - the name of the tab to visit
+ */
+export async function goToTab(tabName: string) {
+  const tabMenuItem = screen.getByText(tabName);
+  userEvent.click(tabMenuItem);
+  await screen.findByText(/^Visualizations$/i);
+}

@@ -2,7 +2,9 @@
  * Module creates mock websocket server
  */
 
+import { readFileSync } from "fs";
 import { Server } from "mock-socket";
+import { ClientJson } from "../data/types";
 
 /**
  * Creates a mock server that sends the messages in the JSON file at the path passed to the function,
@@ -20,7 +22,14 @@ export default function createWebSocketMockServer(
   const server = new Server(url);
 
   server.on("connection", (socket) => {
-    const intervalHandle = setInterval(() => {}, intervalInMillseconds);
+    const dataAsString = readFileSync(jsonMockFilePath, "utf8");
+    const data: ClientJson[] = JSON.parse(`${dataAsString.trim()}`);
+    let index = 0;
+
+    const intervalHandle = setInterval(() => {
+      socket.send(JSON.stringify(data[index++ % data.length]));
+    }, intervalInMillseconds);
+
     socket.on("close", () => {
       clearInterval(intervalHandle);
     });

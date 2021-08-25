@@ -1,0 +1,83 @@
+[
+  {
+    "isMultiple": false,
+    "meta": {
+      "cronPattern": "@every 1m",
+      "primaryFields": ["settlementDate", "settlementPeriod"],
+      "separator": "--",
+      "source": "https://api.bmreports.com/BMRS/B0610/v1"
+    },
+    "data": {
+      "2021-08-25--36": {
+        "activeFlag": "Y",
+        "businessType": "Consumption",
+        "curveType": "Sequential fixed size block",
+        "documentID": "NGET-EMFIP-ATL-06392206",
+        "documentRevNum": 1,
+        "documentType": "System total load",
+        "objectAggregation": "Area",
+        "processType": "Realised",
+        "quantity": 38484,
+        "resolution": "PT30M",
+        "settlementDate": "2021-08-25",
+        "settlementPeriod": 36,
+        "timeSeriesID": "NGET-EMFIP-ATL-TS-06373631",
+        "unitOfMeasure": "Mega watt"
+      }
+    }
+  },
+  {
+    "isMultiple": false,
+    "meta": {
+      "cronPattern": "@every 1m",
+      "primaryFields": ["settlementDate", "settlementPeriod"],
+      "separator": "--",
+      "source": "https://api.bmreports.com/BMRS/B0610/v1"
+    },
+    "data": {
+      "2021-08-25--35": {
+        "activeFlag": "Y",
+        "businessType": "Consumption",
+        "curveType": "Sequential fixed size block",
+        "documentID": "NGET-EMFIP-ATL-06392205",
+        "documentRevNum": 1,
+        "documentType": "System total load",
+        "objectAggregation": "Area",
+        "processType": "Realised",
+        "quantity": 38615,
+        "resolution": "PT30M",
+        "settlementDate": "2021-08-25",
+        "settlementPeriod": 35,
+        "timeSeriesID": "NGET-EMFIP-ATL-TS-06373630",
+        "unitOfMeasure": "Mega watt"
+      }
+    }
+  },
+  {
+    "isMultiple": false,
+    "meta": {
+      "cronPattern": "@every 1m",
+      "primaryFields": ["settlementDate", "settlementPeriod"],
+      "separator": "--",
+      "source": "https://api.bmreports.com/BMRS/B0610/v1"
+    },
+    "data": {
+      "2021-08-25--34": {
+        "activeFlag": "Y",
+        "businessType": "Consumption",
+        "curveType": "Sequential fixed size block",
+        "documentID": "NGET-EMFIP-ATL-06392204",
+        "documentRevNum": 1,
+        "documentType": "System total load",
+        "objectAggregation": "Area",
+        "processType": "Realised",
+        "quantity": 38342,
+        "resolution": "PT30M",
+        "settlementDate": "2021-08-25",
+        "settlementPeriod": 34,
+        "timeSeriesID": "NGET-EMFIP-ATL-TS-06373629",
+        "unitOfMeasure": "Mega watt"
+      }
+    }
+  }
+]
