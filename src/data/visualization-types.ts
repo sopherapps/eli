@@ -476,7 +476,7 @@ export const PieChartType: VisualizationType = {
         id: `${time.getTime()}-add-color`,
         configs: [
           {
-            name: `${time.getTime()}-add-color${datasetConfigSeparator}label`,
+            name: `${time.getTime()}-add-color${datasetConfigSeparator}name`,
             label: "label",
             inputType: HTMLInputType.Text,
             required: true,
@@ -484,8 +484,8 @@ export const PieChartType: VisualizationType = {
           },
           {
             name: `${time.getTime()}-add-color${datasetConfigSeparator}color`,
-            label: "name",
-            inputType: HTMLInputType.Text,
+            label: "color",
+            inputType: HTMLInputType.Color,
             required: true,
             options: {},
           },
@@ -521,7 +521,7 @@ export const DoughnutChartType: VisualizationType = {
         id: `${time.getTime()}-add-color`,
         configs: [
           {
-            name: `${time.getTime()}-add-color${datasetConfigSeparator}label`,
+            name: `${time.getTime()}-add-color${datasetConfigSeparator}name`,
             label: "label",
             inputType: HTMLInputType.Text,
             required: true,
@@ -529,8 +529,8 @@ export const DoughnutChartType: VisualizationType = {
           },
           {
             name: `${time.getTime()}-add-color${datasetConfigSeparator}color`,
-            label: "name",
-            inputType: HTMLInputType.Text,
+            label: "color",
+            inputType: HTMLInputType.Color,
             required: true,
             options: {},
           },

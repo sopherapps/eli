@@ -1,3 +1,6 @@
+/**
+ * Module containing tests for the BAR Chart visualization
+ */
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Server } from "mock-socket";
@@ -18,9 +21,9 @@ let multipleDatasetServer: Server;
 
 const tabName = "the tab";
 const visual = "the visualization";
-const emptyResponseServerUrl = "ws://empty-response.com";
-const singleDatasetServerUrl = "ws://single-dataset-response.com";
-const multipleDatasetServerUrl = "ws://multiple-dataset-response.com";
+const emptyResponseServerUrl = "ws://bar-chart-empty-response.com";
+const singleDatasetServerUrl = "ws://bar-chart-single-dataset-response.com";
+const multipleDatasetServerUrl = "ws://bar-chart-multiple-dataset-response.com";
 const emptyResponseJsonPath = resolve("src/assets/json/empty-response.json");
 const singleDatasetResponseJsonPath = resolve(
   "src/assets/json/single-dataset-response.json"
