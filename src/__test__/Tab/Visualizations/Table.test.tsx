@@ -1,5 +1,5 @@
 /**
- * Module containing tests for the line Chart visualization
+ * Module containing tests for the Table visualization
  */
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";

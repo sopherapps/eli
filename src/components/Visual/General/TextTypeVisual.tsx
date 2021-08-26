@@ -58,6 +58,7 @@ export default function TextTypeVisual({
           .map((dataset) =>
             Object.values(sortedRecords[dataset]).map((record) => (
               <p
+                data-testid="text-item"
                 key={`${dataset}-${primaryFields
                   .map((field) => record[field])
                   .join(separator)}`}
