@@ -69,6 +69,16 @@ export default function MultipleBarChartVisual({
     [configObject.chartStyle.value, configObject.orientation.value]
   );
 
+  const labelAxis = useMemo(
+    () => (configObject.orientation.value === "horizontal" ? "y" : "x"),
+    [configObject.orientation.value]
+  );
+
+  const valueAxis = useMemo(
+    () => (configObject.orientation.value === "horizontal" ? "x" : "y"),
+    [configObject.orientation.value]
+  );
+
   const chartData = useMemo(() => {
     const labels: string[] = [];
     const datasets: BarDatasetConfig[] = [];
@@ -89,7 +99,11 @@ export default function MultipleBarChartVisual({
         if (!labels.includes(label)) {
           labels.push(label);
         }
-        datasetConfig.data.push({ x: label, y: record[yField] });
+        // @ts-ignore
+        datasetConfig.data.push({
+          [labelAxis]: label,
+          [valueAxis]: record[yField],
+        });
       }
       datasets.push(datasetConfig);
     }
@@ -98,7 +112,7 @@ export default function MultipleBarChartVisual({
       labels,
       datasets,
     };
-  }, [datasetConfigs, sortedRecords]);
+  }, [datasetConfigs, labelAxis, sortedRecords, valueAxis]);
 
   return (
     <>

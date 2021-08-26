@@ -44,6 +44,16 @@ export default function BarChartVisual({
     [configObject.orientation.value]
   );
 
+  const labelAxis = useMemo(
+    () => (configObject.orientation.value === "horizontal" ? "y" : "x"),
+    [configObject.orientation.value]
+  );
+
+  const valueAxis = useMemo(
+    () => (configObject.orientation.value === "horizontal" ? "x" : "y"),
+    [configObject.orientation.value]
+  );
+
   const chartData = useMemo(() => {
     const labels: string[] = [];
     const records: { x: string; y: number }[] = [];
@@ -53,7 +63,8 @@ export default function BarChartVisual({
     for (let record of sortedRecords) {
       const label = `${record[xField]}`;
       labels.push(label);
-      records.push({ x: label, y: record[yField] });
+      // @ts-ignore
+      records.push({ [labelAxis]: label, [valueAxis]: record[yField] });
     }
 
     return {
@@ -72,7 +83,9 @@ export default function BarChartVisual({
     configObject.label.value,
     configObject.xField.value,
     configObject.yField.value,
+    labelAxis,
     sortedRecords,
+    valueAxis,
   ]);
 
   return (
