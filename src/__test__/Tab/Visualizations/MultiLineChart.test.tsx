@@ -21,9 +21,11 @@ let multipleDatasetServer: Server;
 
 const tabName = "the tab";
 const visual = "the visualization";
-const emptyResponseServerUrl = "ws://bar-chart-empty-response.com";
-const singleDatasetServerUrl = "ws://bar-chart-single-dataset-response.com";
-const multipleDatasetServerUrl = "ws://bar-chart-multiple-dataset-response.com";
+const emptyResponseServerUrl = "ws://multi-line-chart-empty-response.com";
+const singleDatasetServerUrl =
+  "ws://multi-line-chart-single-dataset-response.com";
+const multipleDatasetServerUrl =
+  "ws://multi-line-chart-multiple-dataset-response.com";
 const emptyResponseJsonPath = resolve("src/assets/json/empty-response.json");
 const singleDatasetResponseJsonPath = resolve(
   "src/assets/json/single-dataset-response.json"

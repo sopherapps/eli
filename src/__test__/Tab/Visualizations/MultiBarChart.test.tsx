@@ -21,9 +21,11 @@ let multipleDatasetServer: Server;
 
 const tabName = "the tab";
 const visual = "the visualization";
-const emptyResponseServerUrl = "ws://bar-chart-empty-response.com";
-const singleDatasetServerUrl = "ws://bar-chart-single-dataset-response.com";
-const multipleDatasetServerUrl = "ws://bar-chart-multiple-dataset-response.com";
+const emptyResponseServerUrl = "ws://multi-bar-chart-empty-response.com";
+const singleDatasetServerUrl =
+  "ws://multi-bar-chart-single-dataset-response.com";
+const multipleDatasetServerUrl =
+  "ws://multi-bar-chart-multiple-dataset-response.com";
 const emptyResponseJsonPath = resolve("src/assets/json/empty-response.json");
 const singleDatasetResponseJsonPath = resolve(
   "src/assets/json/single-dataset-response.json"
@@ -86,13 +88,13 @@ test("should show configuration errors if wrongly configured", async () => {
 
   await goToTab(tabName);
   const expectedErrorMessages = [
-    /'Data Source URL' is not a valid websocket URL/,
-    /'Sort by' should be a comma separated list of fields, with descending fields having a '-' suffix/,
-    /'Lifespan of each Datapoint in seconds' should be set if 'Append new data to old data' is true/,
-    /'label' is required/,
-    /'color' is required/,
-    /'x-axis field' is required/,
-    /'y-axis field' is required/,
+    /'Data Source URL' is not a valid websocket URL/i,
+    /'Sort by' should be a comma separated list of fields, with descending fields having a '-' suffix/i,
+    /'Lifespan of each Datapoint in seconds' should be set if 'Append new data to old data' is true/i,
+    /'label' is required/i,
+    /'color' is required/i,
+    /'x-axis field' is required/i,
+    /'y-axis field' is required/i,
   ];
 
   for (let msg of expectedErrorMessages) {
