@@ -43,8 +43,8 @@ export default function TextTypeVisual({
   return (
     <div
       className="data-ui"
+      data-testid="data-ui"
       style={{
-        fontSize: configObject.fontSize.value,
         textAlign: configObject.alignment.value,
         fontWeight: configObject.bold.value ? "bold" : "normal",
         fontStyle: configObject.italic.value ? "italic" : "normal",
@@ -58,6 +58,7 @@ export default function TextTypeVisual({
           .map((dataset) =>
             Object.values(sortedRecords[dataset]).map((record) => (
               <p
+                style={{ fontSize: `${configObject.fontSize.value}px` }}
                 data-testid="text-item"
                 key={`${dataset}-${primaryFields
                   .map((field) => record[field])

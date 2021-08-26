@@ -1,7 +1,7 @@
 /**
  * Module containing tests for the Text visualization
  */
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Server } from "mock-socket";
 import { resolve } from "path";
@@ -224,6 +224,81 @@ test("should display the text as expected when append data is false", async () =
   for (let docId of otherDocumentIDs) {
     expect(screen.queryByText(docId)).toBeNull();
   }
+});
+
+test("should display the text as italic if italic is set", async () => {
+  await setUpMockText(singleDatasetServerUrl, false);
+
+  const italicInput = screen.getByLabelText(/italic/i);
+  userEvent.click(italicInput);
+
+  await goToTab(tabName);
+
+  const textItemWrapper = await screen.findByTestId("data-ui");
+  expect(textItemWrapper.style.fontStyle).toBe("italic");
+});
+
+test("should display the text as bold if bold is set", async () => {
+  await setUpMockText(singleDatasetServerUrl, false);
+
+  const boldInput = screen.getByLabelText(/bold/i);
+  userEvent.click(boldInput);
+
+  await goToTab(tabName);
+
+  const textItemWrapper = await screen.findByTestId("data-ui");
+  expect(textItemWrapper.style.fontWeight).toBe("bold");
+});
+
+test("should display the text left aligned if alignment is set to left", async () => {
+  await setUpMockText(singleDatasetServerUrl, false);
+
+  const alignmentInput = screen.getByLabelText(/alignment/i);
+  userEvent.selectOptions(alignmentInput, ["left"]);
+
+  await goToTab(tabName);
+
+  const textItemWrapper = await screen.findByTestId("data-ui");
+  expect(textItemWrapper.style.textAlign).toBe("left");
+});
+
+test("should display the text right aligned if alignment is set to right", async () => {
+  await setUpMockText(singleDatasetServerUrl, false);
+
+  const alignmentInput = screen.getByLabelText(/alignment/i);
+  userEvent.selectOptions(alignmentInput, ["right"]);
+
+  await goToTab(tabName);
+
+  const textItemWrapper = await screen.findByTestId("data-ui");
+  expect(textItemWrapper.style.textAlign).toBe("right");
+});
+
+test("should display the text center aligned if alignment is set to center", async () => {
+  await setUpMockText(singleDatasetServerUrl, false);
+
+  const alignmentInput = screen.getByLabelText(/alignment/i);
+  userEvent.selectOptions(alignmentInput, ["center"]);
+
+  await goToTab(tabName);
+
+  const textItemWrapper = await screen.findByTestId("data-ui");
+  expect(textItemWrapper.style.textAlign).toBe("center");
+});
+
+test("should display the text font size as set", async () => {
+  const latestDocumentId = "NGET-EMFIP-ATL-06392206";
+  const newFontSize = 30;
+
+  await setUpMockText(singleDatasetServerUrl, false);
+
+  const fontSizeInput = screen.getByLabelText(/font size/i);
+  fireEvent.change(fontSizeInput, { target: { value: newFontSize } });
+
+  await goToTab(tabName);
+
+  const textItem = await screen.findByText(latestDocumentId);
+  expect(textItem.style.fontSize).toBe(`${newFontSize}px`);
 });
 
 /**
