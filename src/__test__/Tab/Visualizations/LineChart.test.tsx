@@ -137,9 +137,9 @@ async function setUpMockLineChart(dataSourceUrl: string) {
   userEvent.type(colorTextInput, "#ffffff");
 
   // set the x-axis-field
-  const xAxisFIeldInput = await screen.findByLabelText(/^x-axis field/i);
-  userEvent.clear(xAxisFIeldInput);
-  userEvent.type(xAxisFIeldInput, "settlementPeriod");
+  const xAxisFieldInput = await screen.findByLabelText(/^x-axis field/i);
+  userEvent.clear(xAxisFieldInput);
+  userEvent.type(xAxisFieldInput, "settlementPeriod");
 
   // set the y-axis-field
   const yAxisInput = await screen.findByLabelText(/^y-axis field/i);
