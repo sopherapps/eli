@@ -37,7 +37,7 @@ export default function TableTypeVisual({
       {errorMessage ? (
         <span className="error">{errorMessage}</span>
       ) : (
-        <table>
+        <table className="table">
           <thead>
             <tr>
               {columnOrder.map((column, index) => (
@@ -46,21 +46,23 @@ export default function TableTypeVisual({
             </tr>
           </thead>
           <tbody>
-            <tr>
-              {sortedRecords.map((record) => (
-                <>
-                  {columnOrder.map((column, index) => (
-                    <td
-                      key={`${primaryFields
-                        .map((field) => record[field])
-                        .join(separator)}-${column}-${index}`}
-                    >
-                      {record[column]}
-                    </td>
-                  ))}
-                </>
-              ))}
-            </tr>
+            {sortedRecords.map((record) => (
+              <tr
+                key={`${primaryFields
+                  .map((field) => record[field])
+                  .join(separator)}`}
+              >
+                {columnOrder.map((column, index) => (
+                  <td
+                    key={`${primaryFields
+                      .map((field) => record[field])
+                      .join(separator)}-${column}-${index}`}
+                  >
+                    {record[column]}
+                  </td>
+                ))}
+              </tr>
+            ))}
           </tbody>
         </table>
       )}
