@@ -10,7 +10,7 @@ import sortByField from "../../../utils/sort-records";
 
 interface BarDatasetConfig {
   label: string;
-  data: { x: string; y: number }[];
+  data: { [key: string]: any }[]; // "y" | "x";
   borderColor: string;
   backgroundColor: string;
 }
@@ -28,7 +28,7 @@ export default function MultipleBarChartVisual({
   width: number;
   sortBy: string;
   configObject: { [key: string]: VisualizationProp };
-  datasetConfigs: { [key: string]: { [key: string]: VisualizationProp } };
+  datasetConfigs: { [key: string]: { [key: string]: VisualizationProp }[] };
 }) {
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
 
@@ -69,36 +69,52 @@ export default function MultipleBarChartVisual({
     [configObject.chartStyle.value, configObject.orientation.value]
   );
 
+  const labelAxis = useMemo(
+    () => (configObject.orientation.value === "horizontal" ? "y" : "x"),
+    [configObject.orientation.value]
+  );
+
+  const valueAxis = useMemo(
+    () => (configObject.orientation.value === "horizontal" ? "x" : "y"),
+    [configObject.orientation.value]
+  );
+
   const chartData = useMemo(() => {
     const labels: string[] = [];
     const datasets: BarDatasetConfig[] = [];
     const datasetNames = Object.keys(datasetConfigs).sort();
 
     for (let dataset of datasetNames) {
-      const datasetConfig: BarDatasetConfig = {
-        label: dataset,
-        data: [],
-        borderColor: datasetConfigs[dataset]?.color?.value || "#fff",
-        backgroundColor: datasetConfigs[dataset]?.color?.value || "#fff",
-      };
-      const xField = datasetConfigs[dataset]?.xField.value;
-      const yField = datasetConfigs[dataset]?.yField.value;
+      for (let datasetConfig of datasetConfigs[dataset] || []) {
+        const config: BarDatasetConfig = {
+          label: dataset,
+          data: [],
+          borderColor: datasetConfig.color?.value || "#fff",
+          backgroundColor: datasetConfig.color?.value || "#fff",
+        };
+        const xField = datasetConfig.xField.value;
+        const yField = datasetConfig.yField.value;
 
-      for (let record of sortedRecords[dataset] || []) {
-        const label = `${record[xField]}`;
-        if (!labels.includes(label)) {
-          labels.push(label);
+        for (let record of sortedRecords[dataset] || []) {
+          const label = `${record[xField]}`;
+          if (!labels.includes(label)) {
+            labels.push(label);
+          }
+
+          config.data.push({
+            [labelAxis]: label,
+            [valueAxis]: record[yField],
+          });
         }
-        datasetConfig.data.push({ x: label, y: record[yField] });
+        datasets.push(config);
       }
-      datasets.push(datasetConfig);
     }
 
     return {
       labels,
       datasets,
     };
-  }, [datasetConfigs, sortedRecords]);
+  }, [datasetConfigs, labelAxis, sortedRecords, valueAxis]);
 
   return (
     <>

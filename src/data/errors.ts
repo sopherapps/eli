@@ -94,7 +94,7 @@ export function validate(visualization: Visualization): {
       errorMessage += `'${config.label}' is not of expected format. `;
     }
 
-    result[`config.${config.name}`] = errorMessage;
+    result[`config.${config.name}`] = errorMessage.trim();
   }
 
   return result;

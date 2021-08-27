@@ -7,6 +7,7 @@ import { Pie } from "react-chartjs-2";
 import { ClientJson, VisualizationProp } from "../../../data/types";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
 import sortByField from "../../../utils/sort-records";
+import { generateRandomColor } from "../../../utils/ui-utils";
 
 export default function PieChartVisual({
   data,
@@ -21,7 +22,7 @@ export default function PieChartVisual({
   width: number;
   sortBy: string;
   configObject: { [key: string]: VisualizationProp };
-  datasetConfigs: { [key: string]: { [key: string]: VisualizationProp } };
+  datasetConfigs: { [key: string]: { [key: string]: VisualizationProp }[] };
 }) {
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
 
@@ -47,7 +48,8 @@ export default function PieChartVisual({
 
     for (let record of sortedRecords) {
       const label = `${record[labelField]}`;
-      const color = datasetConfigs[label]?.color.value || "#fff";
+      const color =
+        (datasetConfigs[label] || [])[0]?.color.value || generateRandomColor();
       labels.push(label);
       backgroundColors.push(color);
       records.push(record[valueField]);
@@ -57,7 +59,7 @@ export default function PieChartVisual({
       labels,
       datasets: [
         {
-          label: configObject.label.value || "pie chart",
+          label: "data",
           data: records,
           backgroundColor: backgroundColors,
           borderColor: backgroundColors,
@@ -65,7 +67,6 @@ export default function PieChartVisual({
       ],
     };
   }, [
-    configObject.label.value,
     configObject.labelField.value,
     configObject.valueField.value,
     datasetConfigs,

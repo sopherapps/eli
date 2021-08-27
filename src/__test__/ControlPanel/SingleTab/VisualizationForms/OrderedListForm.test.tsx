@@ -20,7 +20,7 @@ beforeEach(async () => {
   goToTabEditScreen(0);
   await createVisualizations([visualName]);
   const visualizationTypeSelect = screen.getByLabelText(/Visualization Type/i);
-  userEvent.selectOptions(visualizationTypeSelect, ["unordered-list"]);
+  userEvent.selectOptions(visualizationTypeSelect, ["ordered-list"]);
 });
 
 test("should ask for Source Url or show error if not provided", async () => {

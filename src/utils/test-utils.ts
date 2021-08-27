@@ -67,3 +67,23 @@ export async function createVisualizations(visualizationTitles: string[]) {
     userEvent.type(visualHeaderInput, visual);
   }
 }
+
+/**
+ * Gets the titles of the created visualizations in order top to bottom on the single tab screen
+ * @returns {Promise<string[]>}
+ */
+export async function getAllCreatedVisualsTopToBottom(): Promise<string[]> {
+  const createdVisuals = await screen.findAllByTestId("title");
+  // @ts-ignore
+  return createdVisuals.map((input) => input.value);
+}
+
+/**
+ * Opens a given tab by clicking its menu item in the tabbar
+ * @param tabName - the name of the tab to visit
+ */
+export async function goToTab(tabName: string) {
+  const tabMenuItem = screen.getByText(tabName);
+  userEvent.click(tabMenuItem);
+  await screen.findByText(/^Visualizations$/i);
+}

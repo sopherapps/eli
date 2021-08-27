@@ -34,12 +34,7 @@ export default function LineChartVisual({
     [data.isMultiple, sortError]
   );
 
-  const chartOptions = useMemo(
-    () => ({
-      indexAxis: configObject.orientation.value === "horizontal" ? "y" : "x",
-    }),
-    [configObject.orientation.value]
-  );
+  const chartOptions = {};
 
   const chartData = useMemo(() => {
     const labels: string[] = [];

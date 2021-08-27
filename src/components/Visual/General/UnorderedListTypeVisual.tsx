@@ -43,6 +43,7 @@ export default function UnorderedListVisual({
   return (
     <ul
       className="data-ui"
+      data-testid="data-ui"
       style={{
         listStyleType: configObject.style.value || "inherit",
       }}
@@ -55,6 +56,7 @@ export default function UnorderedListVisual({
           .map((dataset) =>
             Object.values(sortedRecords[dataset]).map((record) => (
               <li
+                data-testid="unordered-list-item"
                 key={`${dataset}-${primaryFields
                   .map((field) => record[field])
                   .join(separator)}`}
