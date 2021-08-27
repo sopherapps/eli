@@ -87,8 +87,6 @@ export default function MixedChartVisual({
     const datasets: MixedDatasetConfig[] = [];
     const datasetNames = Object.keys(datasetConfigs).sort();
 
-    console.log({ datasetConfigs });
-
     for (let dataset of datasetNames) {
       for (let datasetConfig of datasetConfigs[dataset] || []) {
         const xField = datasetConfig.xField.value;

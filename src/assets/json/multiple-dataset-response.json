@@ -9,204 +9,6 @@
     },
     "data": {
       "\"Biomass\"": {
-        "2021-08-25--35": {
-          "activeFlag": "Y",
-          "businessType": "Production",
-          "curveType": "Sequential fixed size block",
-          "documentID": "NGET-EMFIP-AGPT-06392699",
-          "documentRevNum": 1,
-          "documentType": "Actual generation per type",
-          "powerSystemResourceType": "\"Biomass\"",
-          "processType": "Realised",
-          "quantity": 1803,
-          "resolution": "PT30M",
-          "settlementDate": "2021-08-25",
-          "settlementPeriod": 35,
-          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836554"
-        }
-      },
-      "\"Fossil Gas\"": {
-        "2021-08-25--35": {
-          "activeFlag": "Y",
-          "businessType": "Production",
-          "curveType": "Sequential fixed size block",
-          "documentID": "NGET-EMFIP-AGPT-06392699",
-          "documentRevNum": 1,
-          "documentType": "Actual generation per type",
-          "powerSystemResourceType": "\"Fossil Gas\"",
-          "processType": "Realised",
-          "quantity": 14722,
-          "resolution": "PT30M",
-          "settlementDate": "2021-08-25",
-          "settlementPeriod": 35,
-          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836550"
-        }
-      },
-      "\"Fossil Hard coal\"": {
-        "2021-08-25--35": {
-          "activeFlag": "Y",
-          "businessType": "Production",
-          "curveType": "Sequential fixed size block",
-          "documentID": "NGET-EMFIP-AGPT-06392699",
-          "documentRevNum": 1,
-          "documentType": "Actual generation per type",
-          "powerSystemResourceType": "\"Fossil Hard coal\"",
-          "processType": "Realised",
-          "quantity": 231,
-          "resolution": "PT30M",
-          "settlementDate": "2021-08-25",
-          "settlementPeriod": 35,
-          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836551"
-        }
-      },
-      "\"Fossil Oil\"": {
-        "2021-08-25--35": {
-          "activeFlag": "Y",
-          "businessType": "Production",
-          "curveType": "Sequential fixed size block",
-          "documentID": "NGET-EMFIP-AGPT-06392699",
-          "documentRevNum": 1,
-          "documentType": "Actual generation per type",
-          "powerSystemResourceType": "\"Fossil Oil\"",
-          "processType": "Realised",
-          "quantity": 0,
-          "resolution": "PT30M",
-          "settlementDate": "2021-08-25",
-          "settlementPeriod": 35,
-          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836549"
-        }
-      },
-      "\"Hydro Pumped Storage\"": {
-        "2021-08-25--35": {
-          "activeFlag": "Y",
-          "businessType": "Production",
-          "curveType": "Sequential fixed size block",
-          "documentID": "NGET-EMFIP-AGPT-06392699",
-          "documentRevNum": 1,
-          "documentType": "Actual generation per type",
-          "powerSystemResourceType": "\"Hydro Pumped Storage\"",
-          "processType": "Realised",
-          "quantity": 297,
-          "resolution": "PT30M",
-          "settlementDate": "2021-08-25",
-          "settlementPeriod": 35,
-          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836553"
-        }
-      },
-      "\"Hydro Run-of-river and poundage\"": {
-        "2021-08-25--35": {
-          "activeFlag": "Y",
-          "businessType": "Production",
-          "curveType": "Sequential fixed size block",
-          "documentID": "NGET-EMFIP-AGPT-06392699",
-          "documentRevNum": 1,
-          "documentType": "Actual generation per type",
-          "powerSystemResourceType": "\"Hydro Run-of-river and poundage\"",
-          "processType": "Realised",
-          "quantity": 395,
-          "resolution": "PT30M",
-          "settlementDate": "2021-08-25",
-          "settlementPeriod": 35,
-          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836552"
-        }
-      },
-      "\"Nuclear\"": {
-        "2021-08-25--35": {
-          "activeFlag": "Y",
-          "businessType": "Production",
-          "curveType": "Sequential fixed size block",
-          "documentID": "NGET-EMFIP-AGPT-06392699",
-          "documentRevNum": 1,
-          "documentType": "Actual generation per type",
-          "powerSystemResourceType": "\"Nuclear\"",
-          "processType": "Realised",
-          "quantity": 5255,
-          "resolution": "PT30M",
-          "settlementDate": "2021-08-25",
-          "settlementPeriod": 35,
-          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836548"
-        }
-      },
-      "\"Other\"": {
-        "2021-08-25--35": {
-          "activeFlag": "Y",
-          "businessType": "Production",
-          "curveType": "Sequential fixed size block",
-          "documentID": "NGET-EMFIP-AGPT-06392699",
-          "documentRevNum": 1,
-          "documentType": "Actual generation per type",
-          "powerSystemResourceType": "\"Other\"",
-          "processType": "Realised",
-          "quantity": 152,
-          "resolution": "PT30M",
-          "settlementDate": "2021-08-25",
-          "settlementPeriod": 35,
-          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836547"
-        }
-      },
-      "\"Solar\"": {
-        "2021-08-25--35": {
-          "activeFlag": "Y",
-          "businessType": "Solar generation",
-          "curveType": "Sequential fixed size block",
-          "documentID": "NGET-EMFIP-AGPT-06392699",
-          "documentRevNum": 1,
-          "documentType": "Actual generation per type",
-          "powerSystemResourceType": "\"Solar\"",
-          "processType": "Realised",
-          "quantity": 2840,
-          "resolution": "PT30M",
-          "settlementDate": "2021-08-25",
-          "settlementPeriod": 35,
-          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836544"
-        }
-      },
-      "\"Wind Offshore\"": {
-        "2021-08-25--35": {
-          "activeFlag": "Y",
-          "businessType": "Wind generation",
-          "curveType": "Sequential fixed size block",
-          "documentID": "NGET-EMFIP-AGPT-06392699",
-          "documentRevNum": 1,
-          "documentType": "Actual generation per type",
-          "powerSystemResourceType": "\"Wind Offshore\"",
-          "processType": "Realised",
-          "quantity": 2850.794,
-          "resolution": "PT30M",
-          "settlementDate": "2021-08-25",
-          "settlementPeriod": 35,
-          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836545"
-        }
-      },
-      "\"Wind Onshore\"": {
-        "2021-08-25--35": {
-          "activeFlag": "Y",
-          "businessType": "Wind generation",
-          "curveType": "Sequential fixed size block",
-          "documentID": "NGET-EMFIP-AGPT-06392699",
-          "documentRevNum": 1,
-          "documentType": "Actual generation per type",
-          "powerSystemResourceType": "\"Wind Onshore\"",
-          "processType": "Realised",
-          "quantity": 1164.113,
-          "resolution": "PT30M",
-          "settlementDate": "2021-08-25",
-          "settlementPeriod": 35,
-          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836546"
-        }
-      }
-    }
-  },
-  {
-    "isMultiple": true,
-    "meta": {
-      "cronPattern": "@every 1m",
-      "primaryFields": ["settlementDate", "settlementPeriod"],
-      "separator": "--",
-      "source": "https://api.bmreports.com/BMRS/B1620/v1"
-    },
-    "data": {
-      "\"Biomass\"": {
         "2021-08-25--34": {
           "activeFlag": "Y",
           "businessType": "Production",
@@ -391,6 +193,204 @@
           "settlementDate": "2021-08-25",
           "settlementPeriod": 34,
           "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836535"
+        }
+      }
+    }
+  },
+  {
+    "isMultiple": true,
+    "meta": {
+      "cronPattern": "@every 1m",
+      "primaryFields": ["settlementDate", "settlementPeriod"],
+      "separator": "--",
+      "source": "https://api.bmreports.com/BMRS/B1620/v1"
+    },
+    "data": {
+      "\"Biomass\"": {
+        "2021-08-25--35": {
+          "activeFlag": "Y",
+          "businessType": "Production",
+          "curveType": "Sequential fixed size block",
+          "documentID": "NGET-EMFIP-AGPT-06392699",
+          "documentRevNum": 1,
+          "documentType": "Actual generation per type",
+          "powerSystemResourceType": "\"Biomass\"",
+          "processType": "Realised",
+          "quantity": 1803,
+          "resolution": "PT30M",
+          "settlementDate": "2021-08-25",
+          "settlementPeriod": 35,
+          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836554"
+        }
+      },
+      "\"Fossil Gas\"": {
+        "2021-08-25--35": {
+          "activeFlag": "Y",
+          "businessType": "Production",
+          "curveType": "Sequential fixed size block",
+          "documentID": "NGET-EMFIP-AGPT-06392699",
+          "documentRevNum": 1,
+          "documentType": "Actual generation per type",
+          "powerSystemResourceType": "\"Fossil Gas\"",
+          "processType": "Realised",
+          "quantity": 14722,
+          "resolution": "PT30M",
+          "settlementDate": "2021-08-25",
+          "settlementPeriod": 35,
+          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836550"
+        }
+      },
+      "\"Fossil Hard coal\"": {
+        "2021-08-25--35": {
+          "activeFlag": "Y",
+          "businessType": "Production",
+          "curveType": "Sequential fixed size block",
+          "documentID": "NGET-EMFIP-AGPT-06392699",
+          "documentRevNum": 1,
+          "documentType": "Actual generation per type",
+          "powerSystemResourceType": "\"Fossil Hard coal\"",
+          "processType": "Realised",
+          "quantity": 231,
+          "resolution": "PT30M",
+          "settlementDate": "2021-08-25",
+          "settlementPeriod": 35,
+          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836551"
+        }
+      },
+      "\"Fossil Oil\"": {
+        "2021-08-25--35": {
+          "activeFlag": "Y",
+          "businessType": "Production",
+          "curveType": "Sequential fixed size block",
+          "documentID": "NGET-EMFIP-AGPT-06392699",
+          "documentRevNum": 1,
+          "documentType": "Actual generation per type",
+          "powerSystemResourceType": "\"Fossil Oil\"",
+          "processType": "Realised",
+          "quantity": 0,
+          "resolution": "PT30M",
+          "settlementDate": "2021-08-25",
+          "settlementPeriod": 35,
+          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836549"
+        }
+      },
+      "\"Hydro Pumped Storage\"": {
+        "2021-08-25--35": {
+          "activeFlag": "Y",
+          "businessType": "Production",
+          "curveType": "Sequential fixed size block",
+          "documentID": "NGET-EMFIP-AGPT-06392699",
+          "documentRevNum": 1,
+          "documentType": "Actual generation per type",
+          "powerSystemResourceType": "\"Hydro Pumped Storage\"",
+          "processType": "Realised",
+          "quantity": 297,
+          "resolution": "PT30M",
+          "settlementDate": "2021-08-25",
+          "settlementPeriod": 35,
+          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836553"
+        }
+      },
+      "\"Hydro Run-of-river and poundage\"": {
+        "2021-08-25--35": {
+          "activeFlag": "Y",
+          "businessType": "Production",
+          "curveType": "Sequential fixed size block",
+          "documentID": "NGET-EMFIP-AGPT-06392699",
+          "documentRevNum": 1,
+          "documentType": "Actual generation per type",
+          "powerSystemResourceType": "\"Hydro Run-of-river and poundage\"",
+          "processType": "Realised",
+          "quantity": 395,
+          "resolution": "PT30M",
+          "settlementDate": "2021-08-25",
+          "settlementPeriod": 35,
+          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836552"
+        }
+      },
+      "\"Nuclear\"": {
+        "2021-08-25--35": {
+          "activeFlag": "Y",
+          "businessType": "Production",
+          "curveType": "Sequential fixed size block",
+          "documentID": "NGET-EMFIP-AGPT-06392699",
+          "documentRevNum": 1,
+          "documentType": "Actual generation per type",
+          "powerSystemResourceType": "\"Nuclear\"",
+          "processType": "Realised",
+          "quantity": 5255,
+          "resolution": "PT30M",
+          "settlementDate": "2021-08-25",
+          "settlementPeriod": 35,
+          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836548"
+        }
+      },
+      "\"Other\"": {
+        "2021-08-25--35": {
+          "activeFlag": "Y",
+          "businessType": "Production",
+          "curveType": "Sequential fixed size block",
+          "documentID": "NGET-EMFIP-AGPT-06392699",
+          "documentRevNum": 1,
+          "documentType": "Actual generation per type",
+          "powerSystemResourceType": "\"Other\"",
+          "processType": "Realised",
+          "quantity": 152,
+          "resolution": "PT30M",
+          "settlementDate": "2021-08-25",
+          "settlementPeriod": 35,
+          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836547"
+        }
+      },
+      "\"Solar\"": {
+        "2021-08-25--35": {
+          "activeFlag": "Y",
+          "businessType": "Solar generation",
+          "curveType": "Sequential fixed size block",
+          "documentID": "NGET-EMFIP-AGPT-06392699",
+          "documentRevNum": 1,
+          "documentType": "Actual generation per type",
+          "powerSystemResourceType": "\"Solar\"",
+          "processType": "Realised",
+          "quantity": 2840,
+          "resolution": "PT30M",
+          "settlementDate": "2021-08-25",
+          "settlementPeriod": 35,
+          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836544"
+        }
+      },
+      "\"Wind Offshore\"": {
+        "2021-08-25--35": {
+          "activeFlag": "Y",
+          "businessType": "Wind generation",
+          "curveType": "Sequential fixed size block",
+          "documentID": "NGET-EMFIP-AGPT-06392699",
+          "documentRevNum": 1,
+          "documentType": "Actual generation per type",
+          "powerSystemResourceType": "\"Wind Offshore\"",
+          "processType": "Realised",
+          "quantity": 2850.794,
+          "resolution": "PT30M",
+          "settlementDate": "2021-08-25",
+          "settlementPeriod": 35,
+          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836545"
+        }
+      },
+      "\"Wind Onshore\"": {
+        "2021-08-25--35": {
+          "activeFlag": "Y",
+          "businessType": "Wind generation",
+          "curveType": "Sequential fixed size block",
+          "documentID": "NGET-EMFIP-AGPT-06392699",
+          "documentRevNum": 1,
+          "documentType": "Actual generation per type",
+          "powerSystemResourceType": "\"Wind Onshore\"",
+          "processType": "Realised",
+          "quantity": 1164.113,
+          "resolution": "PT30M",
+          "settlementDate": "2021-08-25",
+          "settlementPeriod": 35,
+          "timeSeriesID": "NGET-EMFIP-AGPT-TS-21836546"
         }
       }
     }
