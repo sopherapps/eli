@@ -22,7 +22,7 @@ export default function PieChartVisual({
   width: number;
   sortBy: string;
   configObject: { [key: string]: VisualizationProp };
-  datasetConfigs: { [key: string]: { [key: string]: VisualizationProp } };
+  datasetConfigs: { [key: string]: { [key: string]: VisualizationProp }[] };
 }) {
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
 
@@ -48,7 +48,8 @@ export default function PieChartVisual({
 
     for (let record of sortedRecords) {
       const label = `${record[labelField]}`;
-      const color = datasetConfigs[label]?.color.value || generateRandomColor();
+      const color =
+        (datasetConfigs[label] || [])[0]?.color.value || generateRandomColor();
       labels.push(label);
       backgroundColors.push(color);
       records.push(record[valueField]);

@@ -77,11 +77,13 @@ export default function GeneralVisual({
     }
 
     // put the appropriate names for the configurations
+    const result: { [key: string]: { [key: string]: VisualizationProp }[] } =
+      {};
     for (let key in obj) {
-      obj[datasetNameIdMap[key]] = { ...obj[key] };
-      delete obj[key];
+      const appropriateName = datasetNameIdMap[key];
+      result[appropriateName] = [...(result[appropriateName] || []), obj[key]];
     }
-    return obj;
+    return result;
   }, [config, datasetIds]);
 
   switch (type) {

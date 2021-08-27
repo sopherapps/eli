@@ -30,7 +30,7 @@ export default function MultipleLineChartVisual({
   width: number;
   sortBy: string;
   configObject: { [key: string]: VisualizationProp };
-  datasetConfigs: { [key: string]: { [key: string]: VisualizationProp } };
+  datasetConfigs: { [key: string]: { [key: string]: VisualizationProp }[] };
 }) {
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
 
@@ -70,31 +70,31 @@ export default function MultipleLineChartVisual({
     const datasetNames = Object.keys(datasetConfigs).sort();
 
     for (let dataset of datasetNames) {
-      const datasetConfig: LineDatasetConfig = {
-        label: dataset,
-        fill: !!datasetConfigs[dataset]?.areaUnderTheLineColor?.value,
-        data: [],
-        borderColor: datasetConfigs[dataset]?.color?.value || "#fff",
-        backgroundColor:
-          datasetConfigs[dataset]?.areaUnderTheLineColor?.value ||
-          datasetConfigs[dataset]?.color?.value ||
-          "#fff",
-        borderDash:
-          datasetConfigs[dataset]?.chartStyle?.value === "dotted"
-            ? [5, 5]
-            : undefined,
-      };
-      const xField = datasetConfigs[dataset]?.xField.value;
-      const yField = datasetConfigs[dataset]?.yField.value;
+      for (let datasetConfig of datasetConfigs[dataset] || []) {
+        const config: LineDatasetConfig = {
+          label: dataset,
+          fill: !!datasetConfig.areaUnderTheLineColor?.value,
+          data: [],
+          borderColor: datasetConfig.color?.value || "#fff",
+          backgroundColor:
+            datasetConfig.areaUnderTheLineColor?.value ||
+            datasetConfig.color?.value ||
+            "#fff",
+          borderDash:
+            datasetConfig.chartStyle?.value === "dotted" ? [5, 5] : undefined,
+        };
+        const xField = datasetConfig.xField.value;
+        const yField = datasetConfig.yField.value;
 
-      for (let record of sortedRecords[dataset] || []) {
-        const label = `${record[xField]}`;
-        if (!labels.includes(label)) {
-          labels.push(label);
+        for (let record of sortedRecords[dataset] || []) {
+          const label = `${record[xField]}`;
+          if (!labels.includes(label)) {
+            labels.push(label);
+          }
+          config.data.push({ x: label, y: record[yField] });
         }
-        datasetConfig.data.push({ x: label, y: record[yField] });
+        datasets.push(config);
       }
-      datasets.push(datasetConfig);
     }
 
     return {

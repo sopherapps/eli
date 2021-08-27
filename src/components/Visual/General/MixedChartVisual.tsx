@@ -11,7 +11,7 @@ import sortByField from "../../../utils/sort-records";
 interface MixedDatasetConfig {
   type: string;
   label: string;
-  data: { x: string; y: number }[];
+  data: { [key: string]: any }[]; //{ x: any; y: any }[]
   borderColor: string;
   backgroundColor: string;
   fill?: boolean;
@@ -31,7 +31,7 @@ export default function MixedChartVisual({
   width: number;
   sortBy: string;
   configObject: { [key: string]: VisualizationProp };
-  datasetConfigs: { [key: string]: { [key: string]: VisualizationProp } };
+  datasetConfigs: { [key: string]: { [key: string]: VisualizationProp }[] };
 }) {
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
 
@@ -87,43 +87,43 @@ export default function MixedChartVisual({
     const datasets: MixedDatasetConfig[] = [];
     const datasetNames = Object.keys(datasetConfigs).sort();
 
+    console.log({ datasetConfigs });
+
     for (let dataset of datasetNames) {
-      const xField = datasetConfigs[dataset]?.xField.value;
-      const yField = datasetConfigs[dataset]?.yField.value;
-      const type = datasetConfigs[dataset]?.type.value;
+      for (let datasetConfig of datasetConfigs[dataset] || []) {
+        const xField = datasetConfig.xField.value;
+        const yField = datasetConfig.yField.value;
+        const type = datasetConfig.type.value;
 
-      const datasetConfig: MixedDatasetConfig = {
-        type,
-        label: dataset,
-        data: [],
-        borderColor: datasetConfigs[dataset]?.color?.value || "#fff",
-        backgroundColor:
-          datasetConfigs[dataset]?.areaUnderTheLineColor?.value ||
-          datasetConfigs[dataset]?.color?.value ||
-          "#fff",
-      };
+        const config: MixedDatasetConfig = {
+          type,
+          label: dataset,
+          data: [],
+          borderColor: datasetConfig.color?.value || "#fff",
+          backgroundColor:
+            datasetConfig.areaUnderTheLineColor?.value ||
+            datasetConfig.color?.value ||
+            "#fff",
+        };
 
-      if (type === "line") {
-        datasetConfig.fill =
-          !!datasetConfigs[dataset]?.areaUnderTheLineColor?.value;
-        datasetConfig.borderDash =
-          datasetConfigs[dataset]?.chartStyle?.value === "dotted"
-            ? [5, 5]
-            : undefined;
-      }
-
-      for (let record of sortedRecords[dataset] || []) {
-        const label = `${record[xField]}`;
-        if (!labels.includes(label)) {
-          labels.push(label);
+        if (type === "line") {
+          config.fill = !!datasetConfig.areaUnderTheLineColor?.value;
+          config.borderDash =
+            datasetConfig.chartStyle?.value === "dotted" ? [5, 5] : undefined;
         }
-        // @ts-ignore
-        datasetConfig.data.push({
-          [labelAxis]: label,
-          [valueAxis]: record[yField],
-        });
+
+        for (let record of sortedRecords[dataset] || []) {
+          const label = `${record[xField]}`;
+          if (!labels.includes(label)) {
+            labels.push(label);
+          }
+          config.data.push({
+            [labelAxis]: label,
+            [valueAxis]: record[yField],
+          });
+        }
+        datasets.push(config);
       }
-      datasets.push(datasetConfig);
     }
 
     return {

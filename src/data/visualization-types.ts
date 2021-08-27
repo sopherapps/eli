@@ -388,7 +388,7 @@ export const MixedChartType: VisualizationType = {
         id: `${time.getTime()}-add-line-dt`,
         configs: [
           {
-            name: `${time.getTime()}-add-bar-dt${datasetConfigSeparator}type`,
+            name: `${time.getTime()}-add-line-dt${datasetConfigSeparator}type`,
             label: "type",
             inputType: HTMLInputType.Hidden,
             options: {},
