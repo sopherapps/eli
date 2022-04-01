@@ -6,7 +6,9 @@ Do note that it can technically connect to any websocket URL as long as the data
 
 ## Quick Start
 
-- Open the [Eli app](https://eli.sopherapps.com) in your web browser of choice
+- Set up the app following the instructions for ['How to Run in Developer Mode](#how-to-run-in-developer-mode)
+
+- Open the [local Eli app](http://localhost:3000) in your web browser of choice
 
 - Download the [PubSubQ app](https://sopherapps.com/store/pubsub/pubsubq/) for your operating system and architecture (_note that most computers have AMD64 architecture. If it does not work, you can always download the ARM version_).
 
@@ -255,9 +257,9 @@ Note: _Each of these steps involves writing some tests of some kind_
 - [ ] \*Add ability to delete the entire store via a button/menu click
 - [ ] \*Add ability to download config from localstorage
 - [ ] \*Add ability to load config from a file via an HTML file input (to allow sharing of configs)
-- [x] Deploy to firebase, netlify or vercel. [Deployed it to Digital ocean at [eli.sopherapps.com](https://eli.sopherapps.com)]
+- [x] Deploy to firebase, netlify or vercel.
 - [ ] List the app on SopherApps
-- [ ] Write about the app on SopherApps blog
+- [x] Write about the app on SopherApps blog
 - [ ] Make it a downloadable electronjs app or nwjs or any given lighter option, or a PWA
 - [ ] Remove links to external css or font. Download them and include them in the artefact.
 - [ ] \*Reduce the interval of the cronjsobs in restie (and in sopherapps_utils to millisecond level)
@@ -267,3 +269,7 @@ Note: _Each of these steps involves writing some tests of some kind_
 
 - Testing requires the use of [mock-socket](https://www.npmjs.com/package/mock-socket) to mock the websocket connections.
 - [React Testing Library](https://testing-library.com/), plus its [jest-dom extension](https://github.com/testing-library/jest-dom) and [user-event extension](https://github.com/testing-library/user-event) are very instrumental in the integration tests of the pages. It turns out that the [DOM testing library](https://testing-library.com/docs/dom-testing-library/intro) has many wrappers for major JavaScript frameworks including [Vuejs](https://testing-library.com/docs/vue-testing-library/intro)
+
+## License
+
+Copyright (c) 2021 [Martin Ahindura](https://github.com/Tinitto) Licensed under the [MIT License](./LICENSE)
